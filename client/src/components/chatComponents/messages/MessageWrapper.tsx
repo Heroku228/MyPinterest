@@ -23,7 +23,6 @@ export const MessageWrapper = ({
 		useChatData()
 
 	const [text, setText] = useState<string>('')
-	const [errorMessage, setErrorMessage] = useState<Record<number, string>>()
 
 	const isCooldown = useRef(false)
 

@@ -4,7 +4,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 echo -e "${GREEN} Run backend ... ${NC}"
-(cd backend && npm run start:dev) &
+(cd server && npm run start:dev) &
 
 echo -e "${GREEN} Waiting, while backend started on port: 3000... ${NC}"
 
@@ -14,4 +14,4 @@ done
 
 
 echo -e "${GREEN} Backend runned on port 3000. Run fronted... ${NC}"
-(cd frontend && npm run dev)
+(cd client && npm run dev)

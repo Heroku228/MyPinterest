@@ -5,8 +5,8 @@ import { AppModule } from './app.module'
 
 async function bootstrap() {
 	const httpsOptions = {
-		key: readFileSync('/home/debian/pinterest/backend/static/ssl/private-key.pem'),
-		cert: readFileSync('/home/debian/pinterest/backend/static/ssl/certificate.pem')
+		key: readFileSync('../ssl/key.pem'),
+		cert: readFileSync('../ssl/cert.pem')
 	}
 
 	const app = await NestFactory.create(AppModule, { httpsOptions })
