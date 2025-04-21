@@ -13,8 +13,8 @@ export class ResponseUserDto {
 	@Expose()
 	email: string
 
-	@Expose()
-	userIconUrl: string
+	// @Expose()
+	// userIconUrl: string
 
 	@Expose()
 	createadAt: Date

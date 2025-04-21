@@ -21,9 +21,9 @@ Because of that, **you will NOT be able to run the project out-of-the-box** with
 
 You need to set up your own PostgreSQL instance and connect it to the backend. Environment variables or configuration files related to the database are not publicly shared yet.
 
-### 🔐 SSL Certificates
+<!-- ### 🔐 SSL Certificates
 
-This project currently assumes that SSL certificates are available for secure connections. You will need to generate your own certificates and place them in the appropriate location for the server to run.
+This project currently assumes that SSL certificates are available for secure connections. You will need to generate your own certificates and place them in the appropriate location for the server to run. -->
 
 ---
 
@@ -33,7 +33,6 @@ This project currently assumes that SSL certificates are available for secure co
 /
 ├── client/           # Frontend app (Next.js)
 ├── server/           # Backend app (NestJS)
-├── ssl/			  # SSL Certificates
 ├── init.bash         # Project initializer (starts both frontend and backend)
 ├── cert.bash         # Create ssl certificates
 └── README.md         # You're here
@@ -45,7 +44,6 @@ This project currently assumes that SSL certificates are available for secure co
 
 Make sure you’ve prepared the following before launching the project:
 	•	Your own PostgreSQL database (with connection credentials configured)
-	•	SSL certificates placed where the server expects them
 
 Then simply run:
 bash init.bash
@@ -56,7 +54,6 @@ This script will start both the backend and frontend servers.
 	•	Pinterest-style pin creation & browsing
 	•	User authentication (planned)
 	•	WebSocket-based realtime updates
-	•	GitHub-style board system (coming soon)
 	•	API support for third-party Pinterest data
 
 🙋 Why So Manual Right Now?

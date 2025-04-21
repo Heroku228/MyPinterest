@@ -18,8 +18,8 @@ export class AuthController {
 	}
 
 	@Post('login')
-	async login(@Body() { username, password }: { username: string, password: string }) {
-		return await this.authService.login(password, username)
+	async login(@Body() { emailOrUsername, password }: { emailOrUsername: string, password: string }) {
+		return await this.authService.login(password, emailOrUsername)
 	}
 
 	@UseGuards(JwtAuthGuard)

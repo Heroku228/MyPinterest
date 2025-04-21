@@ -14,6 +14,17 @@ export class UsersService {
 		return await this.userRepository.save(user)
 	}
 
+	async getUserByUsernameOrEmail(identifier: string) {
+		console.log('[getUserByUsernameOrEmail]: ', identifier)
+		const user = await this.userRepository.findOne({
+			where: [
+				{ username: ILike(identifier) },
+				{ email: ILike(identifier) }
+			]
+		})
+		return user
+	}
+
 	async getUserByEmail(email: string) {
 		console.log('getUserByEmail ', email)
 		const user = await this.userRepository.findOne({ where: { email: ILike(email) } })

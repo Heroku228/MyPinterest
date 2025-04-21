@@ -15,4 +15,37 @@ export namespace AuthTypes {
 		message: string,
 		link: string
 	}
+
+	export interface IAuthContextType {
+		user: UserTypes.TResponseUserDto | null,
+		isAuthenticated: boolean,
+		isLoading: boolean,
+		login: (credentials: UserTypes.TLoginDto) => Promise<void>,
+		register: (data: UserTypes.TRegisterDto) => Promise<void>,
+		logout: () => void
+		fetchUser: () => Promise<void>
+	}
 }
+
+export namespace UserTypes {
+	export type TResponseUserDto = {
+		id: string
+		username: string,
+		email: string,
+		userIconUrl: string,
+		createdAt: string
+	}
+
+	export type TLoginDto = {
+		emailOrUsername: string,
+		password: string
+	}
+
+	export type TRegisterDto = {
+		username: string,
+		email: string,
+		password: string,
+		userIconUrl?: string,
+	}
+}
+

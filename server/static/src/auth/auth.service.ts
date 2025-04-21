@@ -1,8 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcrypt'
+import { plainToInstance } from 'class-transformer'
 import { User } from 'static/src/users/entities/user.entity'
 import { UsersService } from 'static/src/users/users.service'
+import { ResponseUserDto } from '../users/dto/response-user.dto'
 
 @Injectable()
 export class AuthService {
@@ -10,25 +12,35 @@ export class AuthService {
 	}
 
 	async register(user: User) {
-		this.userService.save(user)
+		await this.userService.save(user)
 	}
 
-	async login(password: string, username?: string, email?: string) {
-		console.log('AUTHSERVICE [login] (email, username): ', email, username)
+	async login(password: string, identifier?: string) {
+		console.log('AUTHSERVICE [login] (email, username): ', identifier)
 
-		if (!username && !email) throw new UnauthorizedException('Invalid credentials')
+		if (!identifier) throw new UnauthorizedException('Invalid credentials')
 
-		let user: User = new User()
+		const user = await this.userService.getUserByUsernameOrEmail(identifier)
 
-		if (username) user = await this.userService.getUserByUsername(username)
-		else if (email) user = await this.userService.getUserByEmail(email)
+		console.log("USER: ", user)
+		console.log('AUTHSERVICE [login] (username): ', identifier)
+		console.log("USER PASSWORD: ", user?.password)
+		console.log('PASSWORD: ', password)
 
-		console.log('AUTHSERVICE [login] (username): ', username)
+		if (user)
+			console.log('COMPARE: ', await compare(password, user.password))
 
-		if (!user || !(await compare(password, user.password)))
+		if (!user || !(await compare(password, user.password))) {
 			throw new UnauthorizedException('Invalid credentials')
+		}
 
-		return { access_token: this.jwtService.sign({ userId: user.id }) }
+		const responseDto = plainToInstance(ResponseUserDto, user)
+
+
+		return {
+			access_token: this.jwtService.sign({ userId: user.id }),
+			user: responseDto
+		}
 	}
 
 	async validate(userId: string) {

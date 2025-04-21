@@ -1,4 +1,6 @@
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
+import { useAuth } from '@/hooks/context/user/useAuth'
+import { UserTypes } from '@/types/AuthTypes/AuthTypes'
 import { Lock, Mail } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Button } from '../../ui/Button'
@@ -9,6 +11,22 @@ export const AuthLogin = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const loginRef = useRef<HTMLInputElement>(null)
 	const passwordRef = useRef<HTMLInputElement>(null)
+
+	const { login } = useAuth()
+
+	const handleLogin = async () => {
+		const emailOrUsername = loginRef.current?.value.trim()
+		const password = passwordRef.current?.value.trim()
+
+		if (!emailOrUsername || !password) throw new Error('No login or password')
+
+		const credentials: UserTypes.TLoginDto = {
+			emailOrUsername: emailOrUsername,
+			password: password,
+		}
+
+		await login(credentials)
+	}
 
 	return (
 		<>
@@ -40,7 +58,11 @@ export const AuthLogin = () => {
 				}
 			/>
 
-			<Button additionalStyles='mb-6' variant={STYLES_VARIANTS.SECONDARY}>
+			<Button
+				additionalStyles='mb-6'
+				onClick={handleLogin}
+				variant={STYLES_VARIANTS.SECONDARY}
+			>
 				Sign in
 			</Button>
 		</>
