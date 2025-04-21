@@ -1,15 +1,10 @@
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
-import { readFileSync } from 'fs'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-	const httpsOptions = {
-		key: readFileSync('../ssl/key.pem'),
-		cert: readFileSync('../ssl/cert.pem')
-	}
 
-	const app = await NestFactory.create(AppModule, { httpsOptions })
+	const app = await NestFactory.create(AppModule)
 	app.setGlobalPrefix('api/v1')
 	await app.listen(process.env.PORT ?? 3000, '0.0.0.0')
 

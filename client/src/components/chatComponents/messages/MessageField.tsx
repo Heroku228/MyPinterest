@@ -1,3 +1,5 @@
+'use client'
+
 import { messageFieldStyles } from '@/constants/styles/messageFieldStyles'
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { TMessageField } from '@/types/ChatTypes/IChatData'

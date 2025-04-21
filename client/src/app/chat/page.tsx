@@ -12,7 +12,7 @@ export default function ChatContent() {
 		return <h1>Failed to establish your connection to the server.</h1>
 
 	return (
-		<div className='	grid grid-cols-6 gap-35 mx-auto min-h-screen overflow-hidden'>
+		<div className='grid grid-cols-6 gap-35 mx-auto min-h-screen overflow-hidden'>
 			<div className='span-col-1'>
 				<ChatSidebar />
 			</div>

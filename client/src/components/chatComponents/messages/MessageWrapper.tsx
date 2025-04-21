@@ -1,3 +1,5 @@
+'use client'
+
 import { MessageField } from '@/components/chatComponents/messages/MessageField'
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import {

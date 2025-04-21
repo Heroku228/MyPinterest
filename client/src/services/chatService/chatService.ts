@@ -2,11 +2,12 @@ import { ROOMS } from '@/constants/enums/Rooms'
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import { Filter } from 'bad-words'
 import { sender } from '../sockets/collectPayloadBody'
+import { v4 as uuidv4 } from 'uuid'
 
 const filter = new Filter()
 
 export const collectMessage = (text: string, room?: string) => ({
-	messageId: crypto.randomUUID(),
+	messageId: uuidv4(),
 	text: text,
 	room: room ?? ROOMS[0].name,
 	sender: sender,

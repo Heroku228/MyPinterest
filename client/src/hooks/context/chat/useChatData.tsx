@@ -1,3 +1,5 @@
+'use client'
+
 import { sender } from '@/services/sockets/collectPayloadBody'
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import { ContextTypes } from '@/types/ContextTypes/ContextTypes'

@@ -1,3 +1,5 @@
+'use client'
+
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import { Check, Copy, Edit } from 'lucide-react'

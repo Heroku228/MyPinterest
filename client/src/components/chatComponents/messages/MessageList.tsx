@@ -1,3 +1,5 @@
+'use client'
+
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { useEffect, useRef } from 'react'
 import { MessageBlock } from './MessageBlock'
@@ -13,7 +15,7 @@ export const MessageList = () => {
 
 		if (chatData.length > 2 && isNewMessage && !editing)
 			messageEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-		
+
 		prevLengthRef.current = chatData.length
 	}, [chatData])
 
