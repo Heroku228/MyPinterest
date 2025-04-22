@@ -5,7 +5,7 @@ import {
 	formInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { UserTypes } from '@/types/AuthTypes/AuthTypes'
+import { convertFileToBase64 } from '@/services/convertFileToBase64'
 import { FileImage, Mail, User } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { AuthDiv } from '../AuthDiv'
@@ -15,52 +15,60 @@ export const AuthRegister = () => {
 	const usernameRef = useRef<HTMLInputElement>(null)
 	const userIconRef = useRef<HTMLInputElement>(null)
 	const emailRef = useRef<HTMLInputElement>(null)
-
 	const passwordRef = useRef<HTMLInputElement>(null)
 	const confirmPasswordRef = useRef<HTMLInputElement>(null)
 
 	const [error, setError] = useState<boolean>(true)
 	const [selectedFileName, setSelectedFilename] = useState<string>()
+	const [avatarPath, setAvatarPath] = useState<string | null>(null)
 
 	const { register } = useAuth()
 
+	useEffect(() => {
+		console.log('PATH: ', avatarPath)
+	}, [avatarPath])
+
 	const handleRegister = async () => {
-		if (error) throw new Error('Password do not match')
+		if (error) throw new Error('Passwords do not match')
 
 		const username = usernameRef.current?.value.trim()
 		const email = emailRef.current?.value.trim()
 		const password = passwordRef.current?.value.trim()
+		const file = userIconRef.current?.files?.[0]
 
-		if (!username || !email || !password) {
-			console.log('USERNAME: ', username)
-			console.log('email: ', email)
-			console.log('password: ', password)
-			return
+		if (!username || !email || !password || !file) return
+
+		const base64 = await convertFileToBase64(file)
+
+		const data = {
+			username,
+			email,
+			password,
+			fileName: file.name,
+			userIconBase64: base64,
 		}
 
-		const credentials: UserTypes.TRegisterDto = {
-			email: email,
-			password: password,
-			username: username,
+		try {
+			await register(data)
+		} catch (err) {
+			console.error('Ошибка при регистрации: ', err)
 		}
-
-		await register(credentials)
 	}
 
 	const handleShowFS = () => {
 		userIconRef.current?.click()
 	}
 
-	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		const fileName = file?.name
 
+		if (!file) return
+
 		const extensition = fileName?.split('.').pop()?.toLowerCase()
 		console.log('EXT: ', extensition)
-		if (file) {
-			const newFileName = file.name.slice(0, 20) + `.${extensition}`
-			setSelectedFilename(newFileName)
-		}
+		const newFileName = file.name.slice(0, 20) + `.${extensition}`
+		setSelectedFilename(newFileName)
 	}
 
 	useEffect(() => {

@@ -45,7 +45,8 @@ export namespace UserTypes {
 		username: string,
 		email: string,
 		password: string,
-		userIconUrl?: string,
+		fileName: string
+		userIconBase64: string,
 	}
 }
 

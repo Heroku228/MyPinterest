@@ -3,7 +3,7 @@ import { Exclude, Expose } from 'class-transformer'
 export class ResponseUserDto {
 	@Exclude()
 	id: string
-	
+
 	@Exclude()
 	password: string
 
@@ -13,8 +13,8 @@ export class ResponseUserDto {
 	@Expose()
 	email: string
 
-	// @Expose()
-	// userIconUrl: string
+	@Expose()
+	userIconUrl: string
 
 	@Expose()
 	createadAt: Date

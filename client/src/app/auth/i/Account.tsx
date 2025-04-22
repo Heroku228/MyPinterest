@@ -14,6 +14,7 @@ export const Account = () => {
 		<div>
 			<h1>{user?.username}</h1>
 			<h2>{user?.email}</h2>
+			<img src={user?.userIconUrl} alt='user icon' />
 			<button onClick={logout}>Logout</button>
 		</div>
 	)

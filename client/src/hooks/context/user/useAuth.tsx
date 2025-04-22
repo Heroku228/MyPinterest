@@ -40,7 +40,12 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	const register = async (data: UserTypes.TRegisterDto) => {
 		const res = await axios.post(
 			'http://localhost:3000/api/v1/auth/register',
-			data
+			JSON.stringify(data),
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
 		)
 		console.log('[REGISTER]: ', res)
 		if (res.status === 201) {

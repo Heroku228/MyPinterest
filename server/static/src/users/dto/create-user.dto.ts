@@ -19,7 +19,7 @@ export class CreateUserDto {
 	@IsString({ message: 'email should be a line' })
 	email: string
 
-	// @Expose()
-	// @IsString({ message: 'email should be a line' })
-	// userIconUrl: string
+	@Expose()
+	@IsString({ message: 'email should be a line' })
+	userIconUrl: string
 }

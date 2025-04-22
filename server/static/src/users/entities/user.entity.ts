@@ -17,8 +17,8 @@ export class User {
 	@Column({ unique: true })
 	email: string
 
-	// @Column()
-	// userIconUrl: string
+	@Column()
+	userIconUrl: string
 
 	@CreateDateColumn()
 	createadAt: Date

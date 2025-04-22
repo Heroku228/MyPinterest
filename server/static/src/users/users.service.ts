@@ -8,6 +8,10 @@ import { User } from './entities/user.entity'
 export class UsersService {
 	constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { }
 
+	async clear() {
+		await this.userRepository.clear()
+	}
+
 	async save(user: User) {
 		const hashedPassword = await hash(user.password, 10)
 		user.password = hashedPassword

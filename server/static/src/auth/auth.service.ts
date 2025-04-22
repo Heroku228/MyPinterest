@@ -11,6 +11,10 @@ export class AuthService {
 	constructor(private readonly jwtService: JwtService, private readonly userService: UsersService) {
 	}
 
+	async clear() {
+		await this.userService.clear()
+	}
+
 	async register(user: User) {
 		await this.userService.save(user)
 	}
