@@ -4,11 +4,30 @@ import { compare } from 'bcrypt'
 import { plainToInstance } from 'class-transformer'
 import { User } from 'static/src/users/entities/user.entity'
 import { UsersService } from 'static/src/users/users.service'
+import { AUTH_RESPONSE_ACCESS, AUTH_RESPONSE_MESSAGE, AUTH_RESPONSE_STATUS } from '../consts/enums/AuthEnums'
+import { UserTypes } from '../types/user/UserNamespace'
 import { ResponseUserDto } from '../users/dto/response-user.dto'
 
 @Injectable()
 export class AuthService {
 	constructor(private readonly jwtService: JwtService, private readonly userService: UsersService) {
+	}
+
+	sendErrorObject(reason: AUTH_RESPONSE_MESSAGE) {
+		return {
+			access: AUTH_RESPONSE_ACCESS.NO_ENTRY_ALLOWED,
+			status: AUTH_RESPONSE_STATUS.ERROR,
+			message: reason,
+		}
+	}
+
+	sendSuccessfulResponse(data: UserTypes.IUserResponseDTO) {
+		return {
+			access: AUTH_RESPONSE_ACCESS.NO_ENTRY_ALLOWED,
+			status: AUTH_RESPONSE_STATUS.ERROR,
+			message: AUTH_RESPONSE_MESSAGE.SUCCESSFUL_AUTHORIZATION,
+			data: data
+		}
 	}
 
 	async clear() {
@@ -26,20 +45,11 @@ export class AuthService {
 
 		const user = await this.userService.getUserByUsernameOrEmail(identifier)
 
-		console.log("USER: ", user)
-		console.log('AUTHSERVICE [login] (username): ', identifier)
-		console.log("USER PASSWORD: ", user?.password)
-		console.log('PASSWORD: ', password)
-
-		if (user)
-			console.log('COMPARE: ', await compare(password, user.password))
-
 		if (!user || !(await compare(password, user.password))) {
 			throw new UnauthorizedException('Invalid credentials')
 		}
 
 		const responseDto = plainToInstance(ResponseUserDto, user)
-
 
 		return {
 			access_token: this.jwtService.sign({ userId: user.id }),

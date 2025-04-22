@@ -16,7 +16,7 @@ export const Account = () => {
 			<h1>{user?.username}</h1>
 			<h2>{user?.email}</h2>
 			<img
-				src={`http://localhost:3000/avatars${user?.userIconUrl}`}
+				src={`http://localhost:3000/api/v1/uploads/avatars${user?.userIconUrl}`}
 				alt='user icon'
 			/>
 			<button onClick={logout}>Logout</button>

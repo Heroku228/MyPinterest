@@ -5,6 +5,8 @@ import { homedir } from 'os'
 import { join, resolve } from 'path'
 import { ResponseUserDto } from 'static/src/users/dto/response-user.dto'
 import { User } from 'static/src/users/entities/user.entity'
+import { AUTH_RESPONSE_MESSAGE } from '../consts/enums/AuthEnums'
+import { AuthTypes } from '../types/user/AuthNamespace'
 import { AuthService } from './auth.service'
 import { JwtAuthGuard } from './jwt-auth.guard'
 
@@ -55,8 +57,14 @@ export class AuthController {
 
 	@UseGuards(JwtAuthGuard)
 	@Get('me')
-	getProfile(@Req() req) {
+	getProfile(@Req() req): AuthTypes.IAuthResponse {
+		if (!req.user)
+			return this.authService.sendErrorObject(AUTH_RESPONSE_MESSAGE.NO_USER_DATA_FROM_REQUEST)
+
+		const responseDto = plainToInstance(ResponseUserDto, req.user)
 		console.log('CONTROLLER [me] request: ', req.user)
-		return req.user
+		console.log('RESPONSE DTO: ', responseDto)
+
+		return this.authService.sendSuccessfulResponse(responseDto)
 	}
 }

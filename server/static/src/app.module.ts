@@ -9,6 +9,7 @@ import { typeOrmConfig } from './config/typeOrmConfig.config'
 import { typeUserMicroservicesConfig } from './config/users-microservice.config'
 import { UsersMicroserviceModule } from './microservices/users-microservice/users-microservice.module'
 import { PinsModule } from './pins/pins.module'
+import { UploadsModule } from './uploads/uploads.module'
 import { UsersModule } from './users/users.module'
 import { WebsocketGateway } from './websocket/websocket.gateway'
 
@@ -21,7 +22,8 @@ import { WebsocketGateway } from './websocket/websocket.gateway'
 		UsersModule,
 		PinsModule,
 		UsersMicroserviceModule,
-		AuthModule
+		AuthModule,
+		UploadsModule
 	],
 	controllers: [AppController],
 	providers: [AppService, WebsocketGateway],
