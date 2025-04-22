@@ -17,7 +17,7 @@ export class AuthController {
 	@Post('register')
 	async register(@Body() body: any) {
 		const { username, email, password, userIconBase64, fileName } = body
-		console.log(username, email, password, userIconBase64, fileName)
+		console.log(username, email, password, fileName)
 
 		const user = plainToInstance(User, {
 			username,
@@ -26,6 +26,7 @@ export class AuthController {
 		})
 
 		if (userIconBase64 && fileName) {
+			console.log('USER ICON BASE 64 AND FILENAME')
 			const base64Data = userIconBase64.replace(/^data:image\/\w+;base64,/, '')
 			const buffer = Buffer.from(base64Data, 'base64')
 
@@ -40,13 +41,17 @@ export class AuthController {
 
 			user.userIconUrl = `/${fileName}`
 		}
+		console.log("ELSE")
 
 		await this.authService.register(user)
-		return plainToInstance(ResponseUserDto, user)
+		return plainToInstance(ResponseUserDto, user, {
+			excludeExtraneousValues: true
+		})
 	}
 
 	@Post('login')
 	async login(@Body() { emailOrUsername, password }: { emailOrUsername: string, password: string }) {
+		console.log('LOGIN CONTROLLER')
 		return await this.authService.login(password, emailOrUsername)
 	}
 

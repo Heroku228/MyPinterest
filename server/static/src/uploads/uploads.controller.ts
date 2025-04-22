@@ -7,8 +7,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
 @Controller('uploads')
 export class UploadsController {
-
-	@UseGuards(JwtAuthGuard)
+	
 	@Get('avatars/:filename')
 	async getUserAvatar(@Param('filename') filename: string, @Res() res: Response) {
 		const filePath = join(homedir(), 'Desktop', 'uploads', filename)

@@ -23,10 +23,10 @@ export class AuthService {
 
 	sendSuccessfulResponse(data: UserTypes.IUserResponseDTO) {
 		return {
-			access: AUTH_RESPONSE_ACCESS.NO_ENTRY_ALLOWED,
-			status: AUTH_RESPONSE_STATUS.ERROR,
+			access: AUTH_RESPONSE_ACCESS.PASS_ALLOWED,
+			status: AUTH_RESPONSE_STATUS.OK,
 			message: AUTH_RESPONSE_MESSAGE.SUCCESSFUL_AUTHORIZATION,
-			data: data
+			userData: data
 		}
 	}
 
@@ -49,7 +49,9 @@ export class AuthService {
 			throw new UnauthorizedException('Invalid credentials')
 		}
 
-		const responseDto = plainToInstance(ResponseUserDto, user)
+		const responseDto = plainToInstance(ResponseUserDto, user, {
+			excludeExtraneousValues: true
+		})
 
 		return {
 			access_token: this.jwtService.sign({ userId: user.id }),
