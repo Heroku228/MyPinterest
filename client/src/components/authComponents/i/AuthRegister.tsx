@@ -5,7 +5,8 @@ import {
 	formInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { convertFileToBase64 } from '@/services/convertFileToBase64'
+import { convertFileToBase64, sanitizedFileName } from '@/services/FSHandler'
+import { UserTypes } from '@/types/AuthTypes/AuthTypes'
 import { FileImage, Mail, User } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { AuthDiv } from '../AuthDiv'
@@ -40,11 +41,11 @@ export const AuthRegister = () => {
 
 		const base64 = await convertFileToBase64(file)
 
-		const data = {
+		const data: UserTypes.TRegisterDto = {
 			username,
 			email,
 			password,
-			fileName: file.name,
+			fileName: sanitizedFileName(file.name),
 			userIconBase64: base64,
 		}
 

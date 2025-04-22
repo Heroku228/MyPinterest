@@ -17,6 +17,7 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 					Authorization: `Bearer ${localStorage.getItem('token')}`,
 				},
 			})
+			console.log(res)
 			setUser(res.data)
 		} catch (err) {
 			console.log('[AUTH ERROR]: ', err)
@@ -36,7 +37,6 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 		] = `Bearer ${res.data.access_token}`
 		setUser(res.data.user)
 	}
-
 	const register = async (data: UserTypes.TRegisterDto) => {
 		const res = await axios.post(
 			'http://localhost:3000/api/v1/auth/register',

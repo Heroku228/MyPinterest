@@ -7,6 +7,7 @@ export const Account = () => {
 
 	const router = useRouter()
 	useEffect(() => {
+		console.log('USER : ', user)
 		if (!isAuthenticated) router.push('/auth')
 	}, [isAuthenticated])
 
@@ -14,7 +15,10 @@ export const Account = () => {
 		<div>
 			<h1>{user?.username}</h1>
 			<h2>{user?.email}</h2>
-			<img src={user?.userIconUrl} alt='user icon' />
+			<img
+				src={`http://localhost:3000/avatars${user?.userIconUrl}`}
+				alt='user icon'
+			/>
 			<button onClick={logout}>Logout</button>
 		</div>
 	)

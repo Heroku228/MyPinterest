@@ -30,17 +30,18 @@ export class AuthController {
 			const folderPath = resolve(homedir(), 'Desktop', 'uploads')
 			if (!existsSync(folderPath)) mkdirSync(folderPath, { recursive: true })
 
-			const safeFileName = fileName.slice(0, 20).replace(/[^a-zA-Z0-9.-]/g, '_')
-			const filePath = join(folderPath, safeFileName)
-			writeFileSync(filePath, buffer)
+			const safeFileName: string = fileName.slice(0, 20).replace(/[^a-zA-Z0-9.-]/g, '_')
+			const extensition = fileName.split('.').pop()?.toLowerCase()
+			const filePath = join(safeFileName)
 
-			user.userIconUrl = filePath
+			writeFileSync(`${folderPath}/${filePath}`, buffer)
+
+			user.userIconUrl = `/${fileName}`
 		}
 
 		await this.authService.register(user)
 		return plainToInstance(ResponseUserDto, user)
 	}
-
 
 	@Post('login')
 	async login(@Body() { emailOrUsername, password }: { emailOrUsername: string, password: string }) {
