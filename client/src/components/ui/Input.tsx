@@ -23,7 +23,6 @@ export const Input: React.FC<InputProps> = ({
 				${additionalStyles}
 				`}
 			{...props}
-			type='text'
 		/>
 	)
 }

@@ -4,4 +4,5 @@ export type TVisibleUserData = {
 	showIcon: boolean,
 	link?: string
 	size: number
+	additionalStyles?: string
 }

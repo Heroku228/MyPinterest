@@ -8,13 +8,19 @@ export const CurrentUserInfo = ({
 	showEmail,
 	showIcon,
 	link,
+	additionalStyles,
 	size,
 }: TVisibleUserData) => {
 	const { user } = useAuth()
 
 	return (
 		<Link href={link ? link : ''} className='flex flex-col py-1 '>
-			<div className='flex items-center gap-4 mb-1'>
+			<div
+				className={`
+				flex items-center gap-4 mb-1
+				${additionalStyles}
+				`}
+			>
 				{showIcon ? (
 					<Image
 						src={`http://127.0.0.1:3000/api/v1/uploads/avatars/${user?.userIconUrl}`}

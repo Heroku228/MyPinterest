@@ -21,13 +21,8 @@ export const AuthRegister = () => {
 
 	const [error, setError] = useState<boolean>(true)
 	const [selectedFileName, setSelectedFilename] = useState<string>()
-	const [avatarPath, setAvatarPath] = useState<string | null>(null)
 
 	const { register } = useAuth()
-
-	useEffect(() => {
-		console.log('PATH: ', avatarPath)
-	}, [avatarPath])
 
 	const handleRegister = async () => {
 		if (error) throw new Error('Passwords do not match')

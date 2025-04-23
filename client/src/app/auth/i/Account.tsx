@@ -1,24 +1,25 @@
 import { Header } from '@/components/header/Header'
-import { AccountContent } from '@/components/i/AccountContent'
-import { AccountSidebar } from '@/components/i/AccountSidebar'
+import { AccountContent } from '@/components/i/accountContent/AccountContent'
+import { AccountSidebar } from '@/components/i/accountSidebar/AccountSidebar'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 export const Account = () => {
-	const { user, logout, isAuthenticated } = useAuth()
-
+	const { isAuthenticated } = useAuth()
+	const { width } = useWindowSize()
 	const router = useRouter()
+
 	useEffect(() => {
-		console.log('USER : ', user)
 		if (!isAuthenticated) router.push('/auth')
 	}, [isAuthenticated])
 
 	return (
 		<div className='w-11/12 m-auto p-4'>
 			<Header />
-			<div className='flex gap-4'>
-				<AccountSidebar />
+			<div className={`flex gap-4`}>
+				<AccountSidebar isMobileVersion={width < 720 ? true : false} />
 				<AccountContent />
 			</div>
 		</div>

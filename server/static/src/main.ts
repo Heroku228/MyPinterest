@@ -10,6 +10,7 @@ async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule, {
 		cors: false
 	})
+	
 	app.setGlobalPrefix('api/v1')
 
 	app.use(bodyParser.json({ limit: '10mb' }))
