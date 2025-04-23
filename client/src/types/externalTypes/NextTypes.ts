@@ -5,11 +5,9 @@ export interface INextRequest extends NextRequest {
 	ip: string
 }
 
-
 export type TReactNode = {
 	children: ReactNode
 }
-
 
 export type TShowHint = {
 	showHint: boolean,

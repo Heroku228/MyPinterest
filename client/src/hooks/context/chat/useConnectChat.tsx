@@ -19,12 +19,9 @@ export const ConnectChatProvider = ({ children }: TReactNode) => {
 	const [room, setRoom] = useState<string>('Room#1')
 
 	useEffect(() => {
-		handleJoin()
-		return () => handleExit()
+		connect()
+		return () => disconnect()
 	}, [])
-
-	const handleJoin = () => connect()
-	const handleExit = () => disconnect()
 
 	const handleRoom = async (
 		roomName: string

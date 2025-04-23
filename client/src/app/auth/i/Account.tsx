@@ -1,6 +1,6 @@
 import { Header } from '@/components/header/Header'
-import { AccountContent } from '@/components/i/accountContent/AccountContent'
-import { AccountSidebar } from '@/components/i/accountSidebar/AccountSidebar'
+import { AccountContent } from '@/components/profile/accountContent/AccountContent'
+import { AccountSidebar } from '@/components/profile/accountSidebar/AccountSidebar'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { useRouter } from 'next/navigation'

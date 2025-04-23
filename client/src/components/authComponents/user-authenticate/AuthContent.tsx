@@ -1,4 +1,4 @@
-import { AuthLogin } from './AuthLogin'
+import { AuthLogin } from './authentication/AuthLogin'
 import { AuthRegister } from './register/AuthRegister'
 
 export const AuthContent = ({

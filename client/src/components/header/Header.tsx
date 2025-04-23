@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { LogIn } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { CurrentUserInfo } from '../i/CurrentUserInfo'
+import { CurrentUserInfo } from '../profile/CurrentUserInfo'
 import { SiteLogo } from '../SiteLogo'
 import { HeaderList } from './List/HeaderList'
 

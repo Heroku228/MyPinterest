@@ -1,6 +1,6 @@
 'use client'
 
-import { CheckIconForCopying } from '@/components/icons/CheckIconForCopying'
+import { CheckIconForCopying } from '@/components/chatComponents/CheckIconForCopying'
 import { MessageText } from '@/components/ui/MessageText'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { IMessage } from '@/types/ChatTypes/IChatData'

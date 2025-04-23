@@ -1,4 +1,4 @@
-import { CurrentUserInfo } from '@/components/i/CurrentUserInfo'
+import { CurrentUserInfo } from '@/components/profile/CurrentUserInfo'
 import { SiteLogo } from '@/components/SiteLogo'
 import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'

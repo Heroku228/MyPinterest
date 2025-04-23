@@ -2,7 +2,7 @@
 
 import { MessageWrapper } from '@/components/chatComponents/messages/MessageWrapper'
 import { ChatSidebar } from '@/components/chatComponents/sidebar/ChatSidebar'
-import { AuthNavbar } from '@/components/i/AuthNavbar'
+import { AuthNavbar } from '@/components/profile/AuthNavbar'
 import { UseChatDataProvider } from '@/hooks/context/chat/useChatData'
 import { useConnectChat } from '@/hooks/context/chat/useConnectChat'
 

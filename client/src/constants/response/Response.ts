@@ -1,5 +1,8 @@
-export const SOCKET_NOT_FOUND = {
+import { RESPONSE_STATUS, RESPONSE_STATUS_CODE, TSocketResponse } from '@/types/SocketsTypes/TSocketResponse'
+
+export const SOCKET_NOT_FOUND: TSocketResponse = {
 	access: false,
-	status: 500,
-	reasons: 'Socket not found'
+	status: RESPONSE_STATUS.ERROR,
+	statusCode: RESPONSE_STATUS_CODE.BAD_REQUEST,
+	info: 'Socket not found'
 }

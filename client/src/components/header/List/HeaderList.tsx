@@ -1,6 +1,7 @@
 import { Input } from '@/components/ui/Input'
 import { LiItem } from '@/components/ui/Li'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
+import { ROUTES } from '@/constants/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
 export const HeaderList = ({}) => {
@@ -13,7 +14,7 @@ export const HeaderList = ({}) => {
 
 	return (
 		<ul className='flex items-center justify-evenly px-20 w-full'>
-			<LiItem onClick={() => handleClick('/')}>Explore</LiItem>
+			<LiItem onClick={() => handleClick(ROUTES.HOME)}>Explore</LiItem>
 
 			<LiItem additionalStyles=''>
 				<Input
@@ -23,8 +24,8 @@ export const HeaderList = ({}) => {
 				/>
 			</LiItem>
 
-			<LiItem onClick={() => handleClick('/chat')}>Chat</LiItem>
-			<LiItem onClick={() => handleClick('/api')}>API</LiItem>
+			<LiItem onClick={() => handleClick(ROUTES.CHAT)}>Chat</LiItem>
+			<LiItem onClick={() => handleClick(ROUTES.API)}>API</LiItem>
 		</ul>
 	)
 }
