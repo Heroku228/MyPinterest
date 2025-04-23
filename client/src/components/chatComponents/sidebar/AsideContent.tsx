@@ -1,5 +1,6 @@
 import { CurrentUserInfo } from '@/components/i/CurrentUserInfo'
 import { SiteLogo } from '@/components/SiteLogo'
+import { useAuth } from '@/hooks/context/user/useAuth'
 import { PanelRightOpen } from 'lucide-react'
 import { useState } from 'react'
 import { HideSidebarArrow } from './HideSidebarArrow'
@@ -7,6 +8,8 @@ import { MappedAvailableChats } from './MappedAvailableChats'
 
 export const AsideContent = () => {
 	const [hideSidebar, setHideSidebar] = useState<boolean>(false)
+
+	const { isAuthenticated } = useAuth()
 
 	const toggleSidebar = () => {
 		setHideSidebar(!hideSidebar)
@@ -31,14 +34,17 @@ export const AsideContent = () => {
 			<div className='h-full flex py-10 px-2 flex-col gap-8'>
 				<MappedAvailableChats />
 			</div>
-			<div className='chat-sidebar-border-top py-1 px-2 w-full m-auto transition-colors duration-300 background-gray-hover'>
-				<CurrentUserInfo
-					showUsername
-					showIcon={true}
-					link={'/i/account'}
-					size={50}
-				/>
-			</div>
+			{isAuthenticated ? (
+				<div className='chat-sidebar-border-top py-1 px-2 w-full m-auto transition-colors duration-300 background-gray-hover'>
+					<CurrentUserInfo
+						showEmail={false}
+						showUsername
+						showIcon={true}
+						link={'/auth/i'}
+						size={50}
+					/>
+				</div>
+			) : null}
 		</aside>
 	)
 }

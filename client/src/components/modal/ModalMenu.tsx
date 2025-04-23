@@ -2,6 +2,7 @@ import {
 	blockIconStyles,
 	blockStyles,
 } from '@/constants/styles/accountModalStyles'
+import { useAuth } from '@/hooks/context/user/useAuth'
 import {
 	ArrowRightSquareIcon,
 	HelpCircle,
@@ -11,6 +12,7 @@ import {
 } from 'lucide-react'
 
 export const ModalMenu = ({ language }: { language: string }) => {
+	const { logout } = useAuth()
 	return (
 		<>
 			<div className={blockStyles}>
@@ -31,7 +33,7 @@ export const ModalMenu = ({ language }: { language: string }) => {
 				<ArrowRightSquareIcon className={blockIconStyles} />
 			</div>
 
-			<div className={blockStyles}>
+			<div onClick={() => logout()} className={blockStyles}>
 				<LogOut width={'20px'} height={'20px'} className='text-white' />
 				<span className=''>Sign out</span>
 			</div>

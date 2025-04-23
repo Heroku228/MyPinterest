@@ -1,11 +1,16 @@
 'use client'
 
+import { Header } from '@/components/header/Header'
 import { formatDate } from '@/utils/formatDate'
 import Link from 'next/link'
 
 export default function Home() {
 	return (
-		<>
+		<div
+			className='min-h-screen'
+			style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
+		>
+			<Header />
 			<div className='flex gap-4 justify-center m-50'>
 				<Link className='text-3xl' href={'/pins'}>
 					Pins
@@ -22,6 +27,6 @@ export default function Home() {
 					{formatDate(new Date().toDateString())}
 				</p>
 			</div>
-		</>
+		</div>
 	)
 }

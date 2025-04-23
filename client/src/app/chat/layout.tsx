@@ -3,7 +3,7 @@ import ChatProvider from './provider/ChatProdiver'
 
 export const metadata: Metadata = {
 	title: 'Chat with Tailwind Magic',
-	description: 'Сокеты, стиль и немного волшебства',
+	description: '',
 }
 
 export default function ChatLayout({

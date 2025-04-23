@@ -1,44 +1,48 @@
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { LogIn, LogOut } from 'lucide-react'
+import { LogIn } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { AccountInfoModal } from '../modal/AccountInfoModal'
 
 export const AuthNavbar = () => {
-	const { isAuth, setIsAuth } = useAuth()
+	const { isAuthenticated, user } = useAuth()
 
 	const [showModal, setShowModal] = useState<boolean>(false)
 
+	const router = useRouter()
+
 	return (
 		<div className='col-span-1 mt-2 mr-6 ml-auto fixed right-0'>
-			{isAuth ? (
+			{isAuthenticated ? (
 				<div className='relative'>
 					<Image
 						onClick={() => {
 							setShowModal(!showModal)
 						}}
-						src={'/logo.jpeg'}
+						src={`http://127.0.0.1:3000/api/v1/uploads/avatars/${user?.userIconUrl}`}
 						alt='account logo'
-						width={45}
-						height={45}
+						width={60}
+						height={60}
 						className='rounded-full border border-black cursor-pointer'
 					/>
 
 					{showModal ? (
 						<AccountInfoModal
-							username={'Heroku228'}
-							email={'heroku@yandex.com'}
+							username={user?.username}
+							email={user?.email}
 							online={true}
 						/>
-					) : (
-						''
-					)}
+					) : null}
 				</div>
 			) : (
-				<>
+				<div
+					className='flex items-center justify-center gap-4 transition-color duration-300 chat-sidebar-background-color cursor-pointer py-2 px-4 rounded-xl'
+					onClick={() => router.push('/auth')}
+				>
 					<LogIn width={'30px'} height={'20px'} className='text-white' />
-					<LogOut width={'30px'} height={'20px'} className='text-white' />
-				</>
+					<span className='text-white font-bold text-xl'>Log in</span>
+				</div>
 			)}
 		</div>
 	)

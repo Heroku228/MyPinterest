@@ -2,20 +2,24 @@
 
 import { CheckIconForCopying } from '@/components/icons/CheckIconForCopying'
 import { MessageText } from '@/components/ui/MessageText'
+import { useAuth } from '@/hooks/context/user/useAuth'
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import Image from 'next/image'
 
 export const MessageBlock = ({ message }: { message: IMessage }) => {
+	const { user } = useAuth()
+
 	return (
 		<div className='relative p-3 w-max'>
-			<div className='flex items-end gap-1'>
-				<Image
-					className='rounded-full cursor-pointer'
-					src={message.sender.icon ? message.sender.icon : '/basicIcon.jpeg'}
-					alt='user icon'
-					width={45}
-					height={45}
-				/>
+			<div className='flex items-end gap-2'>
+				<div className='relative w-[50px] h-[50px]'>
+					<Image
+						className='rounded-full cursor-pointer'
+						src={`http://127.0.0.1:3000/api/v1/uploads/avatars/${user?.userIconUrl}`}
+						alt='user icon'
+						fill
+					/>
+				</div>
 				<MessageText>{message.text}</MessageText>
 			</div>
 			<CheckIconForCopying message={message} />
