@@ -1,3 +1,6 @@
+import { Header } from '@/components/header/Header'
+import { AccountContent } from '@/components/i/AccountContent'
+import { AccountSidebar } from '@/components/i/AccountSidebar'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -12,14 +15,12 @@ export const Account = () => {
 	}, [isAuthenticated])
 
 	return (
-		<div>
-			<h1>{user?.username}</h1>
-			<h2>{user?.email}</h2>
-			<img
-				src={`http://localhost:3000/api/v1/uploads/avatars${user?.userIconUrl}`}
-				alt='user icon'
-			/>
-			<button onClick={logout}>Logout</button>
+		<div className='w-11/12 m-auto p-4'>
+			<Header />
+			<div className='flex gap-4'>
+				<AccountSidebar />
+				<AccountContent />
+			</div>
 		</div>
 	)
 }
