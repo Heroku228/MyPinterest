@@ -39,7 +39,7 @@ export class AuthController {
 
 			writeFileSync(`${folderPath}/${filePath}`, buffer)
 
-			user.userIconUrl = `/${fileName}`
+			user.userIconUrl = `${fileName}`
 		}
 		console.log("ELSE")
 

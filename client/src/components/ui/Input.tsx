@@ -1,6 +1,29 @@
-import { loginFormInputStyles } from '@/constants/styles/formInputStyles'
+import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
+import {
+	basicInputStyles,
+	primaryInputStyles,
+	secondaryInputStyles,
+} from '@/constants/styles/formInputStyles'
 import { InputProps } from '@/types/UI-types/UIComponentsProps'
 
-export const Input: React.FC<InputProps> = ({ ...props }) => {
-	return <input className={loginFormInputStyles} type='text' {...props} />
+export const Input: React.FC<InputProps> = ({
+	additionalStyles,
+	variant,
+	...props
+}) => {
+	return (
+		<input
+			className={`
+				${basicInputStyles}
+				${
+					variant === STYLES_VARIANTS.PRIMARY
+						? primaryInputStyles
+						: secondaryInputStyles
+				}
+				${additionalStyles}
+				`}
+			{...props}
+			type='text'
+		/>
+	)
 }

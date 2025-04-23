@@ -7,6 +7,15 @@ import { Button } from '../ui/Button'
 export const AccountSidebar = () => {
 	const { user, logout } = useAuth()
 	const [hoverIcon, setHoverIcon] = useState<boolean | null>(null)
+	const [scrollY, setScrollY] = useState(0)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrollY(window.scrollY)
+		}
+		window.addEventListener('scroll', handleScroll)
+		return () => window.removeEventListener('scroll', handleScroll)
+	}, [])
 
 	useEffect(() => {
 		console.log('USER2: ', user)
@@ -17,7 +26,13 @@ export const AccountSidebar = () => {
 	}
 
 	return (
-		<aside className='flex flex-col max-w-xs gap-6 mr-10 input-r-25 chat-sidebar-background-color p-8 h-max rounded-md'>
+		<aside
+			style={{
+				transform: `translateY(${scrollY * 0.9}px)`,
+				transition: 'transform 0.2s ease-out',
+			}}
+			className='flex flex-col max-w-xs gap-6 mr-10 input-r-25 chat-sidebar-background-color p-8 h-max rounded-md'
+		>
 			<div
 				onMouseEnter={() => setHoverIcon(true)}
 				onMouseLeave={() => setHoverIcon(false)}

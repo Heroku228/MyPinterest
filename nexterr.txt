@@ -1,0 +1,2 @@
+Error: Invalid src prop (http://localhost:3000/api/v1/uploads/avatar//cxpc8th5ac.jpeg) on `next/image`, hostname "localhost" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host

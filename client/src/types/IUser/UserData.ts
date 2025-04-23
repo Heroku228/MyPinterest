@@ -1,6 +1,7 @@
 export type TVisibleUserData = {
 	showUsername: boolean,
+	showEmail: boolean,
 	showIcon: boolean,
-	link: string
+	link?: string
 	size: number
 }

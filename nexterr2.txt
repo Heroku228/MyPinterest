@@ -1,0 +1,14 @@
+[TypeError: fetch failed] {
+  [cause]: Error: connect ECONNREFUSED ::1:3000
+      at <unknown> (Error: connect ECONNREFUSED ::1:3000) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '::1',
+    port: 3000
+  }
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1569ms
+ GET /_next/image?url=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fv1%2Fuploads%2Favatar%2F%2Fcxpc8th5ac.jpeg&w=128&q=75 500 in 1872ms
+ GET /_next/image?url=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fv1%2Fuploads%2Favatar%2F%2Fcxpc8th5ac.jpeg&w=128&q=75 500 in 1704ms

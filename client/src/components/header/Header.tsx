@@ -20,12 +20,7 @@ export const Header = () => {
 				className='transition-bg col-span-1 duration-300 background-gray-hover flex w-full overflow-hidden px-8 rounded-lg'
 				onClick={() => window.location.reload()}
 			>
-				<CurrentUserInfo
-					showUsername={true}
-					showIcon={true}
-					link={''}
-					size={40}
-				/>
+				<CurrentUserInfo showEmail showUsername showIcon size={50} />
 			</div>
 		</header>
 	)
