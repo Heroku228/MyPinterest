@@ -1,3 +1,4 @@
+import { UPLOADS } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { TVisibleUserData } from '@/types/IUser/UserData'
 import Image from 'next/image'
@@ -23,7 +24,7 @@ export const CurrentUserInfo = ({
 			>
 				{showIcon ? (
 					<Image
-						src={`http://127.0.0.1:3000/api/v1/uploads/avatars/${user?.userIconUrl}`}
+						src={`${UPLOADS.AVATARS}${user?.userIconUrl}`}
 						alt='account logo'
 						width={size}
 						height={size}

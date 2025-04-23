@@ -1,11 +1,9 @@
-'use client'
-
-import { joinRoom } from '@/services/sockets/joinRoom'
+import { SOCKET_NOT_FOUND } from '@/constants/response/Response'
+import { joinRoom, setSocket } from '@/services/socketService/socketService'
 import { ContextTypes } from '@/types/ContextTypes/ContextTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'
 import { TSocketResponse } from '@/types/SocketsTypes/TSocketResponse'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { setSocket } from '../../../services/sockets/setSocket'
 
 const ConnectChatContext = createContext<
 	ContextTypes.TConnectChatProvider | undefined
@@ -33,8 +31,8 @@ export const ConnectChatProvider = ({ children }: TReactNode) => {
 	): Promise<TSocketResponse | unknown> => {
 		setRoom(roomName)
 
-		if (!socket)
-			return { access: false, status: 500, reasons: 'Socket not found' }
+		if (!socket) return SOCKET_NOT_FOUND
+
 		try {
 			return await joinRoom(socket, roomName)
 		} catch (err) {

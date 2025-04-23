@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { OAuthBlock } from '../authComponents/OAuthBlock'
+import { OAuthBlock } from './OAuthBlock'
 
 export const OAuthContainer = () => {
 	return (

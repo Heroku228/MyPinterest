@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
+import { ROUTES } from '@/constants/routes'
 import { accountSidebarButtonMobileStyles } from '@/constants/styles/accountSidebarStyles'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { useRouter } from 'next/navigation'
@@ -28,7 +29,7 @@ export const AccountSidebarButtons = ({
 					isMobileVersion ? accountSidebarButtonMobileStyles : ''
 				}`}
 				variant={STYLES_VARIANTS.SECONDARY}
-				onClick={() => router.push('/profile-settings')}
+				onClick={() => router.push(ROUTES.SETTINGS)}
 			>
 				Edit profile
 			</Button>

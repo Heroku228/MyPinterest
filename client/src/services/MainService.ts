@@ -19,3 +19,17 @@ export const sanitizedFileName = (filename: string) => {
 
 	return `${randomName}${extension}`
 }
+
+export const scrollToBottom = () => {
+	window.scroll({
+		top: document.body.scrollHeight + 100,
+		behavior: 'smooth'
+	})
+}
+
+export const validPassword = (password: string | undefined): boolean => {
+	if (!password) return false
+
+	const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/
+	return passwordRegex.test(password)
+}

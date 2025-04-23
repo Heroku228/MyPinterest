@@ -1,3 +1,4 @@
+import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { LogIn } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -6,7 +7,7 @@ import { SiteLogo } from '../SiteLogo'
 import { HeaderList } from './List/HeaderList'
 
 export const Header = () => {
-	const { isAuthenticated } = useAuth()
+	const { isAuthenticated, user } = useAuth()
 	const router = useRouter()
 
 	return (
@@ -19,7 +20,7 @@ export const Header = () => {
 				<HeaderList />
 			</div>
 
-			{isAuthenticated ? (
+			{isAuthenticated && user ? (
 				<div
 					className='transition-bg col-span-1 duration-300 background-gray-hover flex w-full overflow-hidden px-8 rounded-lg'
 					onClick={() => window.location.reload()}
@@ -29,7 +30,7 @@ export const Header = () => {
 						showUsername
 						showIcon
 						size={50}
-						link='/auth/i'
+						link={ROUTES.PROFILE(user?.username)}
 					/>
 				</div>
 			) : (

@@ -3,7 +3,7 @@ import {
 	formInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { AuthTypes } from '@/types/AuthTypes/AuthTypes'
-import { Input } from '../ui/Input'
+import { Input } from './Input'
 
 export const AuthDiv = ({
 	Image,

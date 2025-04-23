@@ -1,16 +1,16 @@
 import { Button } from '@/components/ui/Button'
+import { AuthDiv } from '@/components/ui/FormInputBlock'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import {
 	formIconStyles,
 	formInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { convertFileToBase64, sanitizedFileName } from '@/services/FSHandler'
+import { convertFileToBase64, sanitizedFileName } from '@/services/MainService'
 import { UserTypes } from '@/types/AuthTypes/AuthTypes'
 import { FileImage, Mail, User } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { AuthDiv } from '../AuthDiv'
-import { PasswordBlock } from './block/PasswordBlock'
+import { PasswordBlock } from '../passwordBlock/PasswordBlock'
 
 export const AuthRegister = () => {
 	const usernameRef = useRef<HTMLInputElement>(null)

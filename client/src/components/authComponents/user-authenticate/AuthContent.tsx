@@ -1,5 +1,5 @@
-import { AuthLogin } from './i/AuthLogin'
-import { AuthRegister } from './i/AuthRegister'
+import { AuthLogin } from './AuthLogin'
+import { AuthRegister } from './register/AuthRegister'
 
 export const AuthContent = ({
 	registerForm = false,

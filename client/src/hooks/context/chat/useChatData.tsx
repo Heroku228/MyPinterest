@@ -1,6 +1,3 @@
-'use client'
-
-import { sender } from '@/services/sockets/collectPayloadBody'
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import { ContextTypes } from '@/types/ContextTypes/ContextTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'
@@ -17,7 +14,7 @@ export const UseChatDataProvider = ({ children }: TReactNode) => {
 		messageId: '',
 		text: '',
 		room: 'Room#1',
-		sender: sender,
+		sender: null,
 	})
 
 	return (

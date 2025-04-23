@@ -17,7 +17,7 @@ export interface IMessage {
 	messageId: string,
 	text: string
 	room: string
-	sender: IUser
+	sender: IUser | null
 	userCount?: number
 	sentTo?: string,
 	editedMessage?: boolean

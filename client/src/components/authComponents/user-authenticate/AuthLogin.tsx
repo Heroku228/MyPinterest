@@ -4,8 +4,8 @@ import { UserTypes } from '@/types/AuthTypes/AuthTypes'
 import { Lock, Mail } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Button } from '../../ui/Button'
-import { AuthDiv } from '../AuthDiv'
-import { ShowPasswordIcon } from '../ShowPasswordIcon'
+import { AuthDiv } from '../../ui/FormInputBlock'
+import { ShowPasswordIcon } from './passwordBlock/ShowPasswordIcon'
 
 export const AuthLogin = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false)

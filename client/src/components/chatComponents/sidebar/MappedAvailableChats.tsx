@@ -14,10 +14,6 @@ export const MappedAvailableChats = () => {
 	}, [room])
 
 	const handleClick = async (roomName: string) => {
-		if (roomName === currentRoom) {
-			alert(`You're already in ${roomName}`)
-			return
-		}
 		setCurrentRoom(roomName)
 
 		if (roomName && !room) await handleRoom(roomName)

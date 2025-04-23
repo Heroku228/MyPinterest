@@ -1,7 +1,7 @@
-import { AuthContent } from '@/components/authComponents/AuthContent'
+import { OAuthContainer } from '@/components/authComponents/OAuth/OAuthContainer'
+import { AuthContent } from '@/components/authComponents/user-authenticate/AuthContent'
 import { SiteLogo } from '@/components/SiteLogo'
 import { Hint } from '@/components/ui/Hint'
-import { OAuthContainer } from '@/components/ui/OAuthContainer'
 import { SetStateAction } from 'react'
 
 export const AuthenticatioSection = ({

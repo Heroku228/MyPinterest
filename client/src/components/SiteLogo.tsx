@@ -1,4 +1,4 @@
-import { handleRedirectToHome } from '@/services/redirect/redirectToHomePage'
+import { ROUTES } from '@/constants/routes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -7,7 +7,7 @@ export const SiteLogo = () => {
 
 	return (
 		<div
-			onClick={() => handleRedirectToHome(router)}
+			onClick={() => router.push(ROUTES.HOME)}
 			className='flex items-center gap-4 cursor-pointer'
 		>
 			<Image
