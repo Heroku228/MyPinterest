@@ -22,7 +22,7 @@ export const AccountContent = () => {
 
 	return (
 		<section className='flex flex-col gap-10 overflow-x-hidden'>
-			<div className='default-border py-2 px-4'>
+			<div className='default-border py-2 px-4 rounded-xl'>
 				<h1 className='mb-8 text-xl w-max font-bold italic default-border-bottom'>
 					Recents
 				</h1>
@@ -42,7 +42,7 @@ export const AccountContent = () => {
 				</div>
 			</div>
 
-			<div className='h-max w-full flex flex-col gap-8 default-border py-2 px-4'>
+			<div className='h-max w-full flex flex-col gap-8 default-border rounded-xl py-2 px-4'>
 				<h1 className=' text-xl w-max font-bold italic default-border-bottom'>
 					All pins
 				</h1>
