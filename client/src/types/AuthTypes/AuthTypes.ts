@@ -1,7 +1,8 @@
+import { AxiosResponse } from 'axios'
 import { LucideIcon } from 'lucide-react'
 import { ReactNode, RefObject } from 'react'
-import { InputProps } from '../UI-types/UIComponentsProps'
 import { TShowHint } from '../externalTypes/NextTypes'
+import { InputProps } from '../UI-types/UIComponentsProps'
 import { UserTypes } from '../UserTypes'
 
 export namespace AuthTypes {
@@ -33,7 +34,7 @@ export namespace AuthTypes {
 		login: (credentials: UserTypes.TLoginDto) => Promise<void>,
 		register: (data: UserTypes.TRegisterDto) => Promise<void>,
 		logout: () => void
-		fetchUser: () => Promise<void>
+		fetchUser: (username: string) => Promise<void | AxiosResponse<any, any>>
 	}
 }
 

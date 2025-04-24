@@ -1,4 +1,8 @@
+import { useParamsContext } from '@/hooks/context/paramsContext'
+import { useAuth } from '@/hooks/context/user/useAuth'
+import { UserTypes } from '@/types/UserTypes'
 import { useEffect, useState } from 'react'
+import { AnotherUserInfo } from '../AnotherUserInfo'
 import { CurrentUserInfo } from '../CurrentUserInfo'
 import { AccountSidebarButtons } from './subcomponents/AccountSidebarButtons'
 
@@ -8,6 +12,25 @@ export const AccountSidebar = ({
 	isMobileVersion: boolean
 }) => {
 	const [scrollY, setScrollY] = useState(0)
+	const { fetchUser } = useAuth()
+	const { paramsUsername } = useParamsContext()
+
+	const [anotherUser, setAnotherUser] =
+		useState<UserTypes.TResponseUserDto | null>()
+
+	useEffect(() => {
+		const handleFetch = async () => {
+			console.log('TEST')
+			const response = await fetchUser(paramsUsername)
+			console.log('ACCOUNT SIDEBAR RESPONSE: ', response)
+
+			if (!response) return
+
+			setAnotherUser(response.data)
+		}
+
+		handleFetch()
+	}, [paramsUsername])
 
 	useEffect(() => {
 		if (!isMobileVersion) return
@@ -32,14 +55,26 @@ export const AccountSidebar = ({
 		`}
 		>
 			<div>
-				<CurrentUserInfo
-					showUsername
-					showEmail
-					showIcon
-					link='/profile-settings'
-					size={250}
-					additionalStyles='flex-col'
-				/>
+				{anotherUser ? (
+					<AnotherUserInfo
+						showUsername
+						showEmail
+						showIcon
+						link='/profile-settings'
+						size={250}
+						additionalStyles='flex-col'
+						userData={anotherUser}
+					/>
+				) : (
+					<CurrentUserInfo
+						showUsername
+						showEmail
+						showIcon
+						link='/profile-settings'
+						size={250}
+						additionalStyles='flex-col'
+					/>
+				)}
 
 				<AccountSidebarButtons isMobileVersion={isMobileVersion} />
 			</div>

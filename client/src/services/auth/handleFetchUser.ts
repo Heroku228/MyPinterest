@@ -29,13 +29,10 @@ export const getCurrentAuthenticatedUser = async (
 			error: err
 		}
 	}
-
-
 }
 
 export const getUserByUsername = async (username: string) => {
-	const res = await axios.get(`http://localhost:3000/api/v1/users/${username}`)
+	console.log('GET USER BY USERNAME: ', username)
+	return await axios.get(`http://localhost:3000/api/v1/users/${username}`)
 		.catch(err => console.error('[GetUserByUsername ERROR]: ', err))
-
-	console.log("GET USER: RESPONSE: ", res)
 }

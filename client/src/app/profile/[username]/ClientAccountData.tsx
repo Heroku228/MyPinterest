@@ -1,5 +1,6 @@
 'use client'
 
+import { useParamsContext } from '@/hooks/context/paramsContext'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
 import axios from 'axios'
@@ -7,8 +8,9 @@ import { Loader2Icon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Account } from './Account'
 
-export const ClientAccountData = ({ params }: { params: any }) => {
+export const ClientAccountData = () => {
 	const { isLoading, user } = useAuth()
+	const { paramsUsername } = useParamsContext()
 	const [isOwner, setIsOwner] = useState<boolean | null>(false)
 
 	const getUserAccount = async (
@@ -24,18 +26,17 @@ export const ClientAccountData = ({ params }: { params: any }) => {
 
 	useEffect(() => {
 		const handleProps = async () => {
-			const usernameObject = params.value as string
-			const usernameFromProps = JSON.parse(usernameObject)
-			setIsOwner(usernameFromProps.username === user?.username)
+			setIsOwner(paramsUsername === user?.username)
+			console.log('username: ', paramsUsername)
 
 			if (!isOwner) {
-				await getUserAccount(usernameFromProps.username)
+				await getUserAccount(paramsUsername)
 			}
 		}
 		handleProps()
 	}, [user])
 
-	if (!isOwner) return <h1>TEST</h1>
+	if (!isOwner) return <Account />
 
 	return <div>{isLoading ? <Loader2Icon /> : <Account />}</div>
 }

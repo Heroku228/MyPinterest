@@ -30,6 +30,10 @@ export namespace UserTypes {
 		additionalStyles?: string
 	}
 
+	export type TAnotherUserInfo = {
+		userData: TResponseUserDto
+	} & TVisibleUserData
+
 	export type TFetchUserResponse = {
 		access: boolean,
 		status: number,
