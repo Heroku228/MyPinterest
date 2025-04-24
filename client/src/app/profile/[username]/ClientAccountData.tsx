@@ -1,6 +1,7 @@
 'use client'
 
 import { useAuth } from '@/hooks/context/user/useAuth'
+import { UserTypes } from '@/types/UserTypes'
 import axios from 'axios'
 import { Loader2Icon } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -10,22 +11,21 @@ export const ClientAccountData = ({ params }: { params: any }) => {
 	const { isLoading, user } = useAuth()
 	const [isOwner, setIsOwner] = useState<boolean | null>(false)
 
-	const getUserAccount = async (username: string) => {
+	const getUserAccount = async (
+		username: string
+	): Promise<UserTypes.TFetchUserResponse> => {
 		const response = await axios.get(
 			`http://localhost:3000/api/v1/users/${username}`
 		)
-		console.log('GET USER ACCOUNT: ', response)
+
+		console.log('GET USER ACCOUNT: ', response.data)
 		return response.data
 	}
 
 	useEffect(() => {
-		console.log('PARAMS: ', params.value)
-
 		const handleProps = async () => {
 			const usernameObject = params.value as string
 			const usernameFromProps = JSON.parse(usernameObject)
-			console.log('props: ', usernameFromProps.username)
-			console.log('user:', user?.username)
 			setIsOwner(usernameFromProps.username === user?.username)
 
 			if (!isOwner) {

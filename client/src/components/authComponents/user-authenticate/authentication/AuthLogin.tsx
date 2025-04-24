@@ -1,6 +1,6 @@
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { UserTypes } from '@/types/AuthTypes/AuthTypes'
+import { UserTypes } from '@/types/UserTypes'
 import { Lock, Mail } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Button } from '../../../ui/Button'
@@ -28,6 +28,10 @@ export const AuthLogin = () => {
 		await login(credentials)
 	}
 
+	const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') await handleLogin()
+	}
+
 	return (
 		<>
 			<AuthDiv
@@ -49,6 +53,7 @@ export const AuthLogin = () => {
 					name: 'password',
 					placeholder: 'Password',
 					id: 'password',
+					onKeyDown: handleKeyDown,
 				}}
 				children={
 					<ShowPasswordIcon

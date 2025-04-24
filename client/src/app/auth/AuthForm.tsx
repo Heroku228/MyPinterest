@@ -1,3 +1,4 @@
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { useState } from 'react'
 import { AuthenticatioSection } from './form/AuthenticationSection'
 import { SideImage } from './form/SideImage'
@@ -5,10 +6,13 @@ import { SideImage } from './form/SideImage'
 export const AuthForm = () => {
 	const [showRegister, setShowRegister] = useState<boolean>(false)
 
+	const { width } = useWindowSize()
+
 	const leftBlock = showRegister ? (
 		<SideImage
 			className='h-full max-w-xs rounded-md input-r-25'
 			imageUrl='/bg/bg-1.jpg'
+			show={width > 1150 ? true : false}
 		/>
 	) : (
 		<AuthenticatioSection
@@ -26,6 +30,7 @@ export const AuthForm = () => {
 		<SideImage
 			className='h-full max-w-xs rounded-md input-l-25'
 			imageUrl='/bg/bg-3.jpg'
+			show={width > 1150 ? true : false}
 		/>
 	)
 

@@ -1,4 +1,3 @@
-import { useAuth } from '@/hooks/context/user/useAuth'
 import { useEffect, useState } from 'react'
 import { CurrentUserInfo } from '../CurrentUserInfo'
 import { AccountSidebarButtons } from './subcomponents/AccountSidebarButtons'
@@ -33,16 +32,14 @@ export const AccountSidebar = ({
 		`}
 		>
 			<div>
-				<div className='mb-10'>
-					<CurrentUserInfo
-						showUsername
-						showEmail
-						showIcon
-						link='/profile-settings'
-						size={250}
-						additionalStyles='flex-col'
-					/>
-				</div>
+				<CurrentUserInfo
+					showUsername
+					showEmail
+					showIcon
+					link='/profile-settings'
+					size={250}
+					additionalStyles='flex-col'
+				/>
 
 				<AccountSidebarButtons isMobileVersion={isMobileVersion} />
 			</div>

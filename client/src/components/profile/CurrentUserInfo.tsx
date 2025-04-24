@@ -15,7 +15,7 @@ export const CurrentUserInfo = ({
 	const { user } = useAuth()
 
 	return (
-		<Link href={link ? link : ''} className='flex flex-col py-1 '>
+		<Link href={link ? link : ''} className='flex flex-col py-1'>
 			<div
 				className={`
 				flex items-center gap-4 mb-1

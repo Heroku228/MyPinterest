@@ -3,8 +3,9 @@ import {
 	getCurrentAuthenticatedUser,
 	getUserByUsername,
 } from '@/services/auth/handleFetchUser'
-import { AuthTypes, UserTypes } from '@/types/AuthTypes/AuthTypes'
+import { AuthTypes } from '@/types/AuthTypes/AuthTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'
+import { UserTypes } from '@/types/UserTypes'
 import axios from 'axios'
 import { createContext, useContext, useEffect, useState } from 'react'
 
@@ -16,25 +17,12 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	const isAuthenticated = !!user
 
 	const fetchUser = async (username?: string) => {
-		if (localStorage.getItem('token')) {
-			return
-		}
-
-		if (username) {
-			const response = await getUserByUsername(username)
-
-			console.log('USERNAME: ', username)
-			console.log('RESPONSE: ', response)
-			return
-		}
+		if (username) return await getUserByUsername(username)
 
 		const response = await getCurrentAuthenticatedUser()
-		console.log('SUPER RESPONSE: ', response.status)
+		setIsLoading(false)
 
-		if (response.status === 200) {
-			setUser(response.userData)
-			setIsLoading(false)
-		}
+		if (response.access) setUser(response.data)
 	}
 
 	const login = async (credentials: UserTypes.TLoginDto) => {
@@ -42,7 +30,9 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 			'http://localhost:3000/api/v1/auth/login',
 			credentials
 		)
+		
 		localStorage.setItem('token', res.data.access_token)
+
 		axios.defaults.headers.common[
 			'Authorization'
 		] = `Bearer ${res.data.access_token}`
@@ -59,7 +49,6 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 				},
 			}
 		)
-		console.log('[REGISTER]: ', res)
 		if (res.status === 201) {
 			setUser(res.data)
 			localStorage.setItem('token', res.data.access_token)

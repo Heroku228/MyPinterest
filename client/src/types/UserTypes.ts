@@ -1,4 +1,3 @@
-import { ServerResponse } from './ServerResponseTypes'
 
 export namespace UserTypes {
 	export type TResponseUserDto = {
@@ -36,7 +35,8 @@ export namespace UserTypes {
 		status: number,
 		statusText: string,
 		headers: Object
-		data: ServerResponse.IGetUserResponse
+		data: TResponseUserDto | null
+		error?: any
 	}
 }
 

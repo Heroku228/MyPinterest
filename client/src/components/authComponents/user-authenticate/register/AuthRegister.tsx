@@ -6,8 +6,9 @@ import {
 	formInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { convertFileToBase64, sanitizedFileName } from '@/services/MainService'
-import { UserTypes } from '@/types/AuthTypes/AuthTypes'
+import { UserTypes } from '@/types/UserTypes'
 import { FileImage, Mail, User } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { PasswordBlock } from '../passwordBlock/PasswordBlock'
