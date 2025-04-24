@@ -18,6 +18,7 @@ export const MappedPins = ({
 						className='rounded-lg cursor-pointer default-border transition-all duration-300 hover:scale-105'
 						src={pin}
 						fill
+						sizes='125'
 						alt='pin'
 					/>
 				</div>

@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '@/components/header/Header'
 import { AccountContent } from '@/components/profile/accountContent/AccountContent'
 import { AccountSidebar } from '@/components/profile/accountSidebar/AccountSidebar'

@@ -1,3 +1,5 @@
+'use client'
+
 import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { LogIn } from 'lucide-react'

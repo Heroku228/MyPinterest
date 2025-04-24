@@ -1,13 +1,6 @@
 import type { Metadata } from 'next'
-import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { GlobalProvider } from './Provider'
-
-const jetBrainsFont = JetBrains_Mono({
-	subsets: ['latin'],
-	weight: ['400', '600', '700'],
-	display: 'swap',
-})
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -21,7 +14,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={`${jetBrainsFont.style}`}>
+			<body>
 				<GlobalProvider children={children} />
 			</body>
 		</html>

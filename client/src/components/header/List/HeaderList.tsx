@@ -1,3 +1,4 @@
+'use client'
 import { Input } from '@/components/ui/Input'
 import { LiItem } from '@/components/ui/Li'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'

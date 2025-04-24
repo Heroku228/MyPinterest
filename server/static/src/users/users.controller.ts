@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, UseFilters, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
-import { Username } from 'static/src/common/decorators/user.decorator'
 import { UserGuard } from 'static/src/common/guards/user.guard'
 import { UserInterceptor } from 'static/src/common/interceptors/user.interceptor'
 import { EmailValidationPipe } from 'static/src/conception/pipe'
@@ -16,16 +15,10 @@ import { UsersService } from './users.service'
 export class UsersController {
 	constructor(private readonly usersService: UsersService) { }
 
-	@Get('/username')
-	getUsername(@Username('username') username: string) {
-		console.log('CONTROLLER [getUsername] (username): ', username)
-		return `Username: ${username}`
-	}
-
 	@Get(':username')
-	getUserByUsername(@Param('username') username: string) {
+	async getUserByUsername(@Param('username') username: string) {
 		console.log('CONTROLLER [getUserByUsername]: ', username)
-		const user = this.usersService.getUserByUsername(username)
+		const user = await this.usersService.getUserByUsername(username)
 		return plainToInstance(ResponseUserDto, user)
 	}
 

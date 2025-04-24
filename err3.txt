@@ -1,0 +1,32 @@
+ Server   Error: Route "/profile/[username]" used `searchParams._debugInfo`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    resolveErrorDev react-server-dom-turbopack-client.browser.development.js:1838
+    getOutlinedModel react-server-dom-turbopack-client.browser.development.js:1322
+    parseModelString react-server-dom-turbopack-client.browser.development.js:1462
+    [project]/node_modules/next/dist/compiled/react-server-dom-turbopack/cjs/react-server-dom-turbopack-client.browser.development.js [app-client] (ecmascript)/createFromJSONCallback/< react-server-dom-turbopack-client.browser.development.js:2267
+    resolveConsoleEntry react-server-dom-turbopack-client.browser.development.js:2102
+    processFullStringRow react-server-dom-turbopack-client.browser.development.js:2243
+    processFullBinaryRow react-server-dom-turbopack-client.browser.development.js:2206
+    progress react-server-dom-turbopack-client.browser.development.js:2452
+    promise callback*progress react-server-dom-turbopack-client.browser.development.js:2472
+    promise callback*progress react-server-dom-turbopack-client.browser.development.js:2472
+    promise callback*progress react-server-dom-turbopack-client.browser.development.js:2472
+    promise callback*startReadingFromStream react-server-dom-turbopack-client.browser.development.js:2479
+    [project]/node_modules/next/dist/compiled/react-server-dom-turbopack/cjs/react-server-dom-turbopack-client.browser.development.js [app-client] (ecmascript)/exports.createFromReadableStream react-server-dom-turbopack-client.browser.development.js:2682
+    [project]/node_modules/next/dist/client/app-index.js [app-client] (ecmascript) app-index.tsx:159
+    instantiateModule dev-base.ts:205
+    runModuleExecutionHooks dev-base.ts:265
+    instantiateModule dev-base.ts:203
+    getOrInstantiateModuleFromParent dev-base.ts:132
+    commonJsRequire runtime-utils.ts:241
+    [project]/node_modules/next/dist/client/app-next-turbopack.js [app-client] (ecmascript)/< app-next-turbopack.ts:9
+    [project]/node_modules/next/dist/client/app-bootstrap.js [app-client] (ecmascript)/appBootstrap/< app-bootstrap.ts:78
+    loadScriptsInSequence app-bootstrap.ts:20
+    appBootstrap app-bootstrap.ts:60
+    [project]/node_modules/next/dist/client/app-next-turbopack.js [app-client] (ecmascript) app-next-turbopack.ts:8
+    instantiateModule dev-base.ts:205
+    runModuleExecutionHooks dev-base.ts:265
+    instantiateModule dev-base.ts:203
+    getOrInstantiateRuntimeModule dev-base.ts:101
+    registerChunk runtime-backend-dom.ts:85
+    registerChunk runtime-base.ts:329
+    NextJS 2

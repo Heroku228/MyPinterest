@@ -1,3 +1,8 @@
+'use client'
+import {
+	getCurrentAuthenticatedUser,
+	getUserByUsername,
+} from '@/services/auth/handleFetchUser'
 import { AuthTypes, UserTypes } from '@/types/AuthTypes/AuthTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'
 import axios from 'axios'
@@ -10,18 +15,24 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const isAuthenticated = !!user
 
-	const fetchUser = async () => {
-		try {
-			const res = await axios.get('http://localhost:3000/api/v1/auth/me', {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem('token')}`,
-				},
-			})
-			console.log(res)
-			setUser(res.data.userData)
-		} catch (err) {
-			console.log('[AUTH ERROR]: ', err)
-		} finally {
+	const fetchUser = async (username?: string) => {
+		if (localStorage.getItem('token')) {
+			return
+		}
+
+		if (username) {
+			const response = await getUserByUsername(username)
+
+			console.log('USERNAME: ', username)
+			console.log('RESPONSE: ', response)
+			return
+		}
+
+		const response = await getCurrentAuthenticatedUser()
+		console.log('SUPER RESPONSE: ', response.status)
+
+		if (response.status === 200) {
+			setUser(response.userData)
 			setIsLoading(false)
 		}
 	}
@@ -37,7 +48,7 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 		] = `Bearer ${res.data.access_token}`
 		setUser(res.data.user)
 	}
-	
+
 	const register = async (data: UserTypes.TRegisterDto) => {
 		const res = await axios.post(
 			'http://localhost:3000/api/v1/auth/register',
@@ -66,7 +77,6 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	useEffect(() => {
 		const setTokenAndFetchUser = async () => {
 			const token = localStorage.getItem('token')
-			console.log('TOKEN 2: ', token)
 
 			if (token)
 				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Req, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Req, UseGuards } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import { homedir } from 'os'
@@ -59,6 +59,8 @@ export class AuthController {
 	async clear() {
 		return await this.authService.clear()
 	}
+
+	
 
 	@UseGuards(JwtAuthGuard)
 	@Get('me')

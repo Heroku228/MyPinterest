@@ -1,8 +1,16 @@
-import { RESPONSE_STATUS, RESPONSE_STATUS_CODE, TSocketResponse } from '@/types/SocketsTypes/TSocketResponse'
+import { HTTP_STATUS, RESPONSE_STATUS, } from '@/types/Response'
+import { TSocketResponse } from '@/types/SocketsTypes/TSocketResponse'
 
 export const SOCKET_NOT_FOUND: TSocketResponse = {
 	access: false,
 	status: RESPONSE_STATUS.ERROR,
-	statusCode: RESPONSE_STATUS_CODE.BAD_REQUEST,
+	statusCode: HTTP_STATUS.BAD_REQUEST,
 	info: 'Socket not found'
+}
+
+
+export const FOUNDED_USER = {
+	access: true,
+	status: RESPONSE_STATUS.OK,
+	statusCode: HTTP_STATUS.OK,
 }

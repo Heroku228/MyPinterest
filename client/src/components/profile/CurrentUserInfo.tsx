@@ -1,6 +1,6 @@
 import { UPLOADS } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { UserTypes } from '@/types/AuthTypes/AuthTypes'
+import { UserTypes } from '@/types/UserTypes'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -26,6 +26,7 @@ export const CurrentUserInfo = ({
 					<Image
 						src={`${UPLOADS.AVATARS}${user?.userIconUrl}`}
 						alt='account logo'
+						priority
 						width={size}
 						height={size}
 						className='rounded-full border border-black'

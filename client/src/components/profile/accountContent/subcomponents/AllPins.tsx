@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/Button'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import Image from 'next/image'

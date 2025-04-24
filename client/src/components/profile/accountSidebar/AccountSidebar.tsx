@@ -8,7 +8,6 @@ export const AccountSidebar = ({
 }: {
 	isMobileVersion: boolean
 }) => {
-	const { user } = useAuth()
 	const [scrollY, setScrollY] = useState(0)
 
 	useEffect(() => {
