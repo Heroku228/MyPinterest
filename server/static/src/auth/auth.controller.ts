@@ -26,7 +26,6 @@ export class AuthController {
 		})
 
 		if (userIconBase64 && fileName) {
-			console.log('USER ICON BASE 64 AND FILENAME')
 			const base64Data = userIconBase64.replace(/^data:image\/\w+;base64,/, '')
 			const buffer = Buffer.from(base64Data, 'base64')
 
@@ -41,7 +40,6 @@ export class AuthController {
 
 			user.userIconUrl = `${fileName}`
 		}
-		console.log("ELSE")
 
 		await this.authService.register(user)
 		return plainToInstance(ResponseUserDto, user, {
@@ -51,7 +49,6 @@ export class AuthController {
 
 	@Post('login')
 	async login(@Body() { emailOrUsername, password }: { emailOrUsername: string, password: string }) {
-		console.log('LOGIN CONTROLLER')
 		return await this.authService.login(password, emailOrUsername)
 	}
 
@@ -60,18 +57,12 @@ export class AuthController {
 		return await this.authService.clear()
 	}
 
-	
-
 	@UseGuards(JwtAuthGuard)
 	@Get('me')
 	getProfile(@Req() req): AuthTypes.IAuthResponse {
 		if (!req.user)
 			return this.authService.sendErrorObject(AUTH_RESPONSE_MESSAGE.NO_USER_DATA_FROM_REQUEST)
-
 		const responseDto = plainToInstance(ResponseUserDto, req.user)
-		console.log('CONTROLLER [me] request: ', req.user)
-		console.log('RESPONSE DTO: ', responseDto)
-
 		return this.authService.sendSuccessfulResponse(responseDto)
 	}
 }

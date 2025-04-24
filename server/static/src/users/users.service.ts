@@ -19,7 +19,6 @@ export class UsersService {
 	}
 
 	async getUserByUsernameOrEmail(identifier: string) {
-		console.log('[getUserByUsernameOrEmail]: ', identifier)
 		const user = await this.userRepository.findOne({
 			where: [
 				{ username: ILike(identifier) },
@@ -30,14 +29,12 @@ export class UsersService {
 	}
 
 	async getUserByEmail(email: string) {
-		console.log('getUserByEmail ', email)
 		const user = await this.userRepository.findOne({ where: { email: ILike(email) } })
 		if (!user) throw new NotFoundException('User not found')
 		return user
 	}
 
 	async getUserByUsername(username: string): Promise<User> {
-		console.log('getUserByUsername ', username)
 		const user = await this.userRepository.findOne({ where: { username: ILike(username) } })
 		if (!user) throw new NotFoundException('User not found')
 		return user
@@ -45,7 +42,8 @@ export class UsersService {
 
 	async getUserById(id: string): Promise<User> {
 		const user = await this.userRepository.findOne({ where: { id: id } })
-		if (!user) throw new Error('User not found')
+		if (!user) throw new NotFoundException('User not found')
+
 		return user
 	}
 

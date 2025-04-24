@@ -4,7 +4,7 @@ import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { LogIn } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { CurrentUserInfo } from '../profile/CurrentUserInfo'
+import { RenderUserData } from '../profile/RenderUserData'
 import { SiteLogo } from '../SiteLogo'
 import { HeaderList } from './List/HeaderList'
 
@@ -24,14 +24,14 @@ export const Header = () => {
 
 			{isAuthenticated && user ? (
 				<div
-					className='transition-bg col-span-1 duration-300 background-gray-hover flex w-full overflow-hidden px-8 rounded-lg'
+					className='transition-bg col-span-1 duration-300 background-gray-hover flex w-full overflow-hidden px-8 rounded-lg w-max'
 					onClick={() => window.location.reload()}
 				>
-					<CurrentUserInfo
+					<RenderUserData
 						showEmail
 						showUsername
 						showIcon
-						size={50}
+						size={60}
 						link={ROUTES.PROFILE(user?.username)}
 					/>
 				</div>

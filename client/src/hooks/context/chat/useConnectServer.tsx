@@ -5,11 +5,11 @@ import { TReactNode } from '@/types/externalTypes/NextTypes'
 import { TSocketResponse } from '@/types/SocketsTypes/TSocketResponse'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-const ConnectChatContext = createContext<
-	ContextTypes.TConnectChatProvider | undefined
+const ConnectServerContext = createContext<
+	ContextTypes.TConnectServerProvider | undefined
 >(undefined)
 
-export const ConnectChatProvider = ({ children }: TReactNode) => {
+export const UseConnectServerProvider = ({ children }: TReactNode) => {
 	const socketUrl = process.env.NEXT_PUBLIC_SERVER_SOCKET_URL
 
 	if (!socketUrl)
@@ -38,7 +38,7 @@ export const ConnectChatProvider = ({ children }: TReactNode) => {
 	}
 
 	return (
-		<ConnectChatContext.Provider
+		<ConnectServerContext.Provider
 			value={{
 				socket,
 				isConnected,
@@ -47,15 +47,17 @@ export const ConnectChatProvider = ({ children }: TReactNode) => {
 			}}
 		>
 			{children}
-		</ConnectChatContext.Provider>
+		</ConnectServerContext.Provider>
 	)
 }
 
-export const useConnectChat = () => {
-	const context = useContext(ConnectChatContext)
+export const useConnectServer = () => {
+	const context = useContext(ConnectServerContext)
 
 	if (!context)
-		throw new Error('useConnectChat must be used within an ConnectChatProvider')
+		throw new Error(
+			'useConnectServer must be used within an ConnectServerProvider'
+		)
 
 	return context
 }

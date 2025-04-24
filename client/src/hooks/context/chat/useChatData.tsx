@@ -1,3 +1,5 @@
+'use client'
+
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import { ContextTypes } from '@/types/ContextTypes/ContextTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'

@@ -17,7 +17,6 @@ export class UsersController {
 
 	@Get(':username')
 	async getUserByUsername(@Param('username') username: string) {
-		console.log('CONTROLLER [getUserByUsername]: ', username)
 		const user = await this.usersService.getUserByUsername(username)
 		return plainToInstance(ResponseUserDto, user)
 	}
@@ -25,19 +24,11 @@ export class UsersController {
 	@Post('create')
 	@UseGuards(UserGuard)
 	@UsePipes(EmailValidationPipe, new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-	// Interceptors - action before request and after request
 	async createNewUser(@Body() userDto: CreateUserDto) {
-		console.log('CONTROLLER [createNewUser]: ', userDto)
-		console.log('CONTROLLER [createNewUser] (username): ', userDto.username)
 		await this.usersService.findExistingsUser(userDto.email, userDto.username)
 		const user = plainToInstance(User, userDto)
 		await this.usersService.save(user)
 		return plainToInstance(ResponseUserDto, user)
 	}
 
-	@Patch('update')
-	async patchUserData(@Query('id') id: string, @Query() updateData: Record<string, any>) {
-		console.log('Controller [patchUserData] (id): ', id)
-		console.log('Controller [patchUserData] (updateData): ', updateData)
-	}
 }

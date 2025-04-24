@@ -1,5 +1,5 @@
 import { ROOMS } from '@/constants/enums/Rooms'
-import { useConnectChat } from '@/hooks/context/chat/useConnectChat'
+import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { Server } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
@@ -7,7 +7,7 @@ export const MappedAvailableChats = () => {
 	const [currentRoom, setCurrentRoom] = useState<string>('Room#1')
 	const [prevRoom, setPrevRoom] = useState<string | null>(null)
 
-	const { socket, room, handleRoom } = useConnectChat()
+	const { socket, room, handleRoom } = useConnectServer()
 
 	useEffect(() => {
 		setPrevRoom(room)

@@ -2,9 +2,7 @@ import { useParamsContext } from '@/hooks/context/paramsContext'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
 import { useEffect, useState } from 'react'
-import { AnotherUserInfo } from '../AnotherUserInfo'
-import { CurrentUserInfo } from '../CurrentUserInfo'
-import { AccountSidebarButtons } from './subcomponents/AccountSidebarButtons'
+import { AccountSidebarWrapper } from './subcomponents/AccountSidebarWrapper'
 
 export const AccountSidebar = ({
 	isMobileVersion,
@@ -16,17 +14,21 @@ export const AccountSidebar = ({
 	const { paramsUsername } = useParamsContext()
 
 	const [anotherUser, setAnotherUser] =
-		useState<UserTypes.TResponseUserDto | null>()
+		useState<UserTypes.TResponseUserDto | null>(null)
 
 	useEffect(() => {
 		const handleFetch = async () => {
-			console.log('TEST')
-			const response = await fetchUser(paramsUsername)
-			console.log('ACCOUNT SIDEBAR RESPONSE: ', response)
+			if (paramsUsername) {
+				console.log('TEST')
+				const response = await fetchUser(paramsUsername)
+				console.log('ACCOUNT SIDEBAR RESPONSE: ', response)
 
-			if (!response) return
+				if (!response) return
 
-			setAnotherUser(response.data)
+				setAnotherUser(response.data)
+			} else {
+				await fetchUser()
+			}
 		}
 
 		handleFetch()
@@ -47,37 +49,15 @@ export const AccountSidebar = ({
 		<aside
 			style={{
 				transform: isMobileVersion ? '' : `translateY(${scrollY * 0.9}px)`,
-				transition: isMobileVersion ? '' : 'transform 0.2s ease-out',
+				transition: isMobileVersion ? '' : 'transform 0.9s ease-out',
 			}}
 			className={`flex flex-col gap-6 mr-10 input-r-25 chat-sidebar-background-color p-8 h-max rounded-md
-				${isMobileVersion ? '' : 'max-w-xs'}
-				
-		`}
+	  	${isMobileVersion ? '' : 'max-w-xs'}`}
 		>
-			<div>
-				{anotherUser ? (
-					<AnotherUserInfo
-						showUsername
-						showEmail
-						showIcon
-						link='/profile-settings'
-						size={250}
-						additionalStyles='flex-col'
-						userData={anotherUser}
-					/>
-				) : (
-					<CurrentUserInfo
-						showUsername
-						showEmail
-						showIcon
-						link='/profile-settings'
-						size={250}
-						additionalStyles='flex-col'
-					/>
-				)}
-
-				<AccountSidebarButtons isMobileVersion={isMobileVersion} />
-			</div>
+			<AccountSidebarWrapper
+				anotherUser={anotherUser}
+				isMobileVersion={false}
+			/>
 		</aside>
 	)
 }

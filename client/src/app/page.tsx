@@ -2,6 +2,7 @@
 
 import { Header } from '@/components/header/Header'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import { setSocket } from '@/services/socketService/socketService'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 

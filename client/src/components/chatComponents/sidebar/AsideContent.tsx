@@ -1,4 +1,4 @@
-import { CurrentUserInfo } from '@/components/profile/CurrentUserInfo'
+import { RenderUserData } from '@/components/profile/RenderUserData'
 import { SiteLogo } from '@/components/SiteLogo'
 import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
@@ -37,7 +37,7 @@ export const AsideContent = () => {
 			</div>
 			{isAuthenticated && user ? (
 				<div className='chat-sidebar-border-top py-1 px-2 w-full m-auto transition-colors duration-300 background-gray-hover'>
-					<CurrentUserInfo
+					<RenderUserData
 						showEmail={false}
 						showUsername
 						showIcon={true}

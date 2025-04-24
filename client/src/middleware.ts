@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { setSocket } from './services/socketService/socketService'
 import { INextRequest } from './types/externalTypes/NextTypes'
 
 export function middleware(request: INextRequest) {

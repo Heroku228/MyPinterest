@@ -39,8 +39,6 @@ export class AuthService {
 	}
 
 	async login(password: string, identifier?: string) {
-		console.log('AUTHSERVICE [login] (email, username): ', identifier)
-
 		if (!identifier) throw new UnauthorizedException('Invalid credentials')
 
 		const user = await this.userService.getUserByUsernameOrEmail(identifier)

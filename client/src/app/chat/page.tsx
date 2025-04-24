@@ -3,11 +3,10 @@
 import { MessageWrapper } from '@/components/chatComponents/messages/MessageWrapper'
 import { ChatSidebar } from '@/components/chatComponents/sidebar/ChatSidebar'
 import { AuthNavbar } from '@/components/profile/AuthNavbar'
-import { UseChatDataProvider } from '@/hooks/context/chat/useChatData'
-import { useConnectChat } from '@/hooks/context/chat/useConnectChat'
+import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 
 export default function ChatContent() {
-	const { socket, room } = useConnectChat()
+	const { socket, room } = useConnectServer()
 	if (!socket)
 		return <h1>Failed to establish your connection to the server.</h1>
 
@@ -17,9 +16,7 @@ export default function ChatContent() {
 				<ChatSidebar />
 			</div>
 
-			<UseChatDataProvider>
-				<MessageWrapper socket={socket} room={room} />
-			</UseChatDataProvider>
+			<MessageWrapper socket={socket} room={room} />
 
 			<AuthNavbar />
 		</div>

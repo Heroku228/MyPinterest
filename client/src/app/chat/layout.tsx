@@ -1,5 +1,5 @@
+import { UseChatDataProvider } from '@/hooks/context/chat/useChatData'
 import type { Metadata } from 'next'
-import ChatProvider from './provider/ChatProdiver'
 
 export const metadata: Metadata = {
 	title: 'Chat with Tailwind Magic',
@@ -16,7 +16,7 @@ export default function ChatLayout({
 			className='min-h-screen'
 			style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
 		>
-			<ChatProvider>{children}</ChatProvider>
+			<UseChatDataProvider>{children}</UseChatDataProvider>
 		</main>
 	)
 }

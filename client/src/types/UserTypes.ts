@@ -25,14 +25,12 @@ export namespace UserTypes {
 		showUsername: boolean,
 		showEmail: boolean,
 		showIcon: boolean,
-		link?: string
 		size: number
+		link?: string
+		description?: string
 		additionalStyles?: string
+		userData?: TResponseUserDto | null
 	}
-
-	export type TAnotherUserInfo = {
-		userData: TResponseUserDto
-	} & TVisibleUserData
 
 	export type TFetchUserResponse = {
 		access: boolean,

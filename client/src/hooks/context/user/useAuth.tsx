@@ -3,6 +3,7 @@ import {
 	getCurrentAuthenticatedUser,
 	getUserByUsername,
 } from '@/services/auth/handleFetchUser'
+import { setSocket } from '@/services/socketService/socketService'
 import { AuthTypes } from '@/types/AuthTypes/AuthTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'
 import { UserTypes } from '@/types/UserTypes'
@@ -30,7 +31,7 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 			'http://localhost:3000/api/v1/auth/login',
 			credentials
 		)
-		
+
 		localStorage.setItem('token', res.data.access_token)
 
 		axios.defaults.headers.common[

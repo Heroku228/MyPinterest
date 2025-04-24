@@ -10,7 +10,6 @@ export class UploadsController {
 	@Get('avatars/:filename')
 	async getUserAvatar(@Param('filename') filename: string, @Res() res: Response) {
 		const filePath = join(homedir(), 'Desktop', 'uploads', filename)
-		console.log('FILE PATH', filePath)
 
 		if (!existsSync(filePath))
 			throw new NotFoundException('Avatar not found')

@@ -5,7 +5,7 @@ import { TSocketResponse } from '../SocketsTypes/TSocketResponse'
 
 
 export namespace ContextTypes {
-	export type TConnectChatProvider = {
+	export type TConnectServerProvider = {
 		socket: Socket | null,
 		isConnected: boolean,
 		room: string
