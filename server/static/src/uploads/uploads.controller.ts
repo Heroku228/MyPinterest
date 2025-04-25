@@ -25,9 +25,12 @@ export class UploadsController {
 
 		try {
 			const files = readdirSync(folderPath)
-				.filter(file => validExtensions.includes(extname(file).toLowerCase()))
-
-			const fileUrls = files.map(filename => `http://127.0.0.1:3000/api/v1/uploads/avatars/${filename}`)
+				.filter(file => validExtensions.includes(extname(file)
+				.toLowerCase()))
+				
+			const fileUrls = files.map(filename => {
+				`http://localhost:3000/api/v1/uploads/avatars/${filename}`
+			})
 
 			return { images: fileUrls }
 		} catch (err) {

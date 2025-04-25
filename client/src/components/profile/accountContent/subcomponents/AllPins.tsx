@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { ListOrStackLayout } from './ListOrStackLayout'
 
-export const RenderAllPins = ({ pins }: { pins: any[] }) => {
+export const RenderAllPins = ({ pins }: { pins: string[] }) => {
 	const [list, setList] = useState<boolean>(false)
 
 	const { width } = useWindowSize()

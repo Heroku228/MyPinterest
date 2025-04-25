@@ -10,6 +10,6 @@ export const ROUTES = {
 
 
 export const UPLOADS = {
-	AVATARS: 'http://127.0.0.1:3000/api/v1/uploads/avatars/'
+	AVATARS: 'http://localhost:3000/api/v1/uploads/avatars/'
 }
 

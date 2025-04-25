@@ -3,8 +3,8 @@
 import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { useParamsContext } from '@/hooks/context/paramsContext'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import axios from '@/services/axiosInstance'
 import { UserTypes } from '@/types/UserTypes'
-import axios from 'axios'
 import { Loader2Icon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Account } from './Account'
@@ -18,10 +18,7 @@ export const ClientAccountData = () => {
 	const getUserAccount = async (
 		username: string
 	): Promise<UserTypes.TFetchUserResponse> => {
-		const response = await axios.get(
-			`http://192.168.0.188:3000/api/v1/users/${username}`
-		)
-
+		const response = await axios.get(`/users/${username}`)
 		return response.data
 	}
 

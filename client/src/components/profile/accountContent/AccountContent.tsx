@@ -11,6 +11,7 @@ export const AccountContent = ({}: {}) => {
 			const response = await axios.get('/uploads/all-pins')
 			setPins(response.data.images)
 		}
+
 		fetchAllPins()
 	}, [])
 
