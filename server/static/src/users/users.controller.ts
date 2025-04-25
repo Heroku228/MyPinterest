@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Post, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Body, Controller, Get, Inject, Logger, Param, Post, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
 import Redis from 'ioredis'
 import { UserGuard } from 'static/src/common/guards/user.guard'
@@ -15,13 +15,17 @@ import { UsersService } from './users.service'
 export class UsersController {
 	constructor(
 		private readonly usersService: UsersService,
-		@Inject('REDIS_CLIENT') private redis: Redis
+		@Inject('REDIS_CLIENT') private redis: Redis,
 	) { }
+
+	private readonly logger = new Logger(UsersController.name)
 
 
 	@Get(':username')
 	async getUserByUsername(@Param('username') username: string) {
+		console.log('GET USER BY USERNAME CONTROLLER')
 		const user = await this.usersService.getUserByUsername(username)
+		this.logger.log(`USER: `,)
 		return plainToInstance(ResponseUserDto, user)
 	}
 

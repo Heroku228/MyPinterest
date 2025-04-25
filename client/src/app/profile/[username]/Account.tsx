@@ -12,8 +12,9 @@ export const Account = () => {
 		<div className='w-11/12 m-auto p-4'>
 			<Header />
 			<main className={`flex flex-col md:flex-row gap-4`}>
-				<AccountSidebar isMobileVersion={width < 960 ? true : false} />
-				<AccountContent isMobileVersion={width < 960 ? true : false} />
+				{width < 720 ? null : <AccountSidebar />}
+
+				<AccountContent />
 			</main>
 		</div>
 	)

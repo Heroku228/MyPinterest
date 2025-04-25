@@ -2,8 +2,7 @@
 
 import { Header } from '@/components/header/Header'
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { setSocket } from '@/services/socketService/socketService'
-import axios from 'axios'
+import axios from '@/services/axiosInstance'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
@@ -12,9 +11,7 @@ export default function Home() {
 
 	useEffect(() => {
 		const fetchAllPins = async () => {
-			const response = await axios.get(
-				'http://localhost:3000/api/v1/uploads/all-pins'
-			)
+			const response = await axios.get('/uploads/all-pins')
 			console.log('FETCH res : ', response)
 
 			setPins(response.data.images)

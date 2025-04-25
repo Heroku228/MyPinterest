@@ -19,7 +19,7 @@ export const ClientAccountData = () => {
 		username: string
 	): Promise<UserTypes.TFetchUserResponse> => {
 		const response = await axios.get(
-			`http://localhost:3000/api/v1/users/${username}`
+			`http://192.168.0.188:3000/api/v1/users/${username}`
 		)
 
 		return response.data

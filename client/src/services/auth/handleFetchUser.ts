@@ -2,12 +2,11 @@ import axios from '@/services/axiosInstance'
 import { HTTP_STATUS } from '@/types/Response'
 import { UserTypes } from '@/types/UserTypes'
 
-
-
 export const getCurrentAuthenticatedUser = async (
 ): Promise<UserTypes.TFetchUserResponse> => {
 	try {
 		const response = await axios.get('/auth/me')
+		console.log("GET CURRENT AUTH USER RESPONSE: ", response)
 		return {
 			data: response.data,
 			headers: response.headers,
@@ -28,6 +27,7 @@ export const getCurrentAuthenticatedUser = async (
 }
 
 export const getUserByUsername = async (username: string) => {
+	console.log('GET USER BY USERNAME : ', username)
 	return await axios.get(`/users/${username}`,)
 		.catch(err => console.error('[GetUserByUsername ERROR]: ', err))
 }

@@ -11,8 +11,10 @@ async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule, {
 		cors: {
 			origin: [
+				'http://localhost:3001',
+				'http://localhost:3000',
+				'http://192.168.0.188:3001',
 				'http://192.168.0.193:3001',
-				'http://localhost:3001'
 			],
 			credentials: true
 		}

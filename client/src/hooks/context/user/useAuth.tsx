@@ -20,10 +20,13 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 		if (username) return await getUserByUsername(username)
 
 		const response = await getCurrentAuthenticatedUser()
+
+		console.log('FETCHUSER RESPONSE: ', response)
 		setIsLoading(false)
 
 		if (response.access) {
 			setUser(response.data.userData)
+			console.log('FETCH USER RESPOSNE ACCESSS')
 			return
 		}
 	}
@@ -41,6 +44,7 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	}
 
 	const logout = async () => {
+		console.log('LOGIN')
 		setUser(null)
 		return await axios.post('/auth/logout')
 	}

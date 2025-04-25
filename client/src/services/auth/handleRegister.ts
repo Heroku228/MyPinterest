@@ -1,5 +1,6 @@
-import { AuthTypes, UserTypes } from '@/types/AuthTypes/AuthTypes'
+import { AuthTypes, } from '@/types/AuthTypes/AuthTypes'
 import { convertFileToBase64, sanitizedFileName } from '../MainService'
+import { UserTypes } from '@/types/UserTypes'
 
 export const handleRegister = async ({
 	userIconRef,

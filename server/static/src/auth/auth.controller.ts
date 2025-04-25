@@ -86,7 +86,10 @@ export class AuthController {
 	@UseGuards(JwtAuthGuard)
 	@Get('me')
 	getProfile(@Req() req: Request, @Res({ passthrough: true }) res: Response): AuthTypes.IAuthResponse {
-		if (!req.user) return this.authService.sendErrorObject(AUTH_RESPONSE_MESSAGE.NO_USER_DATA_FROM_REQUEST)
+		console.log('GET PROFILE')
+		if (!req.user) {
+			return this.authService.sendErrorObject(AUTH_RESPONSE_MESSAGE.NO_USER_DATA_FROM_REQUEST)
+		}
 		const responseDto = plainToInstance(ResponseUserDto, req.user)
 		return this.authService.sendSuccessfulResponse(responseDto)
 	}

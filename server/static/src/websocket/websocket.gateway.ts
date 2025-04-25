@@ -12,9 +12,7 @@ import { TPayloadBody } from '../types/socket/TPayloadBody'
 
 @WebSocketGateway({
 	cors: {
-		origin: [String(process.env.CLIENT_ADDRESS),
-			'http://192.168.0.193:3001'
-		],
+		origin: true,
 		credentials: true
 	}
 })

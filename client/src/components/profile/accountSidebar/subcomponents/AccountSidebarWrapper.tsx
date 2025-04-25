@@ -6,10 +6,8 @@ import { AccountSidebarButtons } from './AccountSidebarButtons'
 
 export const AccountSidebarWrapper = ({
 	anotherUser,
-	isMobileVersion,
 }: {
 	anotherUser: UserTypes.TResponseUserDto | null | undefined
-	isMobileVersion: boolean
 }) => {
 	const { user } = useAuth()
 
@@ -28,9 +26,7 @@ export const AccountSidebarWrapper = ({
 				imageStyles={'rounded-xl duration-300 transition-all hover:scale-105'}
 			/>
 
-			{/* {anotherUser ? null : ( */}
-			<AccountSidebarButtons isMobileVersion={isMobileVersion} />
-			{/* )} */}
+			{anotherUser ? null : <AccountSidebarButtons />}
 		</div>
 	)
 }
