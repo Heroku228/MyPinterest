@@ -9,7 +9,10 @@ import * as cookiesParser from 'cookie-parser'
 async function bootstrap() {
 
 	const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-		cors: false
+		cors: {
+			origin: '*',
+			credentials: true
+		}
 	})
 
 	app.setGlobalPrefix('api/v1')

@@ -1,5 +1,7 @@
 import { NotFoundException } from '@nestjs/common'
 import { ConnectedSocket, MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets'
+import * as cookie from 'cookie'
+import * as jwt from 'jsonwebtoken'
 import { Server, Socket } from 'socket.io'
 import { OPEN_ROOMS } from '../consts/enums/OpenRoomsEnum'
 import { SocketResponse } from '../consts/enums/SocketResponse'
@@ -11,8 +13,8 @@ import { TPayloadBody } from '../types/socket/TPayloadBody'
 
 @WebSocketGateway({
 	cors: {
-		origin: '*',
-		methods: ['GET', 'POST']
+		origin: String(process.env.CLIENT_ADDRESS),
+		credentials: true
 	}
 })
 
@@ -24,17 +26,28 @@ export class WebsocketGateway implements OnGatewayInit, OnGatewayConnection, OnG
 	}
 
 	handleConnection(client: Socket, ...args: any[]) {
-		console.log('CLIENT ID: ', client.id, ' CONNECTED')
+		try {
+			const cookies = cookie.parse(client.handshake.headers.cookie || '')
+			const token = cookies['access_token']
+
+			if (!token) {
+				client.disconnect()
+				return
+			}
+
+			const payload = jwt.verify(token, String(process.env.SECRET_KEY))
+			client.data.user = payload
+
+
+			console.log(`User connected ${payload}`)
+		} catch (err) {
+			console.log('JWT verification failed: ', err.message)
+			client.disconnect()
+		}
 	}
 
 	handleDisconnect(client: Socket) {
 		console.log('Client disconnected: ', client.id)
-	}
-
-
-	@SubscribeMessage('connection-confirmed')
-	handleConfirmedConnection() {
-
 	}
 
 	@SubscribeMessage('send-message')

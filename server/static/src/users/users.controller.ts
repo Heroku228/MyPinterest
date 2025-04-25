@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, UseFilters, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
 import { UserGuard } from 'static/src/common/guards/user.guard'
-import { UserInterceptor } from 'static/src/common/interceptors/user.interceptor'
 import { EmailValidationPipe } from 'static/src/conception/pipe'
 import { HttpExceptionFilter } from 'static/src/filter/HttpExceptionFilter'
 import { CreateUserDto } from './dto/create-user.dto'
@@ -11,7 +10,7 @@ import { UsersService } from './users.service'
 
 @Controller('users')
 @UseFilters(HttpExceptionFilter)
-@UseInterceptors(UserInterceptor)
+// @UseInterceptors(UserInterceptor)
 export class UsersController {
 	constructor(private readonly usersService: UsersService) { }
 
