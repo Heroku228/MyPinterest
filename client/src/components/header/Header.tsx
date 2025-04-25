@@ -2,6 +2,7 @@
 
 import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { LogIn } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { RenderUserData } from '../profile/RenderUserData'
@@ -10,10 +11,11 @@ import { HeaderList } from './List/HeaderList'
 
 export const Header = () => {
 	const { isAuthenticated, user } = useAuth()
+	const { width } = useWindowSize()
 	const router = useRouter()
 
 	return (
-		<header className='grid grid-cols-6 items-center rounded-xl header-bg-color justify-around w-full py-1 px-8 shadow-md mb-10 text-white'>
+		<header className='grid grid-cols-6 items-center rounded-xl header-bg-color justify-around w-full py-1 px-8 shadow-md mb-10 text-white overflow-x-hidden'>
 			<div className='col-span-1'>
 				<SiteLogo />
 			</div>
@@ -24,11 +26,11 @@ export const Header = () => {
 
 			{isAuthenticated && user ? (
 				<div
-					className='transition-bg col-span-1 duration-300 background-gray-hover flex w-full overflow-hidden px-8 rounded-lg w-max'
+					className='transition-bg col-span-1 duration-300 background-gray-hover flex w-full overflow-hidden px-8 rounded-lg w-max ml-auto'
 					onClick={() => window.location.reload()}
 				>
 					<RenderUserData
-						showEmail
+						showEmail={false}
 						showUsername
 						showIcon
 						size={60}

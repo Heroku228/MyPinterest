@@ -1,5 +1,6 @@
 import { useParamsContext } from '@/hooks/context/paramsContext'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { UserTypes } from '@/types/UserTypes'
 import { useEffect, useState } from 'react'
 import { AccountSidebarWrapper } from './subcomponents/AccountSidebarWrapper'
@@ -12,6 +13,7 @@ export const AccountSidebar = ({
 	const [scrollY, setScrollY] = useState(0)
 	const { fetchUser } = useAuth()
 	const { paramsUsername } = useParamsContext()
+	const { width } = useWindowSize()
 
 	const [anotherUser, setAnotherUser] =
 		useState<UserTypes.TResponseUserDto | null>(null)
@@ -19,9 +21,7 @@ export const AccountSidebar = ({
 	useEffect(() => {
 		const handleFetch = async () => {
 			if (paramsUsername) {
-				console.log('TEST')
 				const response = await fetchUser(paramsUsername)
-				console.log('ACCOUNT SIDEBAR RESPONSE: ', response)
 
 				if (!response) return
 
@@ -56,7 +56,7 @@ export const AccountSidebar = ({
 		>
 			<AccountSidebarWrapper
 				anotherUser={anotherUser}
-				isMobileVersion={false}
+				isMobileVersion={width < 720 ? true : false}
 			/>
 		</aside>
 	)

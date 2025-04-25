@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
+import { RedisModule } from './config/redis.module'
 import { typeOrmConfig } from './config/typeOrmConfig.config'
 import { typeUserMicroservicesConfig } from './config/users-microservice.config'
 import { UsersMicroserviceModule } from './microservices/users-microservice/users-microservice.module'
@@ -23,7 +24,8 @@ import { WebsocketGateway } from './websocket/websocket.gateway'
 		PinsModule,
 		UsersMicroserviceModule,
 		AuthModule,
-		UploadsModule
+		UploadsModule,
+		RedisModule
 	],
 	controllers: [AppController],
 	providers: [AppService, WebsocketGateway],

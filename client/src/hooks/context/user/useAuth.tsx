@@ -21,26 +21,20 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 
 		const response = await getCurrentAuthenticatedUser()
 		setIsLoading(false)
-		console.log('FETCH RESPONSE:', response)
 
 		if (response.access) {
-			console.log(response.data)
 			setUser(response.data.userData)
-			console.log('ACCESS')
 			return
 		}
-		console.log('continuer')
 	}
 
 	const login = async (credentials: UserTypes.TLoginDto) => {
 		const res = await axios.post('/auth/login', credentials)
-		console.log(res)
 		setUser(res.data)
 	}
 
 	const register = async (data: UserTypes.TRegisterDto) => {
 		const res = await axios.post('/auth/register', data)
-		console.log('Register response: ', res)
 		if (res.status === 201) {
 			setUser(res.data)
 		}

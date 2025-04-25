@@ -2,9 +2,10 @@ import { UPLOADS } from '@/constants/routes'
 import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
-import { CircleCheckBigIcon, CircleMinus } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { UserOnlineStatus } from './UserOnlineStatus'
 
 export const RenderUserData = ({
 	showUsername,
@@ -16,18 +17,19 @@ export const RenderUserData = ({
 	userData,
 	description,
 	imageStyles,
-}: UserTypes.TVisibleUserData & { imageStyles?: string }) => {
+	showOnlineStatus,
+}: UserTypes.TVisibleUserData & {
+	imageStyles?: string
+	showOnlineStatus?: boolean
+}) => {
 	const [userInfo, setUserInfo] = useState<UserTypes.TResponseUserDto | null>(
 		null
 	)
-	const [imageUrl, setImageUrl] = useState<string>('')
-
 	const { isConnected } = useConnectServer()
 	const { user } = useAuth()
 
 	useEffect(() => {
-		console.log('USER DATA: ', userData)
-		if (userData){
+		if (userData) {
 			setUserInfo(userData)
 		} else {
 			setUserInfo(user)
@@ -43,26 +45,28 @@ export const RenderUserData = ({
 				`}
 			>
 				{showIcon ? (
-					<img
+					<Image
+						width={size}
+						height={size}
 						src={`${UPLOADS.AVATARS}${userInfo?.userIconUrl}`}
 						alt='account logo'
+						priority
 						className={`rounded-full border border-black cursor-pointer
-							w-[${size}px] h-[${size}px] ${imageStyles}`}
+							${imageStyles}`}
 					/>
 				) : null}
-				{showUsername ? (
-					<div className='flex items-center gap-3'>
-						{isConnected ? (
-							<CircleCheckBigIcon className='text-green-400' />
-						) : (
-							<CircleMinus className='text-red-500' />
-						)}
 
+				<div className='flex gap-2'>
+					{showOnlineStatus ? (
+						<UserOnlineStatus showOnlineStatus={true} />
+					) : null}
+
+					{showUsername ? (
 						<p className='text-white font-medium cursor-pointer text-lg'>
 							{userInfo?.username}
 						</p>
-					</div>
-				) : null}
+					) : null}
+				</div>
 			</div>
 
 			{showEmail ? (
@@ -72,7 +76,7 @@ export const RenderUserData = ({
 			) : null}
 
 			{description ? (
-				<p className='text-center default-border rounded-xl p-2 m-4 font-bold italic text-md overflow-hidden max-w-80 max-h-30'>
+				<p className='text-center mx-auto default-border rounded-xl p-2 m-4 font-bold italic text-md overflow-hidden max-w-80 max-h-30'>
 					{description}
 				</p>
 			) : null}

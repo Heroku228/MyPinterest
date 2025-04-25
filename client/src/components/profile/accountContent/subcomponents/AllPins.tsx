@@ -1,35 +1,23 @@
 'use client'
 import { Button } from '@/components/ui/Button'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import Image from 'next/image'
 import { useState } from 'react'
+import { ListOrStackLayout } from './ListOrStackLayout'
 
 export const RenderAllPins = ({ pins }: { pins: any[] }) => {
 	const [list, setList] = useState<boolean>(false)
 
+	const { width } = useWindowSize()
+
 	return (
 		<div className='h-max w-full flex flex-col gap-8 default-border rounded-xl py-2 px-4'>
-			<h1 className=' text-xl w-max font-bold italic default-border-bottom'>
-				All pins
-			</h1>
-			<div className='flex justify-between gap-4 default-border w-max px-8 py-1 rounded-md'>
-				<span
-					onClick={() => setList(true)}
-					className='font-bold text-2xl duration-300 transition-color hover:text-purple-900 cursor-pointer'
-				>
-					List
-				</span>
-				<span
-					onClick={() => setList(false)}
-					className='font-bold text-2xl duration-300 transition-color hover:text-purple-900 cursor-pointer'
-				>
-					Stack
-				</span>
-			</div>
+			{width < 800 ? null : <ListOrStackLayout setList={setList} />}
 
-			<div className='columns-6'>
+			<div className='columns-3 md:columns-4 lg:columns-6 xl:columns-8 2xl:columns-10'>
 				{pins.slice(10, 30).map((pin, index) => (
-					<div className=' my-4' key={index}>
+					<div className='my-4' key={index}>
 						<Image
 							key={index}
 							className='rounded-lg cursor-pointer default-border transition-all duration-300 hover:scale-105 w-full h-auto object-cover rounded-lg'

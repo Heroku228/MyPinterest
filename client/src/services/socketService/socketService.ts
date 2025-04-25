@@ -4,7 +4,6 @@ import { useCallback, useRef, useState } from 'react'
 import { io, Socket } from 'socket.io-client'
 
 export const setSocket = (socketUrl: string) => {
-	console.log("SET SOCKET FUNCTION")
 	const socketRef = useRef<Socket | null>(null)
 	const [isConnected, setIsConnected] = useState<boolean>(false)
 

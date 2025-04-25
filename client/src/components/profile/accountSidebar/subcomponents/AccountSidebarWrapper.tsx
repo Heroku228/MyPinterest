@@ -19,6 +19,7 @@ export const AccountSidebarWrapper = ({
 				showUsername
 				showEmail
 				showIcon
+				showOnlineStatus
 				link={anotherUser ? '' : ROUTES.SETTINGS}
 				size={160}
 				additionalStyles='flex-col'
@@ -28,7 +29,7 @@ export const AccountSidebarWrapper = ({
 			/>
 
 			{/* {anotherUser ? null : ( */}
-				<AccountSidebarButtons isMobileVersion={isMobileVersion} />
+			<AccountSidebarButtons isMobileVersion={isMobileVersion} />
 			{/* )} */}
 		</div>
 	)

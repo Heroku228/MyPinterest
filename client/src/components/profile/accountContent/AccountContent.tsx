@@ -1,10 +1,13 @@
-import { useWindowSize } from '@/hooks/useWindowSize'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { RenderAllPins } from './subcomponents/AllPins'
 import { RecentPins } from './subcomponents/RecentPins'
 
-export const AccountContent = () => {
+export const AccountContent = ({
+	isMobileVersion,
+}: {
+	isMobileVersion: boolean
+}) => {
 	const [pins, setPins] = useState<any[]>([])
 
 	useEffect(() => {
@@ -19,9 +22,14 @@ export const AccountContent = () => {
 
 	return (
 		<section className='flex flex-col gap-10 overflow-x-hidden'>
-			<RecentPins pins={pins} />
-			<RenderAllPins pins={pins} />
-			<div className='mt-40'></div>
+			{isMobileVersion ? (
+				<RenderAllPins pins={pins} />
+			) : (
+				<>
+					<RecentPins pins={pins} />
+					<RenderAllPins pins={pins} />
+				</>
+			)}
 		</section>
 	)
 }
