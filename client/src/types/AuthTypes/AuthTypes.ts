@@ -33,7 +33,7 @@ export namespace AuthTypes {
 		isLoading: boolean,
 		login: (credentials: UserTypes.TLoginDto) => Promise<void>,
 		register: (data: UserTypes.TRegisterDto) => Promise<void>,
-		logout: () => void
+		logout: () => Promise<AxiosResponse<any, any>>
 		fetchUser: (username?: string) => Promise<void | AxiosResponse<any, any>>
 	}
 }

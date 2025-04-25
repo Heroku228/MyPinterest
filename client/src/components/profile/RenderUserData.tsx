@@ -20,13 +20,14 @@ export const RenderUserData = ({
 	const [userInfo, setUserInfo] = useState<UserTypes.TResponseUserDto | null>(
 		null
 	)
+	const [imageUrl, setImageUrl] = useState<string>('')
 
 	const { isConnected } = useConnectServer()
 	const { user } = useAuth()
 
 	useEffect(() => {
 		console.log('USER DATA: ', userData)
-		if (userData) {
+		if (userData){
 			setUserInfo(userData)
 		} else {
 			setUserInfo(user)
@@ -71,7 +72,7 @@ export const RenderUserData = ({
 			) : null}
 
 			{description ? (
-				<p className='text-center default-border rounded-xl p-2 m-4 font-bold italic text-md overflow-hidden max-w-80 max-h-56'>
+				<p className='text-center default-border rounded-xl p-2 m-4 font-bold italic text-md overflow-hidden max-w-80 max-h-30'>
 					{description}
 				</p>
 			) : null}

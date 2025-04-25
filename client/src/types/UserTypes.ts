@@ -37,7 +37,9 @@ export namespace UserTypes {
 		status: number,
 		statusText: string,
 		headers: Object
-		data: TResponseUserDto | null
+		data: {
+			userData: TResponseUserDto | null
+		}
 		error?: any
 	}
 }

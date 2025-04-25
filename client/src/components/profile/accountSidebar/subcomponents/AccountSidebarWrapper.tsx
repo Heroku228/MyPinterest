@@ -27,9 +27,9 @@ export const AccountSidebarWrapper = ({
 				imageStyles={'rounded-xl duration-300 transition-all hover:scale-105'}
 			/>
 
-			{anotherUser ? null : (
+			{/* {anotherUser ? null : ( */}
 				<AccountSidebarButtons isMobileVersion={isMobileVersion} />
-			)}
+			{/* )} */}
 		</div>
 	)
 }

@@ -32,6 +32,7 @@ export const Header = () => {
 						showUsername
 						showIcon
 						size={60}
+						userData={user}
 						link={ROUTES.PROFILE(user?.username)}
 					/>
 				</div>

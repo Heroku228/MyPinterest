@@ -35,7 +35,12 @@ export class AuthService {
 	}
 
 	async register(user: User) {
-		await this.userService.save(user)
+		const newUser = await this.userService.save(user)
+		const token = this.jwtService.sign({ userId: newUser.id })
+		return {
+			newUser,
+			access_token: token,
+		}
 	}
 
 	async login(password: string, identifier?: string) {

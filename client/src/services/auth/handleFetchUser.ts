@@ -1,18 +1,16 @@
+import axios from '@/services/axiosInstance'
 import { HTTP_STATUS } from '@/types/Response'
 import { UserTypes } from '@/types/UserTypes'
-import axios from 'axios'
+
 
 
 export const getCurrentAuthenticatedUser = async (
 ): Promise<UserTypes.TFetchUserResponse> => {
 	try {
-		const response = await axios.get('http://localhost:3000/api/v1/auth/me', {
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem('token')}`,
-			},
-		})
+		const response = await axios.get('/auth/me')
+		console.log('RESPONSE FROM GET CURRENT AUTH USER: ', response)
 		return {
-			data: response.data.userData,
+			data: response.data,
 			headers: response.headers,
 			statusText: response.statusText,
 			access: true,
@@ -21,7 +19,7 @@ export const getCurrentAuthenticatedUser = async (
 	} catch (err) {
 		console.error('[GetCurrentAuthenticatedUser ERROR]: ', err)
 		return {
-			data: null,
+			data: { userData: null },
 			headers: {},
 			status: HTTP_STATUS.BAD_REQUEST,
 			statusText: 'No data',
@@ -33,6 +31,6 @@ export const getCurrentAuthenticatedUser = async (
 
 export const getUserByUsername = async (username: string) => {
 	console.log('GET USER BY USERNAME: ', username)
-	return await axios.get(`http://localhost:3000/api/v1/users/${username}`)
+	return await axios.get(`/users/${username}`,)
 		.catch(err => console.error('[GetUserByUsername ERROR]: ', err))
 }

@@ -48,7 +48,7 @@ export const AccountSidebar = ({
 	return (
 		<aside
 			style={{
-				transform: isMobileVersion ? '' : `translateY(${scrollY * 0.9}px)`,
+				transform: isMobileVersion ? '' : `translateY(${scrollY * 1}px)`,
 				transition: isMobileVersion ? '' : 'transform 0.9s ease-out',
 			}}
 			className={`flex flex-col gap-6 mr-10 input-r-25 chat-sidebar-background-color p-8 h-max rounded-md
