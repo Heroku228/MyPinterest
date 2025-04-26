@@ -1,5 +1,5 @@
+import { INextRequest } from '@/types/externalTypes/NextTypes'
 import { NextResponse } from 'next/server'
-import { INextRequest } from './types/externalTypes/NextTypes'
 
 export function middleware(request: INextRequest) {
 	console.log('middleware')
@@ -9,6 +9,6 @@ export function middleware(request: INextRequest) {
 }
 
 export const config = {
-	matcher: ['/pins/:path*']
+	matcher: ['/']
 }
 
