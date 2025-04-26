@@ -4,6 +4,7 @@ import { UserTypes } from '@/types/UserTypes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { UserOnlineStatus } from './UserOnlineStatus'
 
 export const RenderUserData = ({
@@ -34,10 +35,10 @@ export const RenderUserData = ({
 	return (
 		<Link href={link ? link : ''} className='flex flex-col py-1 cursor-default'>
 			<div
-				className={`
+				className={twMerge(`
 				flex items-center gap-4 mb-1
 				${additionalStyles}
-				`}
+				`)}
 			>
 				{showIcon ? (
 					<Image
@@ -47,8 +48,8 @@ export const RenderUserData = ({
 						src={`${UPLOADS.AVATARS}${userInfo?.userIconUrl}`}
 						alt='account logo'
 						priority
-						className={`rounded-full border border-black cursor-pointer
-							${imageStyles}`}
+						className={twMerge(`rounded-full border border-black cursor-pointer
+							${imageStyles}`)}
 					/>
 				) : null}
 
