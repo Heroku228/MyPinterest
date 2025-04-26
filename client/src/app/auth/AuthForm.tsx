@@ -1,44 +1,42 @@
 import { useWindowSize } from '@/hooks/useWindowSize'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { AuthenticatioSection } from './form/AuthenticationSection'
-import { SideImage } from './form/SideImage'
+
+const SideImage = dynamic(
+	() => import('./form/SideImage').then(mod => mod.SideImage),
+	{ ssr: false }
+)
 
 export const AuthForm = () => {
 	const [showRegister, setShowRegister] = useState<boolean>(false)
 
 	const { width } = useWindowSize()
 
-	const leftBlock = showRegister ? (
-		<SideImage
-			className='h-full max-w-xs rounded-md input-r-25'
-			imageUrl='/bg/bg-1.jpg'
-			show={width > 1150 ? true : false}
-		/>
-	) : (
-		<AuthenticatioSection
-			showRegister={showRegister}
-			setShowRegister={setShowRegister}
-		/>
-	)
-
-	const rightBlock = showRegister ? (
-		<AuthenticatioSection
-			showRegister={showRegister}
-			setShowRegister={setShowRegister}
-		/>
-	) : (
-		<SideImage
-			className='h-full max-w-xs rounded-md input-l-25'
-			imageUrl='/bg/bg-3.jpg'
-			show={width > 1150 ? true : false}
-		/>
-	)
+	const getBlock = (isLeft: boolean) => {
+		if (showRegister === isLeft) {
+			return (
+				<SideImage
+					className='h-full max-w-xs rounded-md input-r-25'
+					imageUrl='/bg/bg-1.jpg'
+					show={width > 1150}
+				/>
+			)
+		} else {
+			return (
+				<AuthenticatioSection
+					showRegister={showRegister}
+					setShowRegister={setShowRegister}
+				/>
+			)
+		}
+	}
 
 	return (
-		<div className='fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black rounded-2xl flex flex-col gap-12 min-h-150 chat-sidebar-background-color '>
-			<main className='flex gap-8 min-h-150'>
-				{leftBlock}
-				{rightBlock}
+		<div className='fixed inset-0 flex items-center justify-center default-border rounded-2xl flex flex-col gap-12 min-h-150r '>
+			<main className='flex gap-8 chat-sidebar-background-color'>
+				{getBlock(true)}
+				{getBlock(false)}
 			</main>
 		</div>
 	)
