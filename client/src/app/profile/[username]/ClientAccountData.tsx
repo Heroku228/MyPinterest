@@ -1,35 +1,44 @@
 'use client'
 
-import { UserNotFound } from '@/components/Errors/UserNotFound'
+import { Loader } from '@/components/ui/Loader'
 import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { useParamsContext } from '@/hooks/context/paramsContext'
-import { useAuth } from '@/hooks/context/user/useAuth'
 import axios from '@/services/axiosInstance'
-import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Account } from './Account'
+import { UserNotFound } from '@/components/Errors/UserNotFound'
 
 export const ClientAccountData = () => {
 	const { socket } = useConnectServer()
 	const { paramsUsername } = useParamsContext()
-	const [isUserExist, setIsUserExist] = useState<boolean>(false)
-
+	const [isUserExist, setIsUserExist] = useState<boolean | null>(null)
+	const [isLoading, setIsLoading] = useState<boolean>(true)
 
 	useEffect(() => {
 		const fetchUser = async () => {
-			const response = await axios.get(`/users/${paramsUsername}`)
-			if (response.status !== 200) setIsUserExist(false)
-			else setIsUserExist(true)
+			try {
+				const response = await axios.get(`/users/${paramsUsername}`)
+				setIsUserExist(response.status === 200)
+			} catch (err) {
+				setIsUserExist(false)
+			} finally {
+				setIsLoading(false)
+			}
 		}
 
 		fetchUser()
+	}, [paramsUsername])
 
+	useEffect(() => {
 		if (isUserExist) {
-			setTimeout(() => {
+			const timer = setTimeout(() => {
 				socket?.emit('ping')
 			}, 3000)
+			return () => clearTimeout(timer)
 		}
 	}, [])
+
+	if (isLoading) return <Loader />
 
 	return <>{isUserExist ? <Account /> : <UserNotFound />}</>
 }

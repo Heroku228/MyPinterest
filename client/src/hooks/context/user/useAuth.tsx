@@ -4,6 +4,7 @@ import {
 	getUserByUsername,
 } from '@/services/auth/handleFetchUser'
 import axios from '@/services/axiosInstance'
+import { sendErrorMessage } from '@/services/fetchResponse'
 import { AuthTypes } from '@/types/AuthTypes/AuthTypes'
 import { TReactNode } from '@/types/externalTypes/NextTypes'
 import { UserTypes } from '@/types/UserTypes'
@@ -19,21 +20,26 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	const fetchUser = async (username?: string) => {
 		if (username) return await getUserByUsername(username)
 
-		const response = await getCurrentAuthenticatedUser()
+		try {
+			const response = await getCurrentAuthenticatedUser()
 
-		console.log('FETCHUSER RESPONSE: ', response)
-		setIsLoading(false)
+			console.log('FETCHUSER RESPONSE: ', response)
+			setIsLoading(false)
 
-		if (response.access) {
-			setUser(response.data.userData)
-			console.log('FETCH USER RESPOSNE ACCESSS')
-			return
+			if (response.access) {
+				setUser(response.data.userData)
+				console.log('FETCH USER RESPOSNE ACCESSS')
+				return
+			}
+		} catch (err) {
+			console.log('[FETCH USER ERROR] ', err)
 		}
 	}
 
 	const login = async (credentials: UserTypes.TLoginDto) => {
 		const res = await axios.post('/auth/login', credentials)
-		setUser(res.data)
+		if (res.status === 200) setUser(res.data)
+		else return sendErrorMessage(res)
 	}
 
 	const register = async (data: UserTypes.TRegisterDto) => {

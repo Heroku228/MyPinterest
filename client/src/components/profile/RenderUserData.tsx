@@ -1,5 +1,3 @@
-import { UPLOADS } from '@/constants/routes'
-import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
 import Image from 'next/image'
@@ -25,11 +23,11 @@ export const RenderUserData = ({
 	const [userInfo, setUserInfo] = useState<UserTypes.TResponseUserDto | null>(
 		null
 	)
-	const { isConnected } = useConnectServer()
 	const { user } = useAuth()
 
 	useEffect(() => {
 		if (userData) {
+			console.log('USER ICON URL: ', user?.userIconUrl)
 			setUserInfo(userData)
 		} else {
 			setUserInfo(user)
@@ -46,9 +44,10 @@ export const RenderUserData = ({
 			>
 				{showIcon ? (
 					<Image
+						unoptimized
 						width={size}
 						height={size}
-						src={`${UPLOADS.AVATARS}${userInfo?.userIconUrl}`}
+						src={`http://localhost:3000/api/v1/uploads/avatars/${userInfo?.userIconUrl}`}
 						alt='account logo'
 						priority
 						className={`rounded-full border border-black cursor-pointer

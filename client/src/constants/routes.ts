@@ -3,6 +3,7 @@ export const ROUTES = {
 	LOGIN: '/auth',
 	REGISTER: '/auth',
 	PROFILE: (username: string) => `/profile/${username}`,
+	PROFILE_WITHOUT_USERNAME: '/profile',
 	SETTINGS: '/profile/settings',
 	CHAT: '/chat',
 	API: '/api',

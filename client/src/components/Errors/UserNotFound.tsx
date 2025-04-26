@@ -1,3 +1,5 @@
+'use client'
+
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import { ROUTES } from '@/constants/routes'
 import { useParamsContext } from '@/hooks/context/paramsContext'
