@@ -1,10 +1,8 @@
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
-import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
 import { Lock, Mail } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Button } from '../../../ui/Button'
 import { AuthDiv } from '../../../ui/FormInputBlock'
 import { ShowPasswordIcon } from '../passwordBlock/ShowPasswordIcon'
@@ -15,13 +13,7 @@ export const AuthLogin = () => {
 	const passwordRef = useRef<HTMLInputElement>(null)
 	const [errorMessage, setErroreMessage] = useState<string | null>(null)
 
-	const { login, user, isAuthenticated } = useAuth()
-	const router = useRouter()
-
-	useEffect(() => {
-		if (isAuthenticated) router.push(ROUTES.PROFILE_WITHOUT_USERNAME)
-	}, [isAuthenticated])
-
+	const { login } = useAuth()
 	const handleLogin = async () => {
 		const emailOrUsername = loginRef.current?.value.trim()
 		const password = passwordRef.current?.value.trim()
@@ -37,7 +29,6 @@ export const AuthLogin = () => {
 		}
 
 		await login(credentials).catch(err => {
-			console.log('AUTH LOGIN RESPONSE ERROR: ', err)
 			setErroreMessage('Invalid credentials')
 		})
 	}

@@ -38,8 +38,11 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 
 	const login = async (credentials: UserTypes.TLoginDto) => {
 		const res = await axios.post('/auth/login', credentials)
-		if (res.status === 200) setUser(res.data)
-		else return sendErrorMessage(res)
+		console.log('LOGIN RESPONSE: ', res)
+		if (res.status === 200 || res.status == 201) {
+			setUser(res.data)
+			console.log('IF: ', res)
+		} else return sendErrorMessage(res)
 	}
 
 	const register = async (data: UserTypes.TRegisterDto) => {

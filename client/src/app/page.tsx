@@ -6,6 +6,7 @@ import { homePagePinsContainerStyles } from '@/constants/styles/pinsStyles'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import axios from '@/services/axiosInstance'
 import { useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 export default function Home() {
 	const [pins, setPins] = useState<any[]>([])
@@ -15,7 +16,7 @@ export default function Home() {
 	useEffect(() => {
 		const fetchAllPins = async () => {
 			const response = await axios.get('/uploads/all-pins')
-			
+
 			if (response.status !== 200) {
 				setIsPinsFetched(false)
 			} else {
@@ -33,7 +34,9 @@ export default function Home() {
 		>
 			<Header />
 
-			<main className={homePagePinsContainerStyles(isPinsFetched)}>
+			<main
+				className={twMerge(`${homePagePinsContainerStyles(isPinsFetched)} `)}
+			>
 				{!isPinsFetched ? (
 					pins.map((pin, index) => (
 						<img
@@ -50,7 +53,6 @@ export default function Home() {
 					<ErrorLoadingPins />
 				)}
 			</main>
-			<div></div>
 		</div>
 	)
 }

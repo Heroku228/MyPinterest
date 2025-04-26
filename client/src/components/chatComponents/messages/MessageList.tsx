@@ -20,7 +20,7 @@ export const MessageList = () => {
 	}, [chatData])
 
 	return (
-		<section className='w-full mb-8 mt-15 rounded-xl flex flex-col gap-8 min-h-screen'>
+		<section className='w-full mb-8 mt-15 rounded-xl flex flex-col gap-8'>
 			{chatData.map((message, key) => (
 				<MessageBlock message={message} key={key} />
 			))}

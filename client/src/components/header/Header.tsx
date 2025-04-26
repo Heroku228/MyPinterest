@@ -13,7 +13,7 @@ export const Header = () => {
 	const router = useRouter()
 
 	return (
-		<header className='grid grid-cols-6 items-center rounded-xl header-bg-color justify-around w-full py-1 px-8 shadow-md mb-10 text-white overflow-x-hidden'>
+		<header className='grid grid-cols-6 items-center rounded-xl header-bg-color justify-around w-full py-3 px-8 shadow-md text-white overflow-x-hidden'>
 			<div className='col-span-1'>
 				<SiteLogo />
 			</div>

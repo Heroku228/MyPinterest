@@ -1,6 +1,7 @@
 'use client'
 
 import { MessageField } from '@/components/chatComponents/messages/MessageField'
+import { Loader } from '@/components/ui/Loader'
 import { ROOMS } from '@/constants/enums/Rooms'
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { useAuth } from '@/hooks/context/user/useAuth'
@@ -11,10 +12,17 @@ import {
 } from '@/services/chatService/chatService'
 import { sendMessage } from '@/services/socketService/socketService'
 import { IMessage } from '@/types/ChatTypes/IChatData'
+import dynamic from 'next/dynamic'
 import { useRef, useState } from 'react'
 import { Socket } from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
-import { MessageList } from './MessageList'
+
+const MessageList = dynamic(
+	() => import('./MessageList').then(mod => mod.MessageList),
+	{
+		loading: () => <Loader />,
+	}
+)
 
 export const MessageWrapper = ({
 	socket,
@@ -27,6 +35,10 @@ export const MessageWrapper = ({
 	const { user } = useAuth()
 
 	const [text, setText] = useState<string>('')
+	const [errorMessage, setErrorMessage] = useState<Record<
+		string,
+		boolean
+	> | null>(null)
 
 	const isCooldown = useRef(false)
 
@@ -84,7 +96,7 @@ export const MessageWrapper = ({
 	}
 
 	return (
-		<div className='col-span-4 rounded-xl ml-10 relative'>
+		<div className='col-span-4 relative'>
 			<MessageList />
 			<MessageField handleChange={handleChange} onSend={onSend} />
 		</div>

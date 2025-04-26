@@ -1,4 +1,4 @@
-export const primaryButtonStyles = `p-2 rounded-4xl bg-gradient-to-br message-field-send-button-bg hover:bg-purple-900 text-white font-semibold shadow-lg hover:scale-105 active:scale-95 transition-all duration-150 cursor-pointer w-max`
+export const primaryButtonStyles = `p-2 rounded-4xl bg-gradient-to-br message-field-send-button-bg hover:bg-purple-900 text-white font-semibold hover:scale-105 active:scale-95 transition-all duration-150 cursor-pointer w-max`
 
 
 export const secondaryButtonStyles = `

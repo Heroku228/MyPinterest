@@ -18,7 +18,7 @@ export const Account = () => {
 	const { width } = useWindowSize()
 
 	return (
-		<div className='w-11/12 m-auto p-4'>
+		<div>
 			<Header />
 			<main className={`flex flex-col md:flex-row gap-4`}>
 				{width < 720 ? null : <AccountSidebar />}

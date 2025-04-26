@@ -1,12 +1,11 @@
 'use client'
 
+import { TextArea } from '@/components/ui/TextArea'
 import { messageFieldStyles } from '@/constants/styles/messageFieldStyles'
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { TMessageField } from '@/types/ChatTypes/IChatData'
 import { Edit2, Navigation2, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { Button } from '../../ui/Button'
-import { TextArea } from '../../ui/TextArea'
 
 export const MessageField = ({ handleChange, onSend }: TMessageField) => {
 	const { editing, setEditing, message } = useChatData()
@@ -40,13 +39,14 @@ export const MessageField = ({ handleChange, onSend }: TMessageField) => {
 	}
 
 	const handleSend = () => {
+		if (localText.length === 0) return
 		onSend(localText)
 		setLocalText('')
 		setHeight(65)
 	}
 
 	return (
-		<div className='rounded-xl w-max relative bottom-2 right-1/3 z-999'>
+		<>
 			{editing ? (
 				<div className='flex items-center text-white fixed bottom-30 left-80 w-max border-2 border-purple-900 rounded-xl editing-message-bg-color px-4 py-2 gap-16'>
 					<div className='flex items-center gap-4'>
@@ -59,9 +59,7 @@ export const MessageField = ({ handleChange, onSend }: TMessageField) => {
 						size={20}
 					/>
 				</div>
-			) : (
-				''
-			)}
+			) : null}
 			<TextArea
 				className={messageFieldStyles}
 				placeholder='Ask anything'
@@ -83,13 +81,10 @@ export const MessageField = ({ handleChange, onSend }: TMessageField) => {
 				}}
 				ref={textareaRef}
 			/>
-
-			<Button
-				additionalStyles='fixed bottom-10 left-238 bg-purple-400 z-999'
-				onClick={handleSend}
-			>
-				<Navigation2 size={20} />
-			</Button>
-		</div>
+			<Navigation2
+				className='fixed bottom-6 left-310 z-999 text-indigo-400'
+				size={40}
+			/>
+		</>
 	)
 }
