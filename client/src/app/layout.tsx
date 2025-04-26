@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>
+			<body style={{ backgroundColor: `rgba(0,0,0,0.9)` }}>
 				<GlobalProvider children={children} />
 			</body>
 		</html>

@@ -3,13 +3,15 @@ import { Input } from '@/components/ui/Input'
 import { LiItem } from '@/components/ui/Li'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import { ROUTES } from '@/constants/routes'
-import { usePathname, useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/context/user/useAuth'
+import { useRouter } from 'next/navigation'
 
 export const HeaderList = ({}) => {
 	const router = useRouter()
-	const pathName = usePathname()
 
-	const handleClick = (path?: string) => {
+	const { isAuthenticated } = useAuth()
+
+	const handleClick = (path: string) => {
 		if (path) router.push(path)
 	}
 
@@ -26,6 +28,7 @@ export const HeaderList = ({}) => {
 			</LiItem>
 
 			<LiItem onClick={() => handleClick(ROUTES.CHAT)}>Chat</LiItem>
+			<LiItem onClick={() => handleClick(ROUTES.CREATE_PIN)}>Create pin</LiItem>
 			<LiItem onClick={() => handleClick(ROUTES.API)}>API</LiItem>
 		</ul>
 	)

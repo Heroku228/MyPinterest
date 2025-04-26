@@ -11,7 +11,6 @@ import { HeaderList } from './List/HeaderList'
 
 export const Header = () => {
 	const { isAuthenticated, user } = useAuth()
-	const { width } = useWindowSize()
 	const router = useRouter()
 
 	return (

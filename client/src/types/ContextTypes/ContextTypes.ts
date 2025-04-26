@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Socket } from 'socket.io-client'
 import { IMessage } from '../ChatTypes/IChatData'
+import { PinTypes } from '../PinTypes/PinTypes.'
 import { TSocketResponse } from '../SocketsTypes/TSocketResponse'
 
 
@@ -10,6 +11,12 @@ export namespace ContextTypes {
 		isConnected: boolean,
 		room: string
 		handleRoom: (roomName: string) => Promise<TSocketResponse | unknown>
+	}
+
+
+	export type TUsePin = {
+		pin: PinTypes.IPin,
+		setPin: Dispatch<SetStateAction<PinTypes.IPin | null>>
 	}
 
 	export type TUseChatDataProvider = {

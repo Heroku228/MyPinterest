@@ -12,10 +12,7 @@ export default function ChatLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<main
-			className='min-h-screen'
-			style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
-		>
+		<main className='min-h-screen'>
 			<UseChatDataProvider>{children}</UseChatDataProvider>
 		</main>
 	)
