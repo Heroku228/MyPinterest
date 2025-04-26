@@ -1,12 +1,12 @@
 'use client'
 
+import { UserNotFound } from '@/components/Errors/UserNotFound'
 import { Loader } from '@/components/ui/Loader'
 import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { useParamsContext } from '@/hooks/context/paramsContext'
 import axios from '@/services/axiosInstance'
 import { useEffect, useState } from 'react'
 import { Account } from './Account'
-import { UserNotFound } from '@/components/Errors/UserNotFound'
 
 export const ClientAccountData = () => {
 	const { socket } = useConnectServer()

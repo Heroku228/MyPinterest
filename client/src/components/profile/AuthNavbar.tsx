@@ -18,9 +18,8 @@ export const AuthNavbar = () => {
 			{isAuthenticated ? (
 				<div className='relative'>
 					<Image
-						onClick={() => {
-							setShowModal(!showModal)
-						}}
+						unoptimized
+						onClick={() => setShowModal(!showModal)}
 						src={`${UPLOADS.AVATARS}${user?.userIconUrl}`}
 						alt='account logo'
 						width={60}

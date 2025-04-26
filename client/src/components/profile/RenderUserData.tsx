@@ -1,3 +1,4 @@
+import { UPLOADS } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
 import Image from 'next/image'
@@ -26,12 +27,8 @@ export const RenderUserData = ({
 	const { user } = useAuth()
 
 	useEffect(() => {
-		if (userData) {
-			console.log('USER ICON URL: ', user?.userIconUrl)
-			setUserInfo(userData)
-		} else {
-			setUserInfo(user)
-		}
+		if (userData) setUserInfo(userData)
+		else setUserInfo(user)
 	}, [userData, user])
 
 	return (
@@ -47,7 +44,7 @@ export const RenderUserData = ({
 						unoptimized
 						width={size}
 						height={size}
-						src={`http://localhost:3000/api/v1/uploads/avatars/${userInfo?.userIconUrl}`}
+						src={`${UPLOADS.AVATARS}${userInfo?.userIconUrl}`}
 						alt='account logo'
 						priority
 						className={`rounded-full border border-black cursor-pointer

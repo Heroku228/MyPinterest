@@ -11,15 +11,11 @@ export const CheckIconForCopying = ({ message }: { message: IMessage }) => {
 	const { setEditing, setMessage } = useChatData()
 
 	const handleCopyMessage = async (message: IMessage, messageId: string) => {
-		try {
-			await navigator.clipboard.writeText(message.text)
-			setCopied(prev => ({ ...prev, [messageId]: true }))
-			setTimeout(() => {
-				setCopied(prev => ({ ...prev, [messageId]: false }))
-			}, 3000)
-		} catch (err) {
-			console.error('ERROR: ', err)
-		}
+		await navigator.clipboard.writeText(message.text)
+		setCopied(prev => ({ ...prev, [messageId]: true }))
+		setTimeout(() => {
+			setCopied(prev => ({ ...prev, [messageId]: false }))
+		}, 3000)
 	}
 
 	return (
@@ -42,7 +38,6 @@ export const CheckIconForCopying = ({ message }: { message: IMessage }) => {
 				<Edit
 					onClick={() => {
 						message.editedMessage = true
-						console.log(message)
 						setEditing(true)
 						setMessage(message)
 					}}

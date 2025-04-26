@@ -14,9 +14,8 @@ export const HideSidebarArrow = ({
 				<span className='text-gray-400 absolute w-max p-1 bottom-0 rounded-md left-10'>
 					Hide sidebar
 				</span>
-			) : (
-				''
-			)}
+			) : null}
+			
 			<PanelLeftClose
 				onMouseEnter={() => setShowHint(true)}
 				onMouseLeave={() => setShowHint(false)}

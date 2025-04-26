@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 export const useWindowSize = () => {
 	const [windowSize, setWindowSize] = useState({
@@ -7,7 +7,7 @@ export const useWindowSize = () => {
 		width: 0,
 	})
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const handleResize = () => {
 			setWindowSize({
 				width: window.innerWidth,

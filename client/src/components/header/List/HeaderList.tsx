@@ -3,13 +3,10 @@ import { Input } from '@/components/ui/Input'
 import { LiItem } from '@/components/ui/Li'
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import { ROUTES } from '@/constants/routes'
-import { useAuth } from '@/hooks/context/user/useAuth'
 import { useRouter } from 'next/navigation'
 
 export const HeaderList = ({}) => {
 	const router = useRouter()
-
-	const { isAuthenticated } = useAuth()
 
 	const handleClick = (path: string) => {
 		if (path) router.push(path)

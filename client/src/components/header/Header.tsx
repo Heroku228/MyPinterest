@@ -2,7 +2,6 @@
 
 import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { useWindowSize } from '@/hooks/useWindowSize'
 import { LogIn } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { RenderUserData } from '../profile/RenderUserData'

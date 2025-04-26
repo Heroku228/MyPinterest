@@ -1,6 +1,5 @@
 import { useParamsContext } from '@/hooks/context/paramsContext'
 import { useAuth } from '@/hooks/context/user/useAuth'
-import { useWindowSize } from '@/hooks/useWindowSize'
 import { UserTypes } from '@/types/UserTypes'
 import { useEffect, useState } from 'react'
 import { AccountSidebarWrapper } from './subcomponents/AccountSidebarWrapper'
@@ -9,10 +8,12 @@ export const AccountSidebar = ({}) => {
 	const [scrollY, setScrollY] = useState(0)
 	const { fetchUser } = useAuth()
 	const { paramsUsername } = useParamsContext()
-	const { width } = useWindowSize()
 
 	const [anotherUser, setAnotherUser] =
-		useState<UserTypes.TResponseUserDto | null>(null)
+		useState<UserTypes.TResponseUserDto | null>(() => {
+			const storedUser = localStorage.getItem('user_profile')
+			return storedUser ? JSON.parse(storedUser) : null
+		})
 
 	useEffect(() => {
 		const handleFetch = async () => {
@@ -21,6 +22,7 @@ export const AccountSidebar = ({}) => {
 				if (!response) return
 
 				setAnotherUser(response.data)
+				localStorage.setItem('user_profile', JSON.stringify(response.data))
 			} else {
 				await fetchUser()
 			}
@@ -30,8 +32,15 @@ export const AccountSidebar = ({}) => {
 	}, [paramsUsername])
 
 	useEffect(() => {
+		let ticking = false
 		const handleScroll = () => {
-			setScrollY(window.scrollY)
+			if (!ticking) {
+				window.requestAnimationFrame(() => {
+					setScrollY(window.scrollY)
+					ticking = false
+				})
+				ticking = true
+			}
 		}
 
 		window.addEventListener('scroll', handleScroll)
@@ -42,7 +51,7 @@ export const AccountSidebar = ({}) => {
 		<aside
 			style={{
 				transform: `translateY(${scrollY * 1}px)`,
-				transition: 'transform 0.9s ease-out',
+				transition: 'transform 1s ease-in',
 			}}
 			className={`flex flex-col gap-6 mr-10 input-r-25 chat-sidebar-background-color p-8 h-max rounded-md`}
 		>

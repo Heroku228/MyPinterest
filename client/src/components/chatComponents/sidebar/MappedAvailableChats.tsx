@@ -1,7 +1,9 @@
 import { ROOMS } from '@/constants/enums/Rooms'
+import { currentRoomStyles } from '@/constants/styles/messageFieldStyles'
 import { useConnectServer } from '@/hooks/context/chat/useConnectServer'
 import { Server } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 export const MappedAvailableChats = () => {
 	const [currentRoom, setCurrentRoom] = useState<string>('Room#1')
@@ -28,12 +30,12 @@ export const MappedAvailableChats = () => {
 			{ROOMS.map(room => (
 				<div
 					key={room.name}
-					className={`text-white mx-auto rounded-md text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl cursor-pointer px-6 py-1 flex gap-4 overflow-hidden transition-all duration-300 ease-in-out transform border border-purple-400
-					${
-						currentRoom === room.name
-							? 'bg-gradient-to-r from-blue-600 via-purple-500 to-purple-500 border-white scale-105 shadow-lg'
-							: 'hover:scale-105 hover:bg-purple-900'
-					}`}
+					className={twMerge(
+						`text-white mx-auto rounded-md text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl cursor-pointer px-6 py-1 flex gap-4 overflow-hidden transition-all duration-300 ease-in-out transform border border-purple-400${currentRoomStyles(
+							currentRoom,
+							room.name
+						)}`
+					)}
 					onClick={() => handleClick(room.name)}
 				>
 					<Server size={30} className='text-white' />

@@ -4,6 +4,7 @@ import {
 	secondaryButtonStyles,
 } from '@/constants/styles/buttonStyles'
 import { ButtonProps } from '@/types/UI-types/UIComponentsProps'
+import { twMerge } from 'tailwind-merge'
 
 export const Button: React.FC<ButtonProps> = ({
 	variant = STYLES_VARIANTS.PRIMARY,
@@ -12,14 +13,14 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
 	return (
 		<button
-			className={`
+			className={twMerge(`
 				${
 					variant === STYLES_VARIANTS.PRIMARY
 						? primaryButtonStyles
 						: secondaryButtonStyles
 				}
 				${additionalStyles}
-				`}
+				`)}
 			{...props}
 		/>
 	)

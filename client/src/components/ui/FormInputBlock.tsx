@@ -3,6 +3,7 @@ import {
 	formInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { AuthTypes } from '@/types/AuthTypes/AuthTypes'
+import { twMerge } from 'tailwind-merge'
 import { Input } from './Input'
 
 export const AuthDiv = ({
@@ -12,9 +13,11 @@ export const AuthDiv = ({
 }: AuthTypes.TAuthDiv) => {
 	return (
 		<div
-			className={`relative ${formInputStyles} flex items-center gap-4 input-bold-border input-bold-border-focus rounded-md input-bg `}
+			className={twMerge(
+				`relative ${formInputStyles} flex items-center gap-4 input-bold-border input-bold-border-focus rounded-md input-bg`
+			)}
 		>
-			<Image className={`${formIconStyles} text-gray-400 `} />
+			<Image className={twMerge(`${formIconStyles} text-gray-400 `)} />
 			<Input {...inputProps} />
 			{children}
 		</div>

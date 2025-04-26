@@ -14,7 +14,7 @@ export const OAuthContainer = () => {
 				<OAuthBlock
 					children={
 						<Image
-							src={'/google1.svg'}
+							src={'/google2.svg'}
 							alt='Google icon'
 							height={45}
 							width={45}
@@ -24,7 +24,7 @@ export const OAuthContainer = () => {
 				<OAuthBlock
 					children={
 						<Image
-							src={'/apple1.svg'}
+							src={'/apple2.svg'}
 							alt='Google icon'
 							height={45}
 							width={45}

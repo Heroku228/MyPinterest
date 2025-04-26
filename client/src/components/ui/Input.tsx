@@ -5,6 +5,7 @@ import {
 	secondaryInputStyles,
 } from '@/constants/styles/formInputStyles'
 import { InputProps } from '@/types/UI-types/UIComponentsProps'
+import { twMerge } from 'tailwind-merge'
 
 export const Input: React.FC<InputProps> = ({
 	additionalStyles,
@@ -13,7 +14,7 @@ export const Input: React.FC<InputProps> = ({
 }) => {
 	return (
 		<input
-			className={`
+			className={twMerge(`
 				${basicInputStyles}
 				${
 					variant === STYLES_VARIANTS.PRIMARY
@@ -21,7 +22,7 @@ export const Input: React.FC<InputProps> = ({
 						: secondaryInputStyles
 				}
 				${additionalStyles}
-				`}
+				`)}
 			{...props}
 		/>
 	)

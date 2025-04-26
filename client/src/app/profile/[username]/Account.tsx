@@ -1,9 +1,18 @@
 'use client'
 
 import { Header } from '@/components/header/Header'
-import { AccountContent } from '@/components/profile/accountContent/AccountContent'
 import { AccountSidebar } from '@/components/profile/accountSidebar/AccountSidebar'
+import { Loader } from '@/components/ui/Loader'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import dynamic from 'next/dynamic'
+
+const AccountContent = dynamic(
+	() =>
+		import('@/components/profile/accountContent/AccountContent').then(
+			mod => mod.AccountContent
+		),
+	{ loading: () => <Loader /> }
+)
 
 export const Account = () => {
 	const { width } = useWindowSize()

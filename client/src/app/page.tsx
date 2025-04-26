@@ -15,8 +15,7 @@ export default function Home() {
 	useEffect(() => {
 		const fetchAllPins = async () => {
 			const response = await axios.get('/uploads/all-pins')
-			console.log('FETCH res : ', response)
-
+			
 			if (response.status !== 200) {
 				setIsPinsFetched(false)
 			} else {

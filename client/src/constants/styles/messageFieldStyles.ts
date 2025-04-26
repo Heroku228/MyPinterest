@@ -9,3 +9,10 @@ export const messageFieldStyles = `
 	transition-all duration-300 ease-in-out
 	backdrop-blur-md bg-opacity-70
 `
+
+
+export const currentRoomStyles = (currentRoom: string, roomName: string) => {
+	return currentRoom === roomName
+		? 'bg-gradient-to-r from-blue-600 via-purple-500 to-purple-500 border-white scale-105 shadow-lg'
+		: 'hover:scale-105 hover:bg-purple-900'
+}

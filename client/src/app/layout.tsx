@@ -14,7 +14,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body style={{ backgroundColor: `rgba(0,0,0,0.9)` }}>
+			<body
+				className='scroll-smooth'
+				style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
+			>
 				<GlobalProvider children={children} />
 			</body>
 		</html>

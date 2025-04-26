@@ -2,6 +2,7 @@
 
 import { CheckIconForCopying } from '@/components/chatComponents/CheckIconForCopying'
 import { MessageText } from '@/components/ui/MessageText'
+import { UPLOADS } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { IMessage } from '@/types/ChatTypes/IChatData'
 import Image from 'next/image'
@@ -15,7 +16,7 @@ export const MessageBlock = ({ message }: { message: IMessage }) => {
 				<div className='relative w-[50px] h-[50px]'>
 					<Image
 						className='rounded-full cursor-pointer'
-						src={`http://127.0.0.1:3000/api/v1/uploads/avatars/${user?.userIconUrl}`}
+						src={`${UPLOADS.AVATARS}${user?.userIconUrl}`}
 						alt='user icon'
 						fill
 					/>

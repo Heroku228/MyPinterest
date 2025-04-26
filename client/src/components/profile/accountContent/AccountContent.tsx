@@ -1,10 +1,5 @@
-import axios from '@/services/axiosInstance'
-import { useEffect, useState } from 'react'
-import { RenderAllPins } from './subcomponents/AllPins'
-import { RecentPins } from './subcomponents/RecentPins'
-
 export const AccountContent = ({}: {}) => {
-	const [pins, setPins] = useState<any[]>([])
+	// const [pins, setPins] = useState<any[]>([])
 
 	// useEffect(() => {
 	// 	const fetchAllPins = async () => {

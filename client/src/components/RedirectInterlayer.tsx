@@ -14,13 +14,7 @@ export const RedirectInterLayer = ({
 	const pathname = usePathname()
 
 	useEffect(() => {
-		console.log('fasdfasdf')
-		if (pathname !== redirect) {
-			console.log('true')
-			router.push(ROUTES.HOME)
-		} else {
-			console.log('false')
-		}
+		if (pathname !== redirect) router.push(ROUTES.HOME)
 	}, [pathname, redirect])
 
 	return <>{children}</>

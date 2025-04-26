@@ -62,7 +62,6 @@ export const AuthRegister = () => {
 		if (!file) return
 
 		const extensition = fileName?.split('.').pop()?.toLowerCase()
-		console.log('EXT: ', extensition)
 		const newFileName = file.name.slice(0, 20) + `.${extensition}`
 		setSelectedFilename(newFileName)
 	}
