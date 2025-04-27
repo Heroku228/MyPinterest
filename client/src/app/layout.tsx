@@ -15,7 +15,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className='scroll-smooth w-11/12 m-auto p-2'
+				className='scroll-smooth w-11/12 m-auto p-2 overflow-x-hidden'
 				style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
 			>
 				<GlobalProvider children={children} />

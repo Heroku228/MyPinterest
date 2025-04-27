@@ -10,21 +10,26 @@ import { useEffect, useState } from 'react'
 
 export const MessageBlock = ({ message }: { message: IMessage }) => {
 	const { user, isAuthenticated } = useAuth()
-	const [anonymousImage, setAnonymousImage] = useState<string | null>(null)
+	const [anonymousIcon, setAnonymousIcon] = useState<string | null>(null)
 
 	useEffect(() => {
 		if (!isAuthenticated) {
+			setAnonymousIcon('/anonymousIcon.jpg')
 		}
 	}, [isAuthenticated])
 
 	return (
 		<div className='relative p-3 w-max'>
-			<div className='flex items-end gap-2'>
+			<div className='flex items-end gap-4 text-2xl'>
 				<div className='relative w-[50px] h-[50px]'>
 					<Image
 						unoptimized
 						className='rounded-full cursor-pointer'
-						src={`${UPLOADS.AVATARS}${user?.userIconUrl}`}
+						src={`${
+							isAuthenticated
+								? UPLOADS.AVATARS.concat(user?.userIconUrl as string)
+								: anonymousIcon
+						}`}
 						alt='user icon'
 						fill
 					/>

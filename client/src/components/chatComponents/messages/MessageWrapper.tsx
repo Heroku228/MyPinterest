@@ -35,23 +35,31 @@ export const MessageWrapper = ({
 	const { user } = useAuth()
 
 	const [text, setText] = useState<string>('')
-	const [errorMessage, setErrorMessage] = useState<Record<
-		string,
-		boolean
-	> | null>(null)
+	const [showError, setShowError] = useState(false)
+	const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
 	const isCooldown = useRef(false)
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const text = event.target.value
+
+		if (text.length >= 1000 || length >= 150) {
+			setErrorMessage('The message is very big')
+			setShowError(true)
+			return
+		}
+		setShowError(false)
 		setText(text)
 	}
 
 	const onSend = async (newMessage?: string) => {
 		const [, length] = wordsInText(text)
 
-		if (text.length >= 1000) throw new Error('Hes is so big')
-		if (length >= 150) throw new Error('Hes is so big')
+		if (text.length >= 1000 || length >= 150) {
+			setShowError(true)
+			setErrorMessage('The message is very big')
+			return
+		}
 
 		if (isCooldown.current) return
 		isCooldown.current = true
@@ -68,7 +76,7 @@ export const MessageWrapper = ({
 			sender: user,
 		}
 
-		if (editing && newMessage && message) {
+		if (editing && newMessage && message && !showError) {
 			const updatedMessage: IMessage = { ...message, text: newMessage }
 			setChatData(prev =>
 				prev.map(el =>
@@ -78,12 +86,17 @@ export const MessageWrapper = ({
 			await sendMessage(socket, updatedMessage)
 			setEditing(false)
 			setText('')
+			setShowError(false)
 			return
 		}
 
 		const splitedMessages = splitMessageIntoSeveralParts(collectedMessage)
 
 		if (!splitedMessages) return
+		if (showError) {
+			setShowError(false)
+			return
+		}
 
 		for (const el of splitedMessages) {
 			setChatData(prev => [...prev, el])
@@ -91,14 +104,20 @@ export const MessageWrapper = ({
 		}
 
 		setEditing(false)
+		setShowError(false)
 		setText('')
 		return
 	}
 
 	return (
-		<div className='col-span-4 relative'>
+		<div className='col-span-4 '>
 			<MessageList />
-			<MessageField handleChange={handleChange} onSend={onSend} />
+			<MessageField
+				errorMessage={errorMessage}
+				handleChange={handleChange}
+				onSend={onSend}
+				showError={showError}
+			/>
 		</div>
 	)
 }

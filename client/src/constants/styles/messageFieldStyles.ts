@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge'
 
 export const messageFieldStyles = `
- fixed bottom-3 left-1/2 transform -translate-x-1/2
-	w-[85%] sm:w-[80%] md:w-[65%] lg:w-[55%] xl:w-[50%]
+	transform -translate-x-1/2
+	w-[700px]
 	max-w-2xl min-h-[50px] max-h-[200px]
 	p-4 pr-12 resize-none text-2xl
 	rounded-xl border border-purple-400

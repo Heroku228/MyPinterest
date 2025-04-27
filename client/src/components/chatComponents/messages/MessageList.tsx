@@ -8,19 +8,29 @@ export const MessageList = () => {
 	const { chatData, editing } = useChatData()
 
 	const messageEndRef = useRef<HTMLDivElement>(null)
+	const containerRef = useRef<HTMLDivElement>(null)
 	const prevLengthRef = useRef<number>(chatData.length)
 
 	useEffect(() => {
 		const isNewMessage = chatData.length > prevLengthRef.current
 
-		if (chatData.length > 2 && isNewMessage && !editing)
-			messageEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+		if (isNewMessage && !editing) {
+			const container = containerRef.current
+
+			window.scroll({
+				top: container?.offsetHeight,
+				behavior: 'smooth',
+			})
+		}
 
 		prevLengthRef.current = chatData.length
-	}, [chatData])
+	}, [chatData]) 
 
 	return (
-		<section className='w-full mb-8 mt-15 rounded-xl flex flex-col gap-8'>
+		<section
+			ref={containerRef}
+			className='w-full mb-8 mt-15 rounded-xl flex flex-col gap-8'
+		>
 			{chatData.map((message, key) => (
 				<MessageBlock message={message} key={key} />
 			))}
