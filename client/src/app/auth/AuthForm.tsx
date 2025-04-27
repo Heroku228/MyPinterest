@@ -1,4 +1,3 @@
-import { Header } from '@/components/header/Header'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
@@ -34,13 +33,10 @@ export const AuthForm = () => {
 	}
 
 	return (
-		<div>
-			<Header />
-			<div className='fixed inset-0 flex items-center justify-center rounded-2xl flex flex-col gap-12 min-h-150 '>
-				<main className='flex gap-8 chat-sidebar-background-color '>
-					{getBlock(true)}
-					{getBlock(false)}
-				</main>
+		<div className='fixed inset-0 flex items-center justify-center rounded-xl'>
+			<div className='flex gap-8 chat-sidebar-background-color'>
+				{getBlock(true)}
+				{getBlock(false)}
 			</div>
 		</div>
 	)

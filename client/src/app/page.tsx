@@ -1,7 +1,6 @@
 'use client'
 
 import { ErrorLoadingPins } from '@/components/Errors/ErrorLoadingPins'
-import { Header } from '@/components/header/Header'
 import { homePagePinsContainerStyles } from '@/constants/styles/pinsStyles'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import axios from '@/services/axiosInstance'
@@ -28,8 +27,6 @@ export default function Home() {
 
 	return (
 		<div className='min-h-screen overflow-x-hidden'>
-			<Header />
-
 			<main
 				className={twMerge(`${homePagePinsContainerStyles(isPinsFetched)}`)}
 			>

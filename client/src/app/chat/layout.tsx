@@ -1,4 +1,3 @@
-import { Header } from '@/components/header/Header'
 import { UseChatDataProvider } from '@/hooks/context/chat/useChatData'
 import type { Metadata } from 'next'
 
@@ -13,11 +12,8 @@ export default function ChatLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<>
-			<Header />
-			<main className='min-h-screen overflow-x-hidden'>
-				<UseChatDataProvider>{children}</UseChatDataProvider>
-			</main>
-		</>
+		<main className='min-h-screen overflow-x-hidden'>
+			<UseChatDataProvider>{children}</UseChatDataProvider>
+		</main>
 	)
 }

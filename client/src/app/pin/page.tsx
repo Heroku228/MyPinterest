@@ -19,18 +19,22 @@ const RenderCreatePin = dynamic(
 )
 
 export default function PinsContainer() {
-	const { isAuthenticated } = useAuth()
+	const { isAuthenticated, isLoading } = useAuth()
 	const router = useRouter()
 
 	useEffect(() => {
-		if (!isAuthenticated) router.push(ROUTES.LOGIN)
-	}, [isAuthenticated])
+		console.log('IS AUTH: ', isAuthenticated)
+		if (!isLoading) {
+			if (!isAuthenticated) router.push(ROUTES.LOGIN)
+		}
+	}, [isAuthenticated, isLoading])
+
+	if (isLoading) return <Loader />
 
 	return (
 		<div className='text-white'>
 			<RenderCreatePin />
 			<CreatePin />
-			<h1>dasfglkajsdfkkjldas</h1>
 		</div>
 	)
 }

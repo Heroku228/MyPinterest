@@ -21,7 +21,7 @@ export const Header = () => {
 	return (
 		<header className={`${width < 720 ? headerFlexStyles : headerGridStyles}`}>
 			{width < 1400 ? null : (
-				<div className='col-span-1'>
+				<div className='col-span-1 cursor-pointer background-gray-hover w-max py-1 px-4 rounded-md'>
 					<SiteLogo />
 				</div>
 			)}
@@ -48,10 +48,12 @@ export const Header = () => {
 						</div>
 					) : (
 						<div
-							className='col-span-2 gap-4 transition-color duration-300 chat-sidebar-background-color cursor-pointer py-2 px-4 rounded-xl'
+							className='col-span-1 gap-4 transition-color duration-300 chat-sidebar-background-color cursor-pointer py-2 px-4 rounded-xl'
 							onClick={() => router.push('/auth')}
 						>
-							<div className='flex items-center gap-4'>
+							<div
+								className={`flex items-center w-max gap-4 cursor-pointer background-gray-hover p-1 px-5 rounded-md`}
+							>
 								<LogIn width={'30px'} height={'20px'} className='text-white' />
 								<span className='text-white font-bold text-xl'>Log in</span>
 							</div>

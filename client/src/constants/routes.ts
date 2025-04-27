@@ -6,7 +6,7 @@ export const ROUTES = {
 	PROFILE_WITHOUT_USERNAME: '/profile',
 	SETTINGS: '/profile/settings',
 	CHAT: '/chat',
-	CREATE_PIN: '/create-pin',
+	CREATE_PIN: '/pin',
 	API: '/api',
 }
 

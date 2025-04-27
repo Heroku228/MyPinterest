@@ -1,3 +1,4 @@
+import { Header } from '@/components/header/Header'
 import type { Metadata } from 'next'
 import './globals.css'
 import { GlobalProvider } from './Provider'
@@ -18,7 +19,12 @@ export default function RootLayout({
 				className='w-11/12 m-auto p-2 overflow-x-hidden'
 				style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
 			>
-				<GlobalProvider children={children} />
+				<GlobalProvider>
+					<>
+						<Header />
+						{children}
+					</>
+				</GlobalProvider>
 			</body>
 		</html>
 	)
