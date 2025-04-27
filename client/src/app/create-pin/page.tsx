@@ -1,13 +1,22 @@
 'use client'
 
-import { Header } from '@/components/header/Header'
 import { CreatePin } from '@/components/pins/CreatePinModal'
-import { RenderCreatePin } from '@/components/pins/RenderCreatePin'
+import { Loader } from '@/components/ui/Loader'
 import { ROUTES } from '@/constants/routes'
-import { UsePinProvider } from '@/hooks/context/usePin'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+
+const RenderCreatePin = dynamic(
+	() =>
+		import('@/components/pins/RenderCreatePin').then(
+			mod => mod.RenderCreatePin
+		),
+	{
+		loading: () => <Loader />,
+	}
+)
 
 export default function PinsContainer() {
 	const { isAuthenticated } = useAuth()
@@ -19,11 +28,9 @@ export default function PinsContainer() {
 
 	return (
 		<div className='text-white'>
-			<UsePinProvider>
-				<Header />
-				<RenderCreatePin />
-				<CreatePin />
-			</UsePinProvider>
+			<RenderCreatePin />
+			<CreatePin />
+			<h1>dasfglkajsdfkkjldas</h1>
 		</div>
 	)
 }

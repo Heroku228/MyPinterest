@@ -5,8 +5,7 @@ flex flex-col fixed w-max h-full border-r-1 chat-sidebar-border backdrop-blur-lg
 `
 
 export const messageFieldStyles = `
-	transform -translate-x-1/2
-	w-[700px]
+	w-[300px] md:w-[400px] lg:w-700
 	max-w-2xl min-h-[50px] max-h-[200px]
 	p-4 pr-12 resize-none text-2xl
 	rounded-xl border border-purple-400

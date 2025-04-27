@@ -60,6 +60,9 @@
 	.background-gray-hover:hover {
 		background-color: rgba(50, 50, 50, 0.5);
 	}
+	.background-gray {
+		background-color: rgba(50, 50, 50, 0.5);
+	}
 
 	.underline-before {
 		position: relative;

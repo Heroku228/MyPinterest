@@ -19,8 +19,8 @@ export const MessageBlock = ({ message }: { message: IMessage }) => {
 	}, [isAuthenticated])
 
 	return (
-		<div className='relative p-3 w-max'>
-			<div className='flex items-end gap-4 text-2xl'>
+		<div className='relative p-0 lg:p-3 w-max'>
+			<div className='flex items-end gap-4'>
 				<div className='relative w-[50px] h-[50px]'>
 					<Image
 						unoptimized

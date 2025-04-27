@@ -5,6 +5,7 @@ import { Loader } from '@/components/ui/Loader'
 import { ROOMS } from '@/constants/enums/Rooms'
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { useAuth } from '@/hooks/context/user/useAuth'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import {
 	cleanText,
 	splitMessageIntoSeveralParts,
@@ -33,6 +34,7 @@ export const MessageWrapper = ({
 }) => {
 	const { setChatData, setEditing, editing, message } = useChatData()
 	const { user } = useAuth()
+	const { width } = useWindowSize()
 
 	const [text, setText] = useState<string>('')
 	const [showError, setShowError] = useState(false)
@@ -110,7 +112,12 @@ export const MessageWrapper = ({
 	}
 
 	return (
-		<div className='col-span-4 '>
+		<div
+			className={`
+			flex justify-center mx-auto items-center overflow-x-hidden
+			${width < 680 ? 'w-full' : 'w-2/4'}
+		`}
+		>
 			<MessageList />
 			<MessageField
 				errorMessage={errorMessage}

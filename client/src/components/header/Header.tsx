@@ -48,11 +48,13 @@ export const Header = () => {
 						</div>
 					) : (
 						<div
-							className='flex items-center justify-center gap-4 transition-color duration-300 chat-sidebar-background-color cursor-pointer py-2 px-4 rounded-xl'
+							className='col-span-2 gap-4 transition-color duration-300 chat-sidebar-background-color cursor-pointer py-2 px-4 rounded-xl'
 							onClick={() => router.push('/auth')}
 						>
-							<LogIn width={'30px'} height={'20px'} className='text-white' />
-							<span className='text-white font-bold text-xl'>Log in</span>
+							<div className='flex items-center gap-4'>
+								<LogIn width={'30px'} height={'20px'} className='text-white' />
+								<span className='text-white font-bold text-xl'>Log in</span>
+							</div>
 						</div>
 					)}
 				</>

@@ -3,6 +3,7 @@
 import { TextArea } from '@/components/ui/TextArea'
 import { messageFieldStyles } from '@/constants/styles/chatStyles'
 import { useChatData } from '@/hooks/context/chat/useChatData'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { TMessageField } from '@/types/ChatTypes/IChatData'
 import { Edit2, Navigation2, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
@@ -15,8 +16,9 @@ export const MessageField = ({
 }: TMessageField & { showError: boolean; errorMessage: string | null }) => {
 	const { editing, setEditing, message } = useChatData()
 
-	const textareaRef = useRef<HTMLTextAreaElement>(null)
+	const { width } = useWindowSize()
 
+	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const [height, setHeight] = useState<number>(65)
 	const [localText, setLocalText] = useState<string>('')
 
@@ -40,8 +42,6 @@ export const MessageField = ({
 	const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const newText = e.target.value
 
-		if (newText.length === 0) setEditing(false)
-
 		setLocalText(newText)
 		handleChange(e, editing)
 		adjustHeight()
@@ -56,9 +56,9 @@ export const MessageField = ({
 	}
 
 	return (
-		<div className='fixed left-2/5 bottom-0 flex mx-auto justify-center items-center'>
+		<div className={`fixed bottom-4 flex justify-center items-center`}>
 			{editing ? (
-				<div className='flex items-center text-white fixed bottom-28 left-110 w-max border-2 border-purple-900 rounded-xl editing-message-bg-color px-4 py-2 gap-16'>
+				<div className='flex items-center text-white absolute bottom-28 left-0 w-max border-2 border-purple-900 rounded-xl editing-message-bg-color px-4 py-2 gap-16'>
 					<div className='flex items-center gap-4'>
 						<Edit2 size={20} />
 						<span>Editing message</span>
@@ -72,13 +72,13 @@ export const MessageField = ({
 			) : null}
 
 			{showError ? (
-				<span className='text-2xl text-white fixed z-999 bottom-48 left-1/3 bg-red-600 rounded-md py-2 px-5 font-bold'>
+				<span className='text-2xl text-white fixed z-999 bottom-52 bg-purple-700 rounded-full py-1 px-3'>
 					{errorMessage}
 				</span>
 			) : null}
 
 			<TextArea
-				className={messageFieldStyles}
+				additionalStyles={messageFieldStyles}
 				placeholder='Ask anything'
 				value={localText}
 				style={{
@@ -99,7 +99,11 @@ export const MessageField = ({
 				ref={textareaRef}
 			/>
 			<Navigation2
-				className='cursor-pointer bg-indigo-400 text-white rounded-full p-2 absolute left-90 z-999'
+				className={`
+					cursor-pointer hover:bg-indigo-400 text-white rounded-full p-2 absolute  z-999 background-gray active:scale-85 duration-200
+
+				${width < 600 ? 'right-0' : '-right-15 top-1'}
+					`}
 				onClick={handleSend}
 				size={50}
 			/>

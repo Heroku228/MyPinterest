@@ -17,9 +17,8 @@ export default function Home() {
 		const fetchAllPins = async () => {
 			const response = await axios.get('/uploads/all-pins')
 
-			if (response.status !== 200) {
-				setIsPinsFetched(false)
-			} else {
+			if (response.status !== 200) setIsPinsFetched(false)
+			else {
 				setIsPinsFetched(true)
 				setPins(response.data.images)
 			}
@@ -28,14 +27,11 @@ export default function Home() {
 	}, [])
 
 	return (
-		<div
-			className='min-h-screen overflow-x-hidden'
-			style={{ backgroundColor: `rgba(0,0,0,0.9)` }}
-		>
+		<div className='min-h-screen overflow-x-hidden'>
 			<Header />
 
 			<main
-				className={twMerge(`${homePagePinsContainerStyles(isPinsFetched)} `)}
+				className={twMerge(`${homePagePinsContainerStyles(isPinsFetched)}`)}
 			>
 				{!isPinsFetched ? (
 					pins.map((pin, index) => (
