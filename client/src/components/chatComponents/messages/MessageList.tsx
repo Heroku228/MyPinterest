@@ -14,7 +14,7 @@ export const MessageList = () => {
 	useEffect(() => {
 		const isNewMessage = chatData.length > prevLengthRef.current
 
-		if (isNewMessage && !editing) {
+		if (isNewMessage && !editing && chatData.length > 3) {
 			const container = containerRef.current
 
 			window.scroll({
@@ -24,7 +24,7 @@ export const MessageList = () => {
 		}
 
 		prevLengthRef.current = chatData.length
-	}, [chatData]) 
+	}, [chatData])
 
 	return (
 		<section
