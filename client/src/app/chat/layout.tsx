@@ -15,7 +15,7 @@ export default function ChatLayout({
 	return (
 		<>
 			<Header />
-			<main className='min-h-screen'>
+			<main className='min-h-screen overflow-x-hidden'>
 				<UseChatDataProvider>{children}</UseChatDataProvider>
 			</main>
 		</>

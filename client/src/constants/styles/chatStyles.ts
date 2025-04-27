@@ -1,5 +1,9 @@
 import { twMerge } from 'tailwind-merge'
 
+export const chatSidebarBasicStyles = `
+flex flex-col fixed w-max h-full border-r-1 chat-sidebar-border backdrop-blur-lg chat-sidebar-background-color
+`
+
 export const messageFieldStyles = `
 	transform -translate-x-1/2
 	w-[700px]
@@ -12,10 +16,20 @@ export const messageFieldStyles = `
 `
 
 
+export const chatSidebarAdditionalStlyes = `flex flex-col h-full `
+
+export const chatSidebarAsideContentStyles = `
+'flex w-max h-full border-r-1 mt-10 chat-sidebar-border chat-sidebar-background-color py-2 px-10
+`
+
+export const roomsDefaultStyles = `
+h-full mt-8 gap-6 flex py-10 px-2 flex-col gap-8col-span-1 h-max
+`
+
 export const roomsSidebarContainerStyles =
 	(currentRoom: string, roomName: string) => {
 		return twMerge(
-			`text-white flex gap-4 items-center text-2xl default-border py-3 px-4 rounded-xl cursor-pointer
+			`text-white flex gap-4 items-center text-2xl sm:text-xl default-border py-2 px-4 rounded-xl cursor-pointer
 			 ${currentRoomStyles(
 				currentRoom,
 				roomName

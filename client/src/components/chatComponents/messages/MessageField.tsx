@@ -1,7 +1,7 @@
 'use client'
 
 import { TextArea } from '@/components/ui/TextArea'
-import { messageFieldStyles } from '@/constants/styles/messageFieldStyles'
+import { messageFieldStyles } from '@/constants/styles/chatStyles'
 import { useChatData } from '@/hooks/context/chat/useChatData'
 import { TMessageField } from '@/types/ChatTypes/IChatData'
 import { Edit2, Navigation2, X } from 'lucide-react'
