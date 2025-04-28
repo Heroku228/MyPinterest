@@ -4,10 +4,8 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 
 const UsePinContext = createContext<ContextTypes.TUsePin | null>(null)
 
-export const UsePinProvider = ({ children }: { children: ReactNode }) => {
+export const PinProvider = ({ children }: { children: ReactNode }) => {
 	const [pin, setPin] = useState<PinTypes.IPin | null>(null)
-
-	if (!pin) return
 
 	return (
 		<UsePinContext.Provider value={{ pin, setPin }}>

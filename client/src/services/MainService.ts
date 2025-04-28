@@ -33,3 +33,37 @@ export const validPassword = (password: string | undefined): boolean => {
 	const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/
 	return passwordRegex.test(password)
 }
+
+
+type TValidateLink = {
+	valid: boolean,
+	error?: string
+}
+export const validateLink = (link: string): TValidateLink => {
+	const MAX_LENGTH = 1024
+
+	if (link.length > MAX_LENGTH)
+		return {
+			valid: false,
+			error: `Link is too long.`
+		}
+
+
+	try {
+		const url = new URL(link)
+
+		if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+			return {
+				valid: false,
+				error: 'Only HTTP and HTTPS links are allowed'
+			}
+		}
+
+		return { valid: true }
+	} catch (err) {
+		return {
+			valid: false,
+			error: 'Invalid URL format.'
+		}
+	}
+}

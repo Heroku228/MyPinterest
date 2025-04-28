@@ -31,7 +31,7 @@ export const UserNotFound = () => {
 				<Button
 					additionalStyles='w-max px-10 m-10 text-2xl'
 					variant={STYLES_VARIANTS.SECONDARY}
-					onClick={() => router.push(ROUTES.HOME)}
+					onClick={() => router.push(ROUTES.PROFILE_WITHOUT_USERNAME)}
 				>
 					Go back
 				</Button>

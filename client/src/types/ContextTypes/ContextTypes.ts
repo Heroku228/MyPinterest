@@ -15,7 +15,7 @@ export namespace ContextTypes {
 
 
 	export type TUsePin = {
-		pin: PinTypes.IPin,
+		pin: PinTypes.IPin | null,
 		setPin: Dispatch<SetStateAction<PinTypes.IPin | null>>
 	}
 
