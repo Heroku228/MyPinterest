@@ -1,3 +1,4 @@
+import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
 import {
 	formIconStyles,
 	formInputStyles,
@@ -18,7 +19,11 @@ export const AuthDiv = ({
 			)}
 		>
 			<Image className={twMerge(`${formIconStyles} text-gray-400 `)} />
-			<Input {...inputProps} />
+			<Input
+				{...inputProps}
+				variant={STYLES_VARIANTS.PRIMARY}
+				additionalStyles='border-none!'
+			/>
 			{children}
 		</div>
 	)

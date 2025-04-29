@@ -1,8 +1,9 @@
-import { Controller, Get, NotFoundException, Param, Res } from '@nestjs/common'
+import { Body, Controller, Get, NotFoundException, Param, Post, Res } from '@nestjs/common'
 import { Response } from 'express'
 import { existsSync, readdirSync } from 'fs'
 import { homedir } from 'os'
 import { extname, join } from 'path'
+import { Pin } from '../pins/entities/pin.entity'
 
 @Controller('uploads')
 export class UploadsController {
@@ -26,8 +27,8 @@ export class UploadsController {
 		try {
 			const files = readdirSync(folderPath)
 				.filter(file => validExtensions.includes(extname(file)
-				.toLowerCase()))
-				
+					.toLowerCase()))
+
 			const fileUrls = files.map(filename => {
 				`http://localhost:3000/api/v1/uploads/avatars/${filename}`
 			})

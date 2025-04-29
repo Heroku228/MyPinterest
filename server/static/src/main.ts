@@ -3,7 +3,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { AppModule } from './app.module'
 
 import { NestExpressApplication } from '@nestjs/platform-express'
-import * as bodyParser from 'body-parser'
+import { json, urlencoded } from 'body-parser'
 import * as cookiesParser from 'cookie-parser'
 
 async function bootstrap() {
@@ -23,8 +23,8 @@ async function bootstrap() {
 	app.setGlobalPrefix('api/v1')
 
 	app.use(cookiesParser())
-	app.use(bodyParser.json({ limit: '10mb' }))
-	app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
+	app.use(json({ limit: '10mb' }))
+	app.use(urlencoded({ limit: '10mb', extended: true }))
 
 	await app.listen(process.env.PORT ?? 3000, '0.0.0.0')
 

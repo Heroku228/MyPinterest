@@ -1,5 +1,4 @@
 import { usePin } from '@/hooks/context/usePin'
-import { useWindowSize } from '@/hooks/useWindowSize'
 import { validateLink } from '@/services/MainService'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,7 +7,6 @@ import { Span } from '../ui/Span'
 
 export const RenderCreatePin = () => {
 	const { pin } = usePin()
-	const { width } = useWindowSize()
 
 	const [error, setError] = useState<string | null>(null)
 	const [showError, setShowError] = useState<boolean | null>(null)

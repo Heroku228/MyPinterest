@@ -1,7 +1,10 @@
 import { STYLES_VARIANTS } from '@/constants/enums/ButtonVariant'
+import { PINS_ENDPOINTS } from '@/constants/enums/endpoints'
+import { emptyPin } from '@/constants/response/Response'
 import { usePin } from '@/hooks/context/usePin'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { PinTypes } from '@/types/PinTypes/PinTypes.'
+import axios from 'axios'
 import { ArrowRightCircle } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -14,8 +17,35 @@ export const CreatePin = ({}) => {
 	const linkRef = useRef<HTMLInputElement | null>(null)
 	const uploadRef = useRef<HTMLInputElement | null>(null)
 
+	const [formData, setFormData] = useState({
+		title: '',
+		description: '',
+		link: '',
+		base64Image: '',
+	})
+
 	const { width } = useWindowSize()
 	const { setPin } = usePin()
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		const formData = new FormData(e.currentTarget)
+		const entries = Object.fromEntries(formData.entries())
+		const { file, ...data } = entries
+
+		console.log('icon', file)
+		console.log('json', data)
+
+		console.log(formData)
+
+		const response = await axios.post(PINS_ENDPOINTS.CREATE_PIN, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+			withCredentials: true,
+		})
+		console.log('RESPONSE: ', response)
+	}
 
 	const handleChange =
 		(field: keyof PinTypes.IPin) =>
@@ -23,21 +53,7 @@ export const CreatePin = ({}) => {
 			const value = e.target.value
 
 			setPin(prev => {
-				if (!prev)
-					return {
-						author: {
-							id: '',
-							username: '',
-							createdAt: '',
-							email: '',
-							userIconUrl: '',
-						},
-						description: '',
-						title: '',
-						link: '',
-						url: '',
-						[field]: value,
-					} as PinTypes.IPin
+				if (!prev) return emptyPin(field, value)
 
 				return {
 					...prev,
@@ -46,8 +62,9 @@ export const CreatePin = ({}) => {
 			})
 		}
 
-	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
+		console.log(file)
 
 		if (file) {
 			const imageUrl = URL.createObjectURL(file)
@@ -79,44 +96,52 @@ export const CreatePin = ({}) => {
 			</h1>
 
 			<section className='rounded-2xl py-2 px-0 flex flex-col items-center gap-10'>
-				<label
-					htmlFor='file'
-					className='default-border mr-auto p-2 px-4 rounded-full text-xl lg:text-2xl italic hover:bg-black cursor-pointer 
-				'
+				<form
+					onSubmit={handleSubmit}
+					id='create-pin-form'
+					className='flex flex-col  gap-8'
 				>
-					Upload pin
-				</label>
-				<Input
-					onChange={handleFileChange}
-					ref={uploadRef}
-					type='file'
-					id='file'
-					name='file'
-					className='hidden'
-				/>
-
-				<div className='flex flex-col gap-8'>
+					<label
+						htmlFor='file'
+						className='default-border mr-auto p-2 px-4 rounded-full text-xl lg:text-2xl italic hover:bg-black cursor-pointer'
+					>
+						Upload pin
+					</label>
 					<Input
-						placeholder='Tell everyone what your Pin is about'
-						onChange={handleChange('title')}
-						className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
-						ref={titleRef}
+						onChange={handleFileChange}
+						ref={uploadRef}
+						type='file'
+						id='file'
+						name='file'
+						className='hidden'
 					/>
 
-					<Input
-						onChange={handleChange('description')}
-						placeholder='Add a description'
-						className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
-						ref={descriptionRef}
-					/>
+					<div className='flex flex-col gap-8'>
+						<Input
+							name='title'
+							placeholder='Tell everyone what your Pin is about'
+							onChange={handleChange('title')}
+							className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
+							ref={titleRef}
+						/>
 
-					<Input
-						placeholder='Link'
-						onChange={handleChange('link')}
-						className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
-						ref={linkRef}
-					/>
-				</div>
+						<Input
+							name='description'
+							onChange={handleChange('description')}
+							placeholder='Add a description'
+							className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
+							ref={descriptionRef}
+						/>
+
+						<Input
+							name='link'
+							placeholder='Link'
+							onChange={handleChange('link')}
+							className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
+							ref={linkRef}
+						/>
+					</div>
+				</form>
 
 				<div className='ml-auto rounded-full default-border hover:bg-black duration-300 transition-color cursor-pointer'>
 					<span className='text-xl lg:text-2xl italic py-2 px-6 rounded-full flex justify-between gap-2 lg:gap-6'>
@@ -137,6 +162,7 @@ export const CreatePin = ({}) => {
 					</Button>
 
 					<Button
+						form='create-pin-form'
 						additionalStyles={`
 							text-xl hover:scale-110 px-4 rounded-full text-bold italic
 							${activeButton === 2 ? 'scale-105' : ''}

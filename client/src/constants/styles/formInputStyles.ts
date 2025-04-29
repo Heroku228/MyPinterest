@@ -7,4 +7,4 @@ export const formIconStyles = ``
 
 export const basicInputStyles = `outline-none py-1 px-2 w-10/12 overflow-hidden  `
 export const primaryInputStyles = `border rounded-3xl search-input-border input-bg px-4 hover:none h-max text-xl`
-export const secondaryInputStyles = ``
+export const secondaryInputStyles = `default-border py-2 px-4 rounded-full bg-black text-lg lg:text-xl`

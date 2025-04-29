@@ -1,7 +1,14 @@
-import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common'
+import { Body, Controller, Get, Post, UploadedFile, UseFilters, UseGuards, UseInterceptors } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { mkdirSync } from 'fs'
+import { writeFile } from 'fs/promises'
+import { homedir } from 'os'
+import { dirname, join } from 'path'
 import { PinField, PinTitle } from 'static/src/common/decorators/pin.decorator'
 import { HttpExceptionFilter } from 'static/src/filter/HttpExceptionFilter'
-import { Pin } from './entities/pin.entity'
+import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+import { CurrentUser } from '../common/decorators/currrentuser.decorator'
+import { IUser } from '../types/socket/TPayloadBody'
 import { PinsService } from './pins.service'
 
 @Controller('pins')
@@ -27,24 +34,21 @@ export class PinsController {
 		return await this.pinsService.getPinByTitle(title)
 	}
 
-	// TODO -> Change @Body to my own decorator
-	@Post()
-	async createPin(@Body() pin: Pin) {
-		console.log('CONTROLLER [createPin]: ', pin)
-		await this.pinsService.save(pin)
-		return `The pin is saved`
+	@Post('save-pin')
+	@UseGuards(JwtAuthGuard)
+	@UseInterceptors(FileInterceptor('file'))
+	async createPin(
+		@UploadedFile('file') file: Express.Multer.File,
+		@Body() createPinDto: any,
+		@CurrentUser() user: IUser) {
+		console.log('USER: ', user)
+  
+		const filePath = join(homedir(), 'Desktop', 'pins', user.username, file.originalname)
+		mkdirSync(dirname(filePath), { recursive: true })
+		writeFile(filePath, file.buffer)
+
+		return {
+			
+		}
 	}
-
-	// @Get('pin')
-	// getPinById(@PinId() pinId: string) {
-	// 	console.log('CONTROLLER: ', pinId)
-	// 	return { message: `Pin id: ${pinId} ` }
-	// }
-
-	// @Get('pinurl')
-	// getPinUrl(@PinUrl() url: string) {
-	// 	console.log('CONTROLLER: ', url)
-	// 	return { message: `Pin url: ${url}` }
-	// }
-
 }

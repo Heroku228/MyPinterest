@@ -10,6 +10,7 @@ export const ROUTES = {
 	API: '/api',
 }
 
+export const PINS_ROUTE = 'http://localhost:3000/api/v1/pins'
 
 export const UPLOADS = {
 	AVATARS: 'http://localhost:3000/api/v1/uploads/avatars/'

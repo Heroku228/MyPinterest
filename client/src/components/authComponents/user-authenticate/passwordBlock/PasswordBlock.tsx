@@ -1,8 +1,8 @@
+import { validPassword } from '@/services/MainService'
 import { Lock, LockKeyhole } from 'lucide-react'
 import { RefObject, SetStateAction, useState } from 'react'
 import { AuthDiv } from '../../../ui/FormInputBlock'
 import { ShowPasswordIcon } from './ShowPasswordIcon'
-import { validPassword } from '@/services/MainService'
 
 export const PasswordBlock = ({
 	passwordRef,

@@ -16,12 +16,12 @@ export const Input: React.FC<InputProps> = ({
 		<input
 			className={twMerge(`
 				${basicInputStyles}
+				${additionalStyles}
 				${
 					variant === STYLES_VARIANTS.PRIMARY
 						? primaryInputStyles
 						: secondaryInputStyles
 				}
-				${additionalStyles}
 				`)}
 			{...props}
 		/>
