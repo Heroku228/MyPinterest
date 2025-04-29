@@ -1,9 +1,8 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Res } from '@nestjs/common'
+import { Controller, Get, NotFoundException, Param, Res } from '@nestjs/common'
 import { Response } from 'express'
 import { existsSync, readdirSync } from 'fs'
 import { homedir } from 'os'
 import { extname, join } from 'path'
-import { Pin } from '../pins/entities/pin.entity'
 
 @Controller('uploads')
 export class UploadsController {

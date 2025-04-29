@@ -3,7 +3,6 @@ import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { UserOnlineStatus } from './UserOnlineStatus'
 
@@ -22,15 +21,10 @@ export const RenderUserData = ({
 	imageStyles?: string
 	showOnlineStatus?: boolean
 }) => {
-	const [userInfo, setUserInfo] = useState<UserTypes.TResponseUserDto | null>(
-		null
-	)
-	const { user } = useAuth()
+	const { user, isLoading } = useAuth()
 
-	useEffect(() => {
-		if (userData) setUserInfo(userData)
-		else setUserInfo(user)
-	}, [userData, user])
+	if (!userData && (!user || isLoading)) return null
+	const finalUser = userData || user
 
 	return (
 		<Link href={link ? link : ''} className='flex flex-col py-1 cursor-default'>
@@ -45,7 +39,7 @@ export const RenderUserData = ({
 						unoptimized
 						width={size}
 						height={size}
-						src={`${UPLOADS.AVATARS}${userInfo?.userIconUrl}`}
+						src={`${UPLOADS.AVATARS}${finalUser?.userIconUrl}`}
 						alt='account logo'
 						priority
 						className={twMerge(`rounded-full border border-black cursor-pointer
@@ -60,7 +54,7 @@ export const RenderUserData = ({
 
 					{showUsername ? (
 						<p className='text-white font-medium cursor-pointer text-lg'>
-							{userInfo?.username}
+							{finalUser?.username}
 						</p>
 					) : null}
 				</div>
@@ -68,7 +62,7 @@ export const RenderUserData = ({
 
 			{showEmail ? (
 				<p className='italic text-sm cursor-pointer text-center'>
-					{userInfo?.email}
+					{finalUser?.email}
 				</p>
 			) : null}
 

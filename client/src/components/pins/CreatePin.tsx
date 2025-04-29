@@ -14,7 +14,6 @@ import { Input } from '../ui/Input'
 export const CreatePin = () => {
 	const titleRef = useRef<HTMLInputElement | null>(null)
 	const descriptionRef = useRef<HTMLInputElement | null>(null)
-	const linkRef = useRef<HTMLInputElement | null>(null)
 	const uploadRef = useRef<HTMLInputElement | null>(null)
 
 	const { width } = useWindowSize()
@@ -25,11 +24,6 @@ export const CreatePin = () => {
 		const formData = new FormData(e.currentTarget)
 		const entries = Object.fromEntries(formData.entries())
 		const { file, ...data } = entries
-
-		console.log('icon', file)
-		console.log('json', data)
-
-		console.log(formData)
 
 		const response = await axios.post(PINS_ENDPOINTS.CREATE_PIN, formData, {
 			headers: {
@@ -57,7 +51,6 @@ export const CreatePin = () => {
 
 	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
-		console.log(file)
 
 		if (file) {
 			const imageUrl = URL.createObjectURL(file)
@@ -124,14 +117,6 @@ export const CreatePin = () => {
 							placeholder='Add a description'
 							className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
 							ref={descriptionRef}
-						/>
-
-						<Input
-							name='link'
-							placeholder='Link'
-							onChange={handleChange('link')}
-							className={twMerge(inputStyles, `${width < 375 ? 'w-65' : ''}`)}
-							ref={linkRef}
 						/>
 					</div>
 				</form>

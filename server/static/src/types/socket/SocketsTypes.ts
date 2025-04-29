@@ -1,13 +1,14 @@
-import { SocketResponse } from 'static/src/consts/enums/SocketResponse'
+
+import { SERVER_RESPONSE } from 'static/src/consts/enums/API-Response'
 
 export interface ISocketResponse {
-	status: SocketResponse.SOCKET_RESPONSE_STATUS
-	access: SocketResponse.SOCKET_RESPONSE_ACCESS
+	status: SERVER_RESPONSE.SERVER_RESPONSE_STATUS
+	access: SERVER_RESPONSE.SOCKET_RESPONSE_ACCESS
 	info: TSocketInfo
 }
 
 type TSocketInfo = {
-	message: SocketResponse.SOCKET_RESPONSE_MESSAGE
+	message: SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE
 	userCount?: number
 	room: string
 }
@@ -19,5 +20,5 @@ export type TCheckedPayload = {
 export type SocketSuccessParams = {
 	userCount: number,
 	room: string,
-	message: SocketResponse.SOCKET_RESPONSE_MESSAGE
+	message: SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE
 }

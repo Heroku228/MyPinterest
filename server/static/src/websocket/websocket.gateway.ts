@@ -2,8 +2,8 @@ import { Inject, Logger, NotFoundException } from '@nestjs/common'
 import { ConnectedSocket, MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets'
 import Redis from 'ioredis'
 import { Server, Socket } from 'socket.io'
+import { SERVER_RESPONSE } from '../consts/enums/API-Response'
 import { OPEN_ROOMS } from '../consts/enums/OpenRoomsEnum'
-import { SocketResponse } from '../consts/enums/SocketResponse'
 import { checkPayload } from '../service/sockets/checkPayload'
 import { socketStatusConnect } from '../service/sockets/checkRoom'
 import { socketErrorResponse, socketSuccessResponse } from '../service/sockets/socketsResponse'
@@ -66,7 +66,7 @@ export class WebsocketGateway implements OnGatewayInit, OnGatewayConnection, OnG
 		if (!rooms) throw new NotFoundException('[handleLeaveRoom] (rooms) Rooms is undefined')
 
 		return socketSuccessResponse({
-			message: SocketResponse.SOCKET_RESPONSE_MESSAGE.MESSAGE_SENT_SUCCESSFULLY,
+			message: SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE.MESSAGE_SENT_SUCCESSFULLY,
 			room: payload.room,
 			userCount: rooms?.size
 		})
@@ -82,7 +82,7 @@ export class WebsocketGateway implements OnGatewayInit, OnGatewayConnection, OnG
 
 		await client.leave(roomName)
 		return socketSuccessResponse({
-			message: SocketResponse.SOCKET_RESPONSE_MESSAGE.EXIT_FROM_ROOM,
+			message: SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE.EXIT_FROM_ROOM,
 			room: roomName,
 			userCount: rooms?.size
 		})
@@ -90,10 +90,10 @@ export class WebsocketGateway implements OnGatewayInit, OnGatewayConnection, OnG
 
 	@SubscribeMessage('join-room')
 	async handleJoinRoom(@ConnectedSocket() client: Socket, @MessageBody() roomName: string): Promise<ISocketResponse> {
-		if (!roomName) return socketErrorResponse(SocketResponse.SOCKET_RESPONSE_MESSAGE.ROOM_NOT_FOUND_ERROR, roomName)
+		if (!roomName) return socketErrorResponse(SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE.ROOM_NOT_FOUND_ERROR, roomName)
 
 		const validRooms = Object.values(OPEN_ROOMS).includes(roomName as OPEN_ROOMS)
-		if (!validRooms) return socketErrorResponse(SocketResponse.SOCKET_RESPONSE_MESSAGE.NO_VALID_ROOMS, roomName)
+		if (!validRooms) return socketErrorResponse(SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE.NO_VALID_ROOMS, roomName)
 
 		await client.join(roomName)
 		const room = this.server.sockets.adapter.rooms.get(roomName)

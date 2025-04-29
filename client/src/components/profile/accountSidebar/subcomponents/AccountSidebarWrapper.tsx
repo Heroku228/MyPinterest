@@ -1,3 +1,4 @@
+import { Loader } from '@/components/ui/Loader'
 import { ROUTES } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import { UserTypes } from '@/types/UserTypes'
@@ -9,24 +10,32 @@ export const AccountSidebarWrapper = ({
 }: {
 	anotherUser: UserTypes.TResponseUserDto | null | undefined
 }) => {
-	const { user } = useAuth()
+	const { user, isLoading } = useAuth()
 
 	return (
-		<div>
-			<RenderUserData
-				showUsername
-				showEmail
-				showIcon
-				showOnlineStatus
-				link={anotherUser ? '' : ROUTES.SETTINGS}
-				size={160}
-				additionalStyles='flex-col'
-				description='Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World'
-				userData={anotherUser ? anotherUser : user}
-				imageStyles={'rounded-xl duration-300 transition-all hover:scale-105'}
-			/>
+		<>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<div>
+					<RenderUserData
+						showUsername
+						showEmail
+						showIcon
+						showOnlineStatus
+						link={anotherUser ? '' : ROUTES.SETTINGS}
+						size={160}
+						additionalStyles='flex-col'
+						description='Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World'
+						userData={anotherUser ? anotherUser : user}
+						imageStyles={
+							'rounded-xl duration-300 transition-all hover:scale-105'
+						}
+					/>
 
-			{anotherUser ? null : <AccountSidebarButtons />}
-		</div>
+					{anotherUser ? null : <AccountSidebarButtons />}
+				</div>
+			)}
+		</>
 	)
 }

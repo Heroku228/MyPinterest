@@ -9,16 +9,19 @@ export class Pin {
 	title: string
 
 	@Column()
+	username: string
+
+	@Column()
 	description: string
+
+	@Column()
+	url: string
 
 	@CreateDateColumn()
 	createdAt: Date
 
 	@CreateDateColumn()
 	updatedAt: Date
-
-	@Column()
-	url: string
 
 	@Column({ type: 'boolean', default: false })
 	isCensor: boolean

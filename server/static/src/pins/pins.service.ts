@@ -6,6 +6,10 @@ import { Pin } from './entities/pin.entity'
 @Injectable()
 export class PinsService {
 	constructor(@InjectRepository(Pin) private readonly pinRepository: Repository<Pin>) { }
+	
+	async clear() {
+		await this.pinRepository.clear()
+	}
 
 	async save(pin: Pin) {
 		return await this.pinRepository.save(pin)

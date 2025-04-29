@@ -18,7 +18,10 @@ export const UseAuthProvider = ({ children }: TReactNode) => {
 	const isAuthenticated = !!user
 
 	const fetchUser = async (username?: string) => {
-		if (username) return await getUserByUsername(username)
+		if (username) {
+			setIsLoading(false)
+			return await getUserByUsername(username)
+		}
 
 		try {
 			const response = await getCurrentAuthenticatedUser()

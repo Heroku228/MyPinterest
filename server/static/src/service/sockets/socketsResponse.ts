@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common'
-import { SocketResponse } from 'static/src/consts/enums/SocketResponse'
+import { SERVER_RESPONSE } from 'static/src/consts/enums/API-Response'
 import { ISocketResponse, SocketSuccessParams } from 'static/src/types/socket/SocketsTypes'
 
 export const socketSuccessResponse = ({ userCount, message, room }: SocketSuccessParams): ISocketResponse => {
@@ -8,8 +8,8 @@ export const socketSuccessResponse = ({ userCount, message, room }: SocketSucces
 	if (!room) throw new BadRequestException('[SocketSuccess] (room): Room is undefined!')
 
 	return {
-		status: SocketResponse.SOCKET_RESPONSE_STATUS.OK,
-		access: SocketResponse.SOCKET_RESPONSE_ACCESS.PASS_ALLOWED,
+		status: SERVER_RESPONSE.SERVER_RESPONSE_STATUS.OK,
+		access: SERVER_RESPONSE.SOCKET_RESPONSE_ACCESS.PASS_ALLOWED,
 		info: {
 			message: message,
 			room: room,
@@ -18,9 +18,9 @@ export const socketSuccessResponse = ({ userCount, message, room }: SocketSucces
 	}
 }
 
-export const socketErrorResponse = (message: SocketResponse.SOCKET_RESPONSE_MESSAGE, room: string): ISocketResponse => ({
-	status: SocketResponse.SOCKET_RESPONSE_STATUS.ERROR,
-	access: SocketResponse.SOCKET_RESPONSE_ACCESS.NO_ENTRY_ALLOWED,
+export const socketErrorResponse = (message: SERVER_RESPONSE.SOCKET_RESPONSE_MESSAGE, room: string): ISocketResponse => ({
+	status: SERVER_RESPONSE.SERVER_RESPONSE_STATUS.ERROR,
+	access: SERVER_RESPONSE.SOCKET_RESPONSE_ACCESS.NO_ENTRY_ALLOWED,
 	info: {
 		message: message,
 		room: room

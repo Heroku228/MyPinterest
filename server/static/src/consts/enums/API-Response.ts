@@ -4,6 +4,8 @@ export namespace SERVER_RESPONSE {
 		OK: 'ok',
 	} as const
 
+
+
 	export const SERVER_RESPONSE_MESSAGE = {
 		PIN_CREATED_SUCCESSFULLY: 'pin created successfully',
 		NO_PAYLOAD_DATA: 'no payload data',
@@ -29,5 +31,10 @@ export namespace SERVER_RESPONSE {
 		NO_ENTRY_ALLOWED: 'no entry allowed',
 		PASS_ALLOWED: 'pass allowed'
 	} as const
+
+
+	export type SERVER_RESPONSE_STATUS = typeof SERVER_RESPONSE_STATUS[keyof typeof SERVER_RESPONSE_STATUS]
+	export type SOCKET_RESPONSE_ACCESS = typeof SOCKET_RESPONSE_ACCESS[keyof typeof SOCKET_RESPONSE_ACCESS]
+	export type SOCKET_RESPONSE_MESSAGE = typeof SOCKET_RESPONSE_MESSAGE[keyof typeof SOCKET_RESPONSE_MESSAGE]
 }
 

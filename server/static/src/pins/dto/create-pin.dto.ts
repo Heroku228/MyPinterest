@@ -6,5 +6,7 @@ export class CreatePinDto {
 	@Expose()
 	description: string
 	@Expose()
-	link: string
+	url: string
+	@Expose()
+	username: string
 }

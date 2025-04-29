@@ -4,17 +4,18 @@ import { ErrorLoadingPins } from '@/components/Errors/ErrorLoadingPins'
 import { homePagePinsContainerStyles } from '@/constants/styles/pinsStyles'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import axios from '@/services/axiosInstance'
+import { PinTypes } from '@/types/PinTypes/PinTypes.'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export default function Home() {
-	const [pins, setPins] = useState<any[]>([])
+	const [pins, setPins] = useState<PinTypes.IPin[]>([])
 	const [isPinsFetched, setIsPinsFetched] = useState<boolean>(false)
 	const { width } = useWindowSize()
 
 	useEffect(() => {
 		const fetchAllPins = async () => {
-			const response = await axios.get('/uploads/all-pins')
+			const response = await axios.get('pin-image/')
 
 			if (response.status !== 200) setIsPinsFetched(false)
 			else {
@@ -38,7 +39,7 @@ export default function Home() {
 							rounded-lg cursor-pointer border border-gray-700 transition-all duration-300 hover:scale-105 my-4
 							${width < 420 ? 'max-w-[130px]' : 'max-w-[170px]'}
 							`}
-							src={pin}
+							src={pin.url}
 							alt='pin'
 						/>
 					))

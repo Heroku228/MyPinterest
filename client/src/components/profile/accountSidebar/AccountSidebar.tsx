@@ -10,10 +10,7 @@ export const AccountSidebar = ({}) => {
 	const { paramsUsername } = useParamsContext()
 
 	const [anotherUser, setAnotherUser] =
-		useState<UserTypes.TResponseUserDto | null>(() => {
-			const storedUser = localStorage.getItem('user_profile')
-			return storedUser ? JSON.parse(storedUser) : null
-		})
+		useState<UserTypes.TResponseUserDto | null>()
 
 	useEffect(() => {
 		const handleFetch = async () => {
@@ -22,7 +19,6 @@ export const AccountSidebar = ({}) => {
 				if (!response) return
 
 				setAnotherUser(response.data)
-				localStorage.setItem('user_profile', JSON.stringify(response.data))
 			} else {
 				await fetchUser()
 			}
