@@ -27,6 +27,7 @@ export const RenderCreatePin = () => {
 	}, [pin?.link])
 
 	if (!pin) return
+	if (!pin.title && !pin.description && !pin.url) return
 
 	const pStyles = `break-words text-2xl font-bold background-gray py-1 px-8 rounded-md text-purple-300 max-w-md max-h-[200px] overflow-hidden text-lg lg:text-2xl `
 

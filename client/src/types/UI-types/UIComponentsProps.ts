@@ -11,7 +11,7 @@ export type LiProps = LiHTMLAttributes<HTMLLIElement> & AdditionalAttributes
 
 export type SpanProps = HTMLAttributes<HTMLSpanElement> & AdditionalAttributes
 
-export type InputProps = InputHTMLAttributes<HTMLInputElement> & { ref: RefObject<HTMLInputElement | null> | null } & AdditionalAttributes
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & { ref?: RefObject<HTMLInputElement | null> | null } & AdditionalAttributes
 
 export type MessageTextProps = HTMLAttributes<HTMLParagraphElement>
 
