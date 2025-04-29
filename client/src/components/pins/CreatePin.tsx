@@ -11,18 +11,11 @@ import { twMerge } from 'tailwind-merge'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 
-export const CreatePin = ({}) => {
+export const CreatePin = () => {
 	const titleRef = useRef<HTMLInputElement | null>(null)
 	const descriptionRef = useRef<HTMLInputElement | null>(null)
 	const linkRef = useRef<HTMLInputElement | null>(null)
 	const uploadRef = useRef<HTMLInputElement | null>(null)
-
-	const [formData, setFormData] = useState({
-		title: '',
-		description: '',
-		link: '',
-		base64Image: '',
-	})
 
 	const { width } = useWindowSize()
 	const { setPin } = usePin()

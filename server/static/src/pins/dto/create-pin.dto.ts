@@ -5,4 +5,6 @@ export class CreatePinDto {
 	title: string
 	@Expose()
 	description: string
+	@Expose()
+	link: string
 }

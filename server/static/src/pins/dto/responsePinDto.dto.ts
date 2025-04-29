@@ -11,12 +11,4 @@ export class ResponsePinDto {
 	@Expose()
 	imageUrl: string
 
-	@Expose()
-	isCensor?: boolean
-	@Expose()
-	isBanned?: boolean
-	@Expose()
-	isPopular?: boolean
-	@Expose()
-	isHidden?: boolean
 }
