@@ -11,6 +11,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 import { CurrentUser } from '../common/decorators/currrentuser.decorator'
 import { SERVER_RESPONSE } from '../consts/enums/API-Response'
 import { IUser } from '../types/socket/TPayloadBody'
+import { User } from '../users/entities/user.entity'
 import { CreatePinDto } from './dto/create-pin.dto'
 import { ResponsePinDto } from './dto/responsePinDto.dto'
 import { Pin } from './entities/pin.entity'
@@ -26,13 +27,33 @@ export class PinsController {
 		return await this.pinsService.findAll()
 	}
 
+	@Get('get-all-user-pins')
+	@UseGuards(JwtAuthGuard)
+	async getAllUserPins(
+		@Res() res: Response,
+		@CurrentUser() user: User
+	) {
+		const pins = await this.pinsService.findAllUserPins(user.username)
+		console.log('all user pins: ', pins)
+		return res.json(pins)
+	}
+
+	@Get('get-pins-by-username/:username')
+	async getPinsByUsername(
+		@Res() res: Response,
+		@Param('username') username: string
+	) {
+		const pins = await this.pinsService.findAllUserPins(username)
+		console.log('params pins: ', pins)
+		return res.status(200).json(pins)
+	}
+
 	@Get('get-user-pins/:username')
 	async getUserPins(
 		@Param('username') username: string,
 		@Res() res: Response,
 	) {
 		const pathToUserDirectory = join(homedir(), 'Desktop', 'pins', username)
-		console.log('pathtouserdirectory: ', pathToUserDirectory)
 
 		if (!existsSync(pathToUserDirectory))
 			await mkdir(pathToUserDirectory, { recursive: true })

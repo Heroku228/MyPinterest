@@ -15,13 +15,12 @@ export default function Home() {
 
 	useEffect(() => {
 		const fetchAllPins = async () => {
-			const response = await axios.get('pin-image/')
+			const response = await axios
+				.get('pins/all')
+				.catch(err => console.error(err))
 
-			if (response.status !== 200) setIsPinsFetched(false)
-			else {
-				setIsPinsFetched(true)
-				setPins(response.data.images)
-			}
+			if (!response) return
+			setPins(response.data)
 		}
 		fetchAllPins()
 	}, [])

@@ -42,21 +42,17 @@ export const AccountSidebarWrapper = ({
 			.post('users/change-user-icon', formData)
 			.catch(err => console.error(err))
 
+		if (!response) return
+
 		if (finalUser && response.status === 201) {
 			finalUser.userIconUrl = response.data.filePath
 			setIsChangedIcon(true)
 		}
-
-		console.log('response: ', response)
 	}
 
 	useEffect(() => {
-		console.log('test', usernameFromUrl !== user?.username)
-		console.log(user)
-		console.log(disabledChangeIcon)
 		if (!isAuthenticated || usernameFromUrl !== user?.username) {
 			setDisableChangeIcon(true)
-			console.log(disabledChangeIcon)
 		}
 	}, [])
 

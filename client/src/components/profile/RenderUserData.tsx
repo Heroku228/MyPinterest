@@ -22,7 +22,6 @@ export const RenderUserData = ({
 	showOnlineStatus?: boolean
 }) => {
 	const { user, isLoading } = useAuth()
-	
 
 	if (!userData && (!user || isLoading)) return null
 	const finalUser = userData || user
