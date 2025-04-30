@@ -12,6 +12,11 @@ export class UsersService {
 		await this.userRepository.clear()
 	}
 
+
+	async findAll() {
+		return await this.userRepository.find()
+	}
+
 	async save(user: User) {
 		const hashedPassword = await hash(user.password, 10)
 		user.password = hashedPassword

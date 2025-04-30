@@ -1,10 +1,11 @@
 import { Loader } from '@/components/ui/Loader'
 import { Span } from '@/components/ui/Span'
-import { UPLOADS } from '@/constants/routes'
+import { ROUTES, UPLOADS } from '@/constants/routes'
 import { useAuth } from '@/hooks/context/user/useAuth'
 import axios from '@/services/axiosInstance'
 import { UserTypes } from '@/types/UserTypes'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { AccountSidebarButtons } from './AccountSidebarButtons'
@@ -107,6 +108,13 @@ export const AccountSidebarWrapper = ({
 					{user?.username === usernameFromUrl ? (
 						<AccountSidebarButtons />
 					) : null}
+
+					<Link
+						href={ROUTES.USERS}
+						className='italic text-md lg:text-lg absolute bottom-3 right-5'
+					>
+						Other users
+					</Link>
 				</div>
 			)}
 		</>

@@ -27,6 +27,15 @@ export class UsersController {
 
 	private readonly logger = new Logger(UsersController.name)
 
+	@Get('all-users')
+	async getAllUsers(
+		@Res() res: Response
+	) {
+		const users = await this.usersService.findAll()
+		console.log(users)
+		return res.status(200).json(users)
+	}
+
 	@Get(':username')
 	async getUserByUsername(@Param('username') username: string) {
 		console.log('GET USER BY USERNAME CONTROLLER')

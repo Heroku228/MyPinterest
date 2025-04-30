@@ -8,6 +8,7 @@ export const ROUTES = {
 	CHAT: '/chat',
 	CREATE_PIN: '/create-pin',
 	API: '/api',
+	USERS: '/users'
 }
 
 export const PINS_ROUTER = {
