@@ -7,7 +7,6 @@ export const PinId = createParamDecorator((url: string, ctx: ExecutionContext) =
 
 export const PinUrl = createParamDecorator((url: string, ctx: ExecutionContext) => {
 	const request = ctx.switchToHttp().getRequest()
-	console.log(request)
 	return request.query.url
 })
 

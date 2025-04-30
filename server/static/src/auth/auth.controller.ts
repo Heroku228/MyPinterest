@@ -1,7 +1,8 @@
 import { Body, Controller, Delete, Get, Post, Req, Res, UseGuards } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
 import { Request, Response } from 'express'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync } from 'fs'
+import { writeFile } from 'fs/promises'
 import { homedir } from 'os'
 import { join, resolve } from 'path'
 import { ResponseUserDto } from 'static/src/users/dto/response-user.dto'
@@ -18,7 +19,6 @@ export class AuthController {
 	@Post('register')
 	async register(@Body() body: any, @Res({ passthrough: true }) response: Response) {
 		const { username, email, password, userIconBase64, fileName } = body
-		console.log('REGISTER CONTROLLER')
 
 		const userDto = plainToInstance(User, {
 			username,
@@ -30,14 +30,13 @@ export class AuthController {
 			const base64Data = userIconBase64.replace(/^data:image\/\w+;base64,/, '')
 			const buffer = Buffer.from(base64Data, 'base64')
 
-			const folderPath = resolve(homedir(), 'Desktop', 'uploads')
+			const folderPath = resolve(homedir(), 'Desktop', 'uploads', username)
 			if (!existsSync(folderPath)) mkdirSync(folderPath, { recursive: true })
 
 			const safeFileName: string = fileName.slice(0, 20).replace(/[^a-zA-Z0-9.-]/g, '_')
-			const extensition = fileName.split('.').pop()?.toLowerCase()
 			const filePath = join(safeFileName)
 
-			writeFileSync(`${folderPath}/${filePath}`, buffer)
+			await writeFile(`${folderPath}/${filePath}`, buffer)
 
 			userDto.userIconUrl = `${fileName}`
 		}

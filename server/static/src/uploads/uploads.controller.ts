@@ -1,15 +1,19 @@
 import { Controller, Get, NotFoundException, Param, Res } from '@nestjs/common'
 import { Response } from 'express'
 import { existsSync, readdirSync } from 'fs'
+import { readdir } from 'fs/promises'
 import { homedir } from 'os'
 import { extname, join } from 'path'
 
 @Controller('uploads')
 export class UploadsController {
 
-	@Get('avatars/:filename')
-	async getUserAvatar(@Param('filename') filename: string, @Res() res: Response) {
-		const filePath = join(homedir(), 'Desktop', 'uploads', filename)
+	@Get('avatars/:username/:filename')
+	async getUserAvatar(
+		@Param('filename') filename: string,
+		@Param('username') username: string,
+		@Res() res: Response) {
+		const filePath = join(homedir(), 'Desktop', 'uploads', username, filename)
 
 		if (!existsSync(filePath))
 			throw new NotFoundException('Avatar not found')

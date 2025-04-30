@@ -3,9 +3,7 @@ export function LogController(): MethodDecorator {
 		const originalMethod = descriptor.value
 
 		descriptor.value = async function (...args: any[]) {
-			console.log(`Calling ${String(propertyKey)} with`, args)
 			const result = await originalMethod.apply(this, args)
-			console.log(`Result:`, result)
 			return result
 		}
 	}

@@ -76,7 +76,7 @@ export class PinsController {
 
 		const filePath = join(homedir(), 'Desktop', 'pins', user.username, file.originalname)
 		mkdirSync(dirname(filePath), { recursive: true })
-		writeFile(filePath, file.buffer)
+		await writeFile(filePath, file.buffer)
 
 		if (!filePath) return {
 			status: SERVER_RESPONSE.SERVER_RESPONSE_STATUS.ERROR,

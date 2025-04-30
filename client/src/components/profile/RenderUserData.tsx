@@ -22,6 +22,7 @@ export const RenderUserData = ({
 	showOnlineStatus?: boolean
 }) => {
 	const { user, isLoading } = useAuth()
+	
 
 	if (!userData && (!user || isLoading)) return null
 	const finalUser = userData || user
@@ -39,7 +40,7 @@ export const RenderUserData = ({
 						unoptimized
 						width={size}
 						height={size}
-						src={`${UPLOADS.AVATARS}${finalUser?.userIconUrl}`}
+						src={`${UPLOADS.AVATARS}${finalUser?.username}/${finalUser?.userIconUrl}`}
 						alt='account logo'
 						priority
 						className={twMerge(`rounded-full border border-black cursor-pointer
