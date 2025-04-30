@@ -6,7 +6,7 @@ export namespace PinTypes {
 		url: string,
 		title: string,
 		link?: string,
-		description?: string,
+		description: string,
 		isCensor?: boolean,
 		isBanned?: boolean,
 		isPopular?: boolean,

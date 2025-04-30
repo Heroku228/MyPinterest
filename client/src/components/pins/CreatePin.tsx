@@ -47,6 +47,31 @@ export const CreatePin = () => {
 			return
 		}
 
+		if (title.toString().length > 40) {
+			setResponseMessage({
+				httpStatus: 400,
+				data: {
+					message: 'Title is too long',
+					status: 'error',
+				},
+			})
+
+			setTimeout(() => setResponseMessage(null), 2000)
+			return
+		}
+		if (description.toString().length > 60) {
+			setResponseMessage({
+				httpStatus: 400,
+				data: {
+					message: 'Description is too long',
+					status: 'error',
+				},
+			})
+
+			setTimeout(() => setResponseMessage(null), 2000)
+			return
+		}
+
 		const response = await axios.post(PINS_ENDPOINTS.CREATE_PIN, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data',

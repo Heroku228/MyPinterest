@@ -9,8 +9,6 @@ export const collectPayload = (message: IMessage) => ({
 	sender: message.sender
 })
 
-/////////
-
 export const cleanText = (text: string) => {
 	return filter.clean(text)
 }
